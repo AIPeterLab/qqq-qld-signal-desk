@@ -14,7 +14,7 @@ The signal source is QQQ. The model can hold Cash, QQQ, QQQ + QLD during the 5-d
 
 ## Update Schedule
 
-The GitHub Action runs at `0 22 * * *`, which is 6:00 PM New York during daylight saving time. GitHub Actions schedules are UTC, so the clock-time equivalent changes when New York leaves daylight saving time.
+The GitHub Action runs daily at 6:15 PM in the `America/New_York` timezone. The non-zero minute reduces the chance of GitHub Actions delays or dropped jobs during the start-of-hour load spike.
 
 ## Data Source
 

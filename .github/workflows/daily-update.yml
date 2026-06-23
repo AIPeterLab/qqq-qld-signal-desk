@@ -2,7 +2,8 @@ name: Daily signal update
 
 on:
   schedule:
-    - cron: "0 22 * * *"
+    - cron: "15 18 * * *"
+      timezone: "America/New_York"
   workflow_dispatch:
 
 permissions:
