@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QQQ/QLD Signal Desk</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface-2: #eef2f6;
+      --text: #17202a;
+      --muted: #667085;
+      --border: #d9e0e8;
+      --blue: #1f5eff;
+      --green: #17855c;
+      --green-bg: #e8f6ef;
+      --amber: #b46a00;
+      --amber-bg: #fff4dc;
+      --red: #bc3131;
+      --red-bg: #fff0f0;
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #17202a, #1f5eff);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.1;
+      font-weight: 760;
+    }
+
+    .subtitle {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .updated {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.6fr);
+      gap: 18px;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .status-panel {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      min-height: 340px;
+    }
+
+    .status-kicker {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .status-title {
+      margin: 12px 0 8px;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 0.96;
+      font-weight: 820;
+      color: var(--green);
+    }
+
+    .status-panel.cash .status-title,
+    .status-panel.waiting .status-title {
+      color: var(--red);
+    }
+
+    .status-panel.qqq .status-title {
+      color: var(--blue);
+    }
+
+    .status-panel.dca .status-title {
+      color: var(--amber);
+    }
+
+    .state-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 18px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .rule-line {
+      margin: 0;
+      color: #344054;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .manual-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 38px;
+      padding: 9px 13px;
+      border-radius: 8px;
+      border: 1px solid var(--text);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 720;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+    }
+
+    .metric {
+      min-height: 112px;
+      padding: 18px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metric:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .label {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .value {
+      margin: 0;
+      font-size: clamp(23px, 3vw, 32px);
+      line-height: 1.08;
+      font-weight: 780;
+    }
+
+    .note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.8fr);
+      gap: 18px;
+      margin-top: 18px;
+      min-width: 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 12px 18px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    td.reason {
+      white-space: normal;
+      min-width: 260px;
+      color: #344054;
+    }
+
+    .checklist {
+      padding: 18px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .check:last-child {
+      border-bottom: 0;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin-top: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .check.good .dot {
+      background: var(--green);
+    }
+
+    .check.warn .dot {
+      background: var(--amber);
+    }
+
+    .check.risk .dot {
+      background: var(--red);
+    }
+
+    .check-title {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 740;
+    }
+
+    .check-copy {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .positive {
+      color: var(--green);
+    }
+
+    .negative {
+      color: var(--red);
+    }
+
+    .neutral {
+      color: var(--muted);
+    }
+
+    @media (max-width: 880px) {
+      header,
+      .top-grid,
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .updated {
+        text-align: left;
+        white-space: normal;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metric:nth-child(3n) {
+        border-right: 1px solid var(--border);
+      }
+
+      .metric:nth-child(2n) {
+        border-right: 0;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="brand">
+        <div class="mark">Q2</div>
+        <div>
+          <h1>QQQ/QLD Signal Desk</h1>
+          <p class="subtitle">QQQ signal source, QLD leveraged holding, Cash as a normal risk state.</p>
+        </div>
+      </div>
+      <div class="updated" id="updated">Loading latest signal...</div>
+    </header>
+
+    <section class="top-grid">
+      <article class="panel status-panel waiting" id="statusPanel">
+        <div class="status-kicker">Current Status</div>
+        <div class="status-title" id="headlineStatus">Loading</div>
+        <div class="state-row">
+          <span class="chip" id="modelState">Model state: --</span>
+          <span class="chip" id="lastTrade">Last trade: --</span>
+        </div>
+        <p class="rule-line" id="ruleExplanation">Fetching signal data...</p>
+        <a class="manual-link" href="Real_Account_Tracking_System.doc">Open operating manual</a>
+      </article>
+
+      <article class="panel metrics" aria-label="Market indicators">
+        <div class="metric">
+          <p class="label">QQQ Close</p>
+          <p class="value" id="qqqClose">--</p>
+          <p class="note">Adjusted close</p>
+        </div>
+        <div class="metric">
+          <p class="label">SMA200</p>
+          <p class="value" id="sma200">--</p>
+          <p class="note" id="smaDistance">Distance: --</p>
+        </div>
+        <div class="metric">
+          <p class="label">EMA50 / EMA200</p>
+          <p class="value" id="emaPair">--</p>
+          <p class="note" id="emaStatus">--</p>
+        </div>
+        <div class="metric">
+          <p class="label">QLD Close</p>
+          <p class="value" id="qldClose">--</p>
+          <p class="note">Leveraged ETF check</p>
+        </div>
+        <div class="metric">
+          <p class="label">Volatility</p>
+          <p class="value" id="volatility">--</p>
+          <p class="note">QQQ 20-day annualized</p>
+        </div>
+        <div class="metric">
+          <p class="label">MACD Context</p>
+          <p class="value" id="macdStatus">--</p>
+          <p class="note" id="macdValues">Display-only</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-grid">
+      <article class="panel">
+        <div class="section-head">
+          <h2>Recent Signal History</h2>
+          <span class="chip" id="historyCount">-- rows</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+              <th>QQQ</th>
+              <th>SMA Dist.</th>
+              <th>Action</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <tr><td colspan="6">Loading...</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <aside class="panel">
+        <div class="section-head">
+          <h2>Rule Checklist</h2>
+        </div>
+        <div class="checklist" id="checklist"></div>
+      </aside>
+    </section>
+
+    <p class="footer">
+      Data updates are scheduled for 6:00 PM New York time during daylight saving time. MACD is displayed only as context and is not used by the model rule. This dashboard is an operating display, not financial advice.
+    </p>
+  </main>
+
+  <script>
+    const money = (value) => Number.isFinite(value) ? `$${value.toFixed(2)}` : "--";
+    const pct = (value) => Number.isFinite(value) ? `${value >= 0 ? "+" : ""}${value.toFixed(2)}%` : "--";
+    const num = (value) => Number.isFinite(value) ? value.toFixed(2) : "--";
+
+    function clsForStatus(value) {
+      if (!value) return "neutral";
+      if (value > 0) return "positive";
+      if (value < 0) return "negative";
+      return "neutral";
+    }
+
+    function panelClass(state) {
+      if (state === "Cash") return "cash";
+      if (state === "QQQ") return "qqq";
+      if (state === "QQQ + QLD") return "dca";
+      if (state === "QLD") return "qld";
+      return "waiting";
+    }
+
+    function checkItem(kind, title, copy) {
+      return `<div class="check ${kind}"><span class="dot"></span><div><p class="check-title">${title}</p><p class="check-copy">${copy}</p></div></div>`;
+    }
+
+    function render(data) {
+      const current = data.current || {};
+      const market = data.market || {};
+      const macd = data.macd_context || {};
+      const bands = data.bands || {};
+      const history = data.recent_history || [];
+
+      document.getElementById("updated").textContent = `Last update: ${data.last_updated || "--"} | Source: ${data.data_source || "--"}`;
+      document.getElementById("headlineStatus").textContent = current.headline_status || "Waiting";
+      document.getElementById("modelState").textContent = `Model state: ${current.model_state || "--"}`;
+      document.getElementById("lastTrade").textContent = `Last trade: ${current.last_trade_date || "--"}${current.last_trade_action ? `, ${current.last_trade_action}` : ""}`;
+      document.getElementById("ruleExplanation").textContent = current.rule_explanation || "--";
+      document.getElementById("statusPanel").className = `panel status-panel ${panelClass(current.model_state)}`;
+
+      document.getElementById("qqqClose").textContent = money(market.qqq_close);
+      document.getElementById("qldClose").textContent = money(market.qld_close);
+      document.getElementById("sma200").textContent = money(market.sma200);
+      document.getElementById("smaDistance").innerHTML = `Distance: <span class="${clsForStatus(market.distance_to_sma200_pct)}">${pct(market.distance_to_sma200_pct)}</span>`;
+      document.getElementById("emaPair").textContent = `${num(market.ema50)} / ${num(market.ema200)}`;
+      document.getElementById("emaStatus").textContent = bands.ema_status || "--";
+      document.getElementById("volatility").textContent = pct(market.qqq_vol20_annualized_pct);
+      document.getElementById("macdStatus").textContent = macd.status || "--";
+      document.getElementById("macdValues").textContent = `MACD ${num(macd.macd)} | Signal ${num(macd.signal)} | Hist ${num(macd.histogram)}`;
+      document.getElementById("historyCount").textContent = `${history.length} rows`;
+
+      const body = document.getElementById("historyBody");
+      body.innerHTML = history.slice(-12).reverse().map((row) => `
+        <tr>
+          <td>${row.date}</td>
+          <td>${row.headline_status}</td>
+          <td>${money(row.qqq_close)}</td>
+          <td class="${clsForStatus(row.distance_to_sma200_pct)}">${pct(row.distance_to_sma200_pct)}</td>
+          <td>${row.action}</td>
+          <td class="reason">${row.rule_explanation}</td>
+        </tr>
+      `).join("");
+
+      const checks = [
+        checkItem(market.distance_to_sma200_pct >= 0 ? "good" : "risk", bands.trend_status || "Trend unknown", `QQQ is ${pct(market.distance_to_sma200_pct)} versus SMA200.`),
+        checkItem((market.ema50 || 0) >= (market.ema200 || Infinity) ? "good" : "warn", bands.ema_status || "EMA status unknown", "EMA50 must be above EMA200 for QLD entry."),
+        checkItem((market.qqq_vol20_annualized_pct || 100) <= 25 ? "good" : (market.qqq_vol20_annualized_pct || 0) > 35 ? "risk" : "warn", bands.risk_status || "Risk status unknown", `20-day annualized volatility is ${pct(market.qqq_vol20_annualized_pct)}.`),
+        checkItem(macd.status === "Bullish" ? "good" : macd.status === "Bearish" ? "warn" : "", `MACD ${macd.status || "Neutral"}`, "Display-only context; not a trading rule.")
+      ];
+      document.getElementById("checklist").innerHTML = checks.join("");
+    }
+
+    fetch("data/signals.json", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(render)
+      .catch((error) => {
+        document.getElementById("updated").textContent = "Could not load data/signals.json";
+        document.getElementById("ruleExplanation").textContent = error.message;
+      });
+  </script>
+</body>
+</html>
