@@ -16,6 +16,13 @@ The signal source is QQQ. The model can hold Cash, QQQ, QQQ + QLD during the 5-d
 
 The GitHub Action runs daily at 6:15 PM in the `America/New_York` timezone. The non-zero minute reduces the chance of GitHub Actions delays or dropped jobs during the start-of-hour load spike.
 
+After a successful refresh, the workflow emails the current signal summary to `yzheng25@gmail.com` when these GitHub Actions repository secrets are configured:
+
+- `EMAIL_USERNAME`: Gmail address used to send the notification.
+- `EMAIL_APP_PASSWORD`: Google app password for that Gmail account.
+
+The workflow uses Gmail SMTP by default. The sender account must have 2-Step Verification enabled before Google will issue an app password.
+
 ## Data Source
 
 The updater uses free Yahoo Finance chart API adjusted-close data for QQQ and QLD.
