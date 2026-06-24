@@ -1,7 +1,7 @@
 {
   "project": "QQQ/QLD Signal Desk",
   "last_updated": "2026-06-23",
-  "generated_at_utc": "2026-06-23T23:17:44+00:00",
+  "generated_at_utc": "2026-06-24T01:58:36+00:00",
   "data_source": "Yahoo Finance chart API adjusted close",
   "current": {
     "model_state": "Cash",

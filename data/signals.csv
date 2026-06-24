@@ -10,7 +10,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2006-07-03,33.35,0.99,,33.6,,,,20.73,33.31,,,-0.19,-0.35,0.16,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
 2006-07-05,32.62,0.96,,33.56,,,,22.2,33.35,,,-0.19,-0.32,0.13,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
 2006-07-06,32.59,0.95,,33.52,,,,22.05,33.35,,,-0.2,-0.29,0.1,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
-2006-07-07,32.23,0.93,,33.47,,,,22.38,33.35,,,-0.23,-0.28,0.05,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
+2006-07-07,32.23,0.93,,33.47,,,,22.37,33.35,,,-0.23,-0.28,0.05,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
 2006-07-10,31.94,0.91,,33.41,,,,22.46,33.35,,,-0.27,-0.28,0.01,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
 2006-07-11,32.18,0.93,,33.36,,,,21.5,33.35,,,-0.28,-0.28,-0.0,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
 2006-07-12,31.58,0.89,,33.29,,,,22.54,33.35,,,-0.34,-0.29,-0.05,Cash,Hold Cash,Waiting,Waiting for enough QQQ and QLD history to calculate all indicators.
@@ -123,7 +123,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2006-12-12,37.47,1.21,34.5,36.67,35.15,8.62,6.61,13.08,38.27,1.27,1.2,0.26,0.37,-0.11,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2006-12-13,37.54,1.21,34.51,36.71,35.17,8.78,6.73,12.54,38.27,1.27,1.21,0.23,0.34,-0.11,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2006-12-14,37.96,1.24,34.52,36.76,35.2,9.96,7.84,13.08,38.27,1.27,1.21,0.25,0.32,-0.08,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2006-12-15,38.06,1.25,34.53,36.81,35.23,10.2,8.03,13.02,38.27,1.27,1.21,0.26,0.31,-0.05,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2006-12-15,38.06,1.25,34.53,36.81,35.23,10.2,8.03,13.03,38.27,1.27,1.21,0.26,0.31,-0.05,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2006-12-18,37.68,1.22,34.55,36.84,35.26,9.07,6.88,13.52,38.27,1.27,1.21,0.24,0.29,-0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2006-12-19,37.56,1.22,34.56,36.87,35.28,8.68,6.47,13.52,38.27,1.27,1.21,0.21,0.28,-0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2006-12-20,37.42,1.21,34.57,36.89,35.3,8.24,6.02,13.55,38.27,1.27,1.21,0.17,0.26,-0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -165,7 +165,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2007-02-14,38.2,1.24,34.93,37.52,36.02,9.37,6.06,14.57,38.47,1.27,1.18,0.05,0.04,0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2007-02-15,38.43,1.25,34.95,37.56,36.04,9.96,6.61,12.99,38.2,1.24,1.18,0.09,0.05,0.05,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2007-02-16,38.3,1.25,34.96,37.59,36.07,9.55,6.19,13.07,38.43,1.25,1.18,0.12,0.06,0.06,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
-2007-02-20,38.59,1.27,34.98,37.63,36.09,10.33,6.92,12.54,38.43,1.25,1.18,0.16,0.08,0.08,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2007-02-20,38.59,1.27,34.98,37.63,36.09,10.33,6.92,12.55,38.43,1.25,1.18,0.16,0.08,0.08,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2007-02-21,38.71,1.27,34.99,37.67,36.12,10.62,7.17,12.46,38.59,1.27,1.18,0.2,0.11,0.1,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2007-02-22,38.91,1.29,35.01,37.72,36.15,11.14,7.64,11.3,38.71,1.27,1.18,0.25,0.14,0.11,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2007-02-23,38.77,1.28,35.02,37.76,36.17,10.71,7.18,10.17,38.91,1.29,1.18,0.27,0.16,0.11,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
@@ -191,7 +191,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2007-03-23,37.82,1.2,35.34,37.39,36.33,7.01,4.09,21.84,38.77,1.28,1.1,0.0,-0.16,0.16,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2007-03-26,37.97,1.21,35.37,37.41,36.35,7.37,4.47,21.87,38.58,1.26,1.1,0.05,-0.12,0.17,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2007-03-27,37.71,1.2,35.39,37.42,36.36,6.54,3.7,15.84,38.07,1.22,1.1,0.07,-0.08,0.15,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2007-03-28,37.3,1.17,35.41,37.42,36.37,5.33,2.56,16.35,38.07,1.22,1.1,0.05,-0.05,0.1,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2007-03-28,37.3,1.17,35.41,37.42,36.37,5.33,2.56,16.34,38.07,1.22,1.1,0.05,-0.05,0.1,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2007-03-29,37.35,1.17,35.44,37.42,36.38,5.37,2.65,16.24,38.07,1.22,1.1,0.04,-0.03,0.07,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2007-03-30,37.31,1.17,35.47,37.41,36.39,5.2,2.53,15.17,38.07,1.22,1.1,0.03,-0.02,0.05,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2007-04-02,37.36,1.17,35.49,37.41,36.4,5.26,2.65,14.79,38.07,1.22,1.1,0.02,-0.01,0.03,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -216,7 +216,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2007-04-30,39.39,1.3,36.07,38.17,36.8,9.2,7.04,10.42,39.92,1.33,1.17,0.54,0.43,0.11,QLD,Hold QLD,No action,No action; current model state remains valid.
 2007-05-01,39.36,1.3,36.12,38.22,36.83,8.98,6.87,10.49,39.92,1.33,1.17,0.52,0.45,0.07,QLD,Hold QLD,No action,No action; current model state remains valid.
 2007-05-02,39.79,1.32,36.16,38.28,36.86,10.03,7.95,10.23,39.92,1.33,1.2,0.53,0.46,0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
-2007-05-03,39.93,1.33,36.21,38.34,36.89,10.29,8.25,10.23,39.92,1.33,1.2,0.54,0.48,0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
+2007-05-03,39.93,1.33,36.21,38.34,36.89,10.29,8.25,10.22,39.92,1.33,1.2,0.54,0.48,0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
 2007-05-04,39.97,1.33,36.25,38.41,36.92,10.25,8.26,10.2,39.93,1.33,1.2,0.55,0.49,0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
 2007-05-07,39.97,1.33,36.3,38.47,36.95,10.12,8.17,10.08,39.97,1.33,1.2,0.55,0.5,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
 2007-05-08,40.05,1.33,36.34,38.53,36.98,10.22,8.31,10.03,39.97,1.33,1.2,0.55,0.51,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -445,7 +445,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2008-03-27,37.58,1.08,41.57,38.17,40.24,-9.58,-6.61,33.55,38.55,1.12,0.96,0.01,-0.27,0.28,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-03-28,37.39,1.06,41.55,38.14,40.21,-10.01,-7.01,33.57,38.55,1.12,0.96,0.0,-0.22,0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-03-31,37.59,1.07,41.54,38.12,40.19,-9.51,-6.46,32.15,38.55,1.12,0.96,0.02,-0.17,0.19,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2008-04-01,39.2,1.16,41.53,38.16,40.18,-5.62,-2.43,35.11,38.55,1.12,0.96,0.16,-0.1,0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2008-04-01,39.2,1.16,41.53,38.16,40.18,-5.62,-2.43,35.12,38.55,1.12,0.96,0.16,-0.1,0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-04-02,39.11,1.17,41.52,38.2,40.17,-5.81,-2.62,35.16,39.2,1.16,0.96,0.26,-0.03,0.29,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-04-03,39.2,1.17,41.51,38.24,40.16,-5.58,-2.38,35.15,39.2,1.17,0.96,0.34,0.04,0.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-04-04,39.43,1.17,41.51,38.29,40.15,-5.0,-1.79,33.88,39.2,1.17,0.96,0.42,0.12,0.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -475,7 +475,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2008-05-08,41.61,1.29,41.31,39.61,40.16,0.74,3.63,24.1,42.07,1.34,1.08,0.87,0.81,0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2008-05-09,41.45,1.29,41.3,39.68,40.17,0.36,3.19,21.34,42.07,1.34,1.08,0.83,0.82,0.02,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2008-05-12,42.21,1.33,41.3,39.78,40.19,2.19,5.02,21.61,42.07,1.34,1.08,0.85,0.82,0.03,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2008-05-13,42.32,1.34,41.31,39.88,40.21,2.44,5.24,21.58,42.21,1.34,1.08,0.87,0.83,0.04,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2008-05-13,42.32,1.34,41.31,39.88,40.21,2.44,5.24,21.59,42.21,1.34,1.08,0.87,0.83,0.04,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2008-05-14,42.23,1.33,41.31,39.97,40.23,2.21,4.95,20.09,42.32,1.34,1.16,0.86,0.84,0.02,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2008-05-15,42.96,1.38,41.32,40.09,40.26,3.97,6.72,20.49,42.32,1.34,1.16,0.91,0.85,0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2008-05-16,43.0,1.38,41.33,40.2,40.29,4.03,6.73,17.99,42.96,1.38,1.2,0.94,0.87,0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -551,7 +551,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2008-08-26,39.95,1.17,40.28,40.04,40.25,-0.83,-0.75,21.02,41.51,1.26,1.08,0.25,0.33,-0.08,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-08-27,40.21,1.18,40.27,40.05,40.25,-0.16,-0.11,21.06,41.51,1.26,1.08,0.22,0.31,-0.09,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-08-28,40.53,1.18,40.26,40.07,40.25,0.67,0.7,21.15,41.51,1.26,1.08,0.22,0.29,-0.07,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2008-08-29,39.68,1.15,40.25,40.05,40.25,-1.4,-1.4,22.1,41.51,1.26,1.08,0.15,0.26,-0.12,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2008-08-29,39.68,1.15,40.25,40.05,40.25,-1.4,-1.4,22.11,41.51,1.26,1.08,0.15,0.26,-0.12,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-09-02,39.19,1.12,40.23,40.02,40.24,-2.57,-2.6,22.28,41.51,1.26,1.08,0.05,0.22,-0.17,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-09-03,38.82,1.1,40.21,39.97,40.22,-3.45,-3.48,19.08,41.51,1.26,1.12,-0.06,0.16,-0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-09-04,37.57,1.03,40.18,39.88,40.2,-6.5,-6.55,21.23,41.51,1.26,1.1,-0.24,0.08,-0.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -574,7 +574,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2008-09-29,32.56,0.72,39.52,37.87,39.53,-17.61,-17.63,45.98,39.68,1.15,0.87,-1.27,-1.07,-0.2,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-09-30,33.5,0.8,39.47,37.7,39.47,-15.12,-15.13,47.93,39.19,1.12,0.72,-1.34,-1.12,-0.21,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-10-01,33.15,0.78,39.42,37.52,39.41,-15.91,-15.89,47.93,38.82,1.1,0.72,-1.4,-1.18,-0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2008-10-02,31.64,0.72,39.36,37.29,39.33,-19.61,-19.55,49.11,37.57,1.03,0.72,-1.55,-1.25,-0.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2008-10-02,31.64,0.72,39.36,37.29,39.33,-19.61,-19.55,49.1,37.57,1.03,0.72,-1.55,-1.25,-0.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-10-03,31.15,0.68,39.3,37.05,39.25,-20.74,-20.64,49.15,37.51,1.03,0.72,-1.69,-1.34,-0.35,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-10-06,30.01,0.62,39.24,36.77,39.16,-23.51,-23.35,50.04,37.51,1.03,0.68,-1.88,-1.45,-0.43,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-10-07,28.11,0.56,39.16,36.43,39.05,-28.22,-28.01,53.59,37.51,1.03,0.62,-2.15,-1.59,-0.56,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -608,7 +608,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2008-11-14,24.95,0.41,37.24,30.02,36.12,-33.0,-30.93,65.93,29.06,0.56,0.4,-1.26,-1.3,0.04,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-11-17,24.43,0.39,37.17,29.81,36.01,-34.28,-32.16,64.97,29.06,0.56,0.4,-1.32,-1.31,-0.02,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-11-18,24.4,0.39,37.1,29.59,35.89,-34.24,-32.01,62.74,29.06,0.56,0.39,-1.36,-1.32,-0.04,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2008-11-19,23.13,0.35,37.04,29.34,35.76,-37.56,-35.34,64.6,29.06,0.56,0.39,-1.48,-1.35,-0.13,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2008-11-19,23.13,0.35,37.04,29.34,35.76,-37.56,-35.34,64.61,29.06,0.56,0.39,-1.48,-1.35,-0.13,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-11-20,22.01,0.32,36.96,29.05,35.63,-40.46,-38.23,66.37,29.06,0.56,0.35,-1.64,-1.41,-0.23,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-11-21,22.96,0.34,36.89,28.81,35.5,-37.75,-35.32,68.13,29.06,0.56,0.32,-1.67,-1.46,-0.21,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2008-11-24,24.37,0.38,36.82,28.64,35.39,-33.82,-31.15,71.2,29.06,0.56,0.32,-1.57,-1.48,-0.08,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -655,7 +655,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2009-01-26,25.1,0.39,34.3,26.0,32.01,-26.82,-21.58,36.76,27.01,0.46,0.36,-0.2,-0.11,-0.09,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-01-27,25.28,0.4,34.23,25.97,31.94,-26.15,-20.85,36.85,27.01,0.46,0.36,-0.17,-0.12,-0.05,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-01-28,26.17,0.42,34.17,25.98,31.88,-23.42,-17.92,38.61,27.01,0.46,0.36,-0.08,-0.12,0.03,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2009-01-29,25.51,0.4,34.11,25.96,31.82,-25.23,-19.84,39.22,27.01,0.46,0.36,-0.06,-0.11,0.04,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2009-01-29,25.51,0.4,34.11,25.96,31.82,-25.23,-19.84,39.23,27.01,0.46,0.36,-0.06,-0.11,0.04,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-01-30,25.06,0.39,34.04,25.92,31.75,-26.39,-21.09,39.59,27.01,0.46,0.36,-0.08,-0.1,0.02,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-02-02,25.36,0.4,33.97,25.9,31.69,-25.36,-19.98,36.49,27.01,0.46,0.36,-0.07,-0.1,0.02,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-02-03,25.76,0.41,33.9,25.89,31.63,-24.03,-18.57,37.06,27.01,0.46,0.36,-0.03,-0.08,0.05,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -696,7 +696,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2009-03-25,26.32,0.42,30.94,25.12,29.64,-14.96,-11.21,43.87,26.69,0.43,0.3,0.38,0.05,0.33,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-03-26,27.13,0.44,30.87,25.19,29.61,-12.13,-8.39,43.2,26.69,0.43,0.3,0.49,0.13,0.36,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-03-27,26.62,0.43,30.8,25.25,29.58,-13.58,-10.02,43.79,27.13,0.44,0.3,0.53,0.21,0.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2009-03-30,25.96,0.4,30.73,25.28,29.55,-15.51,-12.13,42.94,27.13,0.44,0.3,0.51,0.27,0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2009-03-30,25.96,0.4,30.73,25.28,29.55,-15.51,-12.13,42.95,27.13,0.44,0.3,0.51,0.27,0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-03-31,26.19,0.41,30.65,25.31,29.51,-14.56,-11.27,42.87,27.13,0.44,0.3,0.5,0.32,0.18,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-04-01,26.57,0.42,30.57,25.36,29.48,-13.08,-9.87,42.36,27.13,0.44,0.3,0.52,0.36,0.16,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-04-02,27.43,0.45,30.5,25.44,29.46,-10.07,-6.9,40.99,27.13,0.44,0.3,0.6,0.41,0.19,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -764,7 +764,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2009-07-01,31.48,0.58,27.58,30.16,29.75,14.13,5.81,18.41,31.91,0.6,0.54,0.3,0.33,-0.03,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2009-07-02,30.78,0.56,27.55,30.19,29.76,11.73,3.45,19.54,31.91,0.6,0.54,0.24,0.32,-0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2009-07-06,30.62,0.55,27.53,30.2,29.77,11.22,2.86,19.56,31.91,0.6,0.54,0.18,0.29,-0.11,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2009-07-07,29.86,0.53,27.5,30.19,29.77,8.57,0.31,21.24,31.91,0.6,0.54,0.07,0.25,-0.17,Cash,Hold Cash,Move to Cash,"Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
+2009-07-07,29.86,0.53,27.5,30.19,29.77,8.57,0.31,21.25,31.91,0.6,0.54,0.07,0.25,-0.17,Cash,Hold Cash,Move to Cash,"Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
 2009-07-08,30.01,0.53,27.47,30.18,29.77,9.27,0.82,21.1,31.91,0.6,0.53,-0.0,0.2,-0.2,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-07-09,30.07,0.53,27.44,30.18,29.77,9.56,0.98,21.17,31.8,0.6,0.53,-0.06,0.15,-0.2,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2009-07-10,30.2,0.54,27.42,30.18,29.78,10.13,1.41,21.3,31.8,0.6,0.53,-0.09,0.1,-0.19,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -823,7 +823,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2009-09-24,36.41,0.77,29.31,34.58,31.79,24.22,14.56,13.98,36.92,0.79,0.67,0.7,0.66,0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-09-25,36.09,0.76,29.37,34.64,31.83,22.91,13.4,14.52,36.92,0.79,0.67,0.63,0.66,-0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-09-28,36.71,0.78,29.42,34.72,31.88,24.77,15.15,15.49,36.92,0.79,0.67,0.62,0.65,-0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
-2009-09-29,36.54,0.78,29.48,34.79,31.92,23.97,14.47,14.99,36.92,0.79,0.67,0.59,0.64,-0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
+2009-09-29,36.54,0.78,29.48,34.79,31.92,23.97,14.47,15.0,36.92,0.79,0.67,0.59,0.64,-0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-09-30,36.57,0.78,29.53,34.86,31.97,23.83,14.39,12.68,36.92,0.79,0.67,0.57,0.62,-0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-10-01,35.49,0.73,29.58,34.88,32.01,19.95,10.88,17.42,36.92,0.79,0.67,0.45,0.59,-0.14,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-10-02,35.38,0.73,29.63,34.9,32.04,19.42,10.44,17.43,36.92,0.79,0.68,0.35,0.54,-0.19,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -865,7 +865,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2009-11-23,38.21,0.84,31.69,36.71,33.58,20.56,13.79,22.03,38.6,0.86,0.73,0.44,0.39,0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-11-24,38.08,0.84,31.75,36.76,33.62,19.93,13.26,21.24,38.6,0.86,0.73,0.43,0.4,0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-11-25,38.24,0.85,31.81,36.82,33.67,20.21,13.59,19.15,38.6,0.86,0.73,0.43,0.41,0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
-2009-11-27,37.66,0.82,31.87,36.85,33.71,18.18,11.73,19.52,38.6,0.86,0.73,0.38,0.4,-0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
+2009-11-27,37.66,0.82,31.87,36.85,33.71,18.18,11.73,19.53,38.6,0.86,0.73,0.38,0.4,-0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-11-30,37.7,0.82,31.92,36.89,33.75,18.1,11.73,16.29,38.6,0.86,0.73,0.34,0.39,-0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-01,38.09,0.84,31.99,36.93,33.79,19.08,12.74,16.49,38.6,0.86,0.73,0.34,0.38,-0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-02,38.15,0.84,32.05,36.98,33.83,19.0,12.75,16.5,38.6,0.86,0.74,0.33,0.37,-0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -877,12 +877,12 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2009-12-10,38.34,0.85,32.46,37.22,34.08,18.13,12.52,13.48,38.6,0.86,0.82,0.26,0.3,-0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-11,38.2,0.84,32.53,37.26,34.12,17.41,11.95,13.39,38.6,0.86,0.82,0.26,0.29,-0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-14,38.56,0.86,32.61,37.31,34.16,18.25,12.87,13.49,38.6,0.86,0.82,0.28,0.29,-0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
-2009-12-15,38.34,0.85,32.69,37.35,34.21,17.31,12.1,13.16,38.6,0.86,0.82,0.27,0.28,-0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
+2009-12-15,38.34,0.85,32.69,37.35,34.21,17.31,12.1,13.17,38.6,0.86,0.82,0.27,0.28,-0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-16,38.4,0.85,32.76,37.39,34.25,17.2,12.11,13.12,38.6,0.86,0.82,0.27,0.28,-0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-17,37.93,0.83,32.84,37.41,34.28,15.51,10.63,13.68,38.56,0.86,0.82,0.23,0.27,-0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-18,38.55,0.86,32.92,37.45,34.33,17.11,12.3,13.69,38.56,0.86,0.82,0.24,0.27,-0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-21,38.98,0.88,33.0,37.51,34.37,18.12,13.41,13.95,38.56,0.86,0.82,0.29,0.27,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
-2009-12-22,39.21,0.89,33.08,37.58,34.42,18.55,13.93,13.02,38.98,0.88,0.82,0.33,0.28,0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
+2009-12-22,39.21,0.89,33.08,37.58,34.42,18.55,13.93,13.03,38.98,0.88,0.82,0.33,0.28,0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-23,39.5,0.9,33.16,37.66,34.47,19.14,14.59,13.06,39.21,0.89,0.82,0.39,0.3,0.09,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-24,39.87,0.92,33.23,37.74,34.53,19.96,15.47,13.3,39.5,0.9,0.82,0.46,0.34,0.13,QLD,Hold QLD,No action,No action; current model state remains valid.
 2009-12-28,40.07,0.93,33.31,37.83,34.58,20.31,15.88,11.64,39.87,0.92,0.82,0.53,0.37,0.15,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -893,7 +893,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2010-01-05,40.25,0.93,33.68,38.23,34.85,19.5,15.5,12.85,40.25,0.93,0.82,0.62,0.52,0.1,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-01-06,40.0,0.92,33.75,38.3,34.9,18.55,14.63,12.95,40.25,0.93,0.82,0.61,0.54,0.07,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-01-07,40.03,0.92,33.81,38.37,34.95,18.38,14.54,12.56,40.25,0.93,0.82,0.59,0.55,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
-2010-01-08,40.36,0.94,33.88,38.45,35.0,19.11,15.3,12.44,40.25,0.93,0.83,0.6,0.56,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
+2010-01-08,40.36,0.94,33.88,38.45,35.0,19.11,15.31,12.44,40.25,0.93,0.83,0.6,0.56,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-01-11,40.19,0.93,33.95,38.52,35.05,18.39,14.67,12.64,40.36,0.94,0.83,0.58,0.56,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-01-12,39.69,0.91,34.02,38.56,35.1,16.69,13.08,13.56,40.36,0.94,0.83,0.53,0.56,-0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-01-13,40.19,0.93,34.09,38.63,35.15,17.89,14.32,13.81,40.36,0.94,0.83,0.51,0.55,-0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -905,7 +905,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2010-01-22,38.29,0.84,34.46,38.84,35.41,11.11,8.12,18.07,40.39,0.94,0.89,0.18,0.4,-0.22,Cash,Hold Cash,Move to Cash,"Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
 2010-01-25,38.42,0.85,34.51,38.82,35.44,11.31,8.39,17.88,40.39,0.94,0.84,0.07,0.34,-0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2010-01-26,38.45,0.85,34.56,38.81,35.47,11.25,8.4,17.47,40.39,0.94,0.84,-0.01,0.27,-0.28,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2010-01-27,38.76,0.86,34.62,38.8,35.5,11.96,9.16,17.64,40.39,0.94,0.84,-0.06,0.2,-0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2010-01-27,38.76,0.86,34.62,38.8,35.5,11.96,9.16,17.63,40.39,0.94,0.84,-0.06,0.2,-0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2010-01-28,37.76,0.82,34.66,38.76,35.53,8.92,6.28,19.64,40.39,0.94,0.84,-0.17,0.13,-0.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2010-01-29,37.1,0.79,34.71,38.7,35.54,6.88,4.38,20.19,40.39,0.94,0.82,-0.31,0.04,-0.35,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2010-02-01,37.51,0.81,34.75,38.65,35.56,7.92,5.47,20.74,40.39,0.94,0.79,-0.38,-0.04,-0.34,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -932,7 +932,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2010-03-03,39.54,0.89,35.71,38.54,36.09,10.71,9.56,16.29,39.49,0.89,0.78,0.22,0.03,0.19,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2010-03-04,39.67,0.9,35.76,38.58,36.12,10.92,9.81,16.25,39.54,0.89,0.78,0.26,0.08,0.19,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2010-03-05,40.26,0.93,35.81,38.65,36.16,12.42,11.34,11.91,39.67,0.9,0.78,0.35,0.13,0.22,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2010-03-08,40.34,0.93,35.87,38.71,36.2,12.47,11.43,11.84,40.26,0.93,0.79,0.41,0.19,0.23,QLD,Hold QLD,Complete DCA to QLD,QLD entry conditions stayed valid through the 5-day DCA process.
+2010-03-08,40.34,0.93,35.87,38.71,36.2,12.47,11.43,11.83,40.26,0.93,0.79,0.41,0.19,0.23,QLD,Hold QLD,Complete DCA to QLD,QLD entry conditions stayed valid through the 5-day DCA process.
 2010-03-09,40.57,0.94,35.93,38.79,36.25,12.92,11.92,11.08,40.34,0.93,0.79,0.48,0.25,0.23,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-03-10,40.9,0.96,35.99,38.87,36.29,13.65,12.68,10.95,40.57,0.94,0.8,0.55,0.31,0.24,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-03-11,41.05,0.96,36.04,38.95,36.34,13.91,12.96,10.68,40.9,0.96,0.8,0.61,0.37,0.24,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -1099,7 +1099,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2010-10-28,45.68,1.15,40.59,42.8,40.31,12.52,13.3,13.81,45.58,1.14,0.99,0.94,0.9,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-10-29,45.57,1.14,40.62,42.9,40.37,12.19,12.89,13.86,45.68,1.15,0.99,0.92,0.9,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-01,45.61,1.14,40.65,43.01,40.42,12.19,12.84,12.88,45.68,1.15,0.99,0.9,0.9,-0.0,QLD,Hold QLD,No action,No action; current model state remains valid.
-2010-11-02,46.09,1.17,40.68,43.13,40.47,13.32,13.89,10.78,45.68,1.15,1.02,0.92,0.91,0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
+2010-11-02,46.09,1.17,40.68,43.13,40.47,13.32,13.89,10.79,45.68,1.15,1.02,0.92,0.91,0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-03,46.3,1.18,40.71,43.26,40.53,13.74,14.24,9.86,46.09,1.17,1.02,0.93,0.91,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-04,46.87,1.21,40.75,43.4,40.6,15.03,15.46,10.31,46.3,1.18,1.03,0.98,0.93,0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-05,46.87,1.21,40.79,43.53,40.66,14.91,15.28,10.35,46.87,1.21,1.04,1.01,0.94,0.07,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -1115,8 +1115,8 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2010-11-19,45.82,1.15,41.2,44.34,41.17,11.22,11.31,12.83,46.93,1.21,1.11,0.41,0.64,-0.24,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-22,46.21,1.17,41.25,44.41,41.22,12.03,12.11,13.03,46.93,1.21,1.11,0.41,0.59,-0.19,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-23,45.47,1.14,41.29,44.45,41.26,10.14,10.21,14.33,46.93,1.21,1.11,0.35,0.54,-0.2,QLD,Hold QLD,No action,No action; current model state remains valid.
-2010-11-24,46.39,1.18,41.33,44.53,41.31,12.24,12.3,15.97,46.93,1.21,1.11,0.37,0.51,-0.14,QLD,Hold QLD,No action,No action; current model state remains valid.
-2010-11-26,46.09,1.16,41.37,44.59,41.36,11.39,11.43,16.18,46.93,1.21,1.11,0.35,0.48,-0.12,QLD,Hold QLD,No action,No action; current model state remains valid.
+2010-11-24,46.39,1.18,41.33,44.53,41.31,12.24,12.3,15.96,46.93,1.21,1.11,0.37,0.51,-0.14,QLD,Hold QLD,No action,No action; current model state remains valid.
+2010-11-26,46.09,1.16,41.37,44.59,41.36,11.39,11.43,16.17,46.93,1.21,1.11,0.35,0.48,-0.12,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-29,46.05,1.16,41.41,44.65,41.41,11.19,11.22,16.15,46.93,1.21,1.11,0.34,0.45,-0.11,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-11-30,45.49,1.13,41.45,44.68,41.45,9.75,9.76,16.77,46.93,1.21,1.11,0.28,0.41,-0.14,QLD,Hold QLD,No action,No action; current model state remains valid.
 2010-12-01,46.45,1.18,41.49,44.75,41.5,11.96,11.95,17.99,46.93,1.21,1.11,0.3,0.39,-0.09,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -1150,7 +1150,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2011-01-11,49.14,1.32,42.54,46.98,43.06,15.52,14.12,7.55,49.07,1.32,1.23,0.59,0.54,0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2011-01-12,49.49,1.34,42.58,47.08,43.13,16.24,14.76,7.79,49.14,1.32,1.23,0.62,0.55,0.07,QLD,Hold QLD,No action,No action; current model state remains valid.
 2011-01-13,49.51,1.34,42.62,47.17,43.19,16.18,14.63,7.44,49.49,1.34,1.23,0.65,0.57,0.07,QLD,Hold QLD,No action,No action; current model state remains valid.
-2011-01-14,49.88,1.36,42.66,47.28,43.26,16.93,15.31,7.4,49.51,1.34,1.24,0.68,0.59,0.09,QLD,Hold QLD,No action,No action; current model state remains valid.
+2011-01-14,49.88,1.36,42.66,47.28,43.26,16.93,15.31,7.41,49.51,1.34,1.24,0.68,0.59,0.09,QLD,Hold QLD,No action,No action; current model state remains valid.
 2011-01-18,50.02,1.37,42.7,47.39,43.32,17.15,15.45,7.39,49.88,1.36,1.24,0.72,0.62,0.1,QLD,Hold QLD,No action,No action; current model state remains valid.
 2011-01-19,49.45,1.34,42.73,47.47,43.39,15.72,13.98,8.86,50.02,1.37,1.24,0.69,0.63,0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
 2011-01-20,49.1,1.32,42.77,47.53,43.44,14.81,13.02,9.24,50.02,1.37,1.24,0.63,0.63,-0.0,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -1275,7 +1275,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2011-07-12,50.52,1.37,48.5,49.8,47.96,4.16,5.34,19.4,51.98,1.45,1.2,0.54,0.26,0.28,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2011-07-13,50.73,1.38,48.54,49.84,47.98,4.51,5.72,19.05,51.98,1.45,1.2,0.52,0.31,0.21,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2011-07-14,50.14,1.35,48.57,49.85,48.01,3.22,4.44,18.09,51.98,1.45,1.2,0.46,0.34,0.11,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2011-07-15,50.81,1.39,48.61,49.89,48.03,4.51,5.77,18.29,51.98,1.45,1.2,0.45,0.36,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2011-07-15,50.81,1.39,48.61,49.89,48.03,4.51,5.77,18.3,51.98,1.45,1.2,0.45,0.36,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2011-07-18,50.54,1.37,48.65,49.91,48.06,3.87,5.15,18.42,51.98,1.45,1.2,0.42,0.38,0.05,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2011-07-19,51.69,1.44,48.7,49.98,48.1,6.14,7.47,19.63,51.98,1.45,1.22,0.49,0.4,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2011-07-20,51.47,1.42,48.74,50.04,48.13,5.59,6.93,18.77,51.98,1.45,1.23,0.51,0.42,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -1332,7 +1332,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2011-09-30,46.19,1.11,49.33,48.12,48.05,-6.37,-3.88,26.54,49.81,1.3,1.14,-0.06,0.14,-0.2,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2011-10-03,45.0,1.06,49.31,47.99,48.02,-8.75,-6.29,26.8,49.81,1.3,1.11,-0.28,0.05,-0.33,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2011-10-04,45.92,1.1,49.31,47.91,48.0,-6.86,-4.33,27.94,49.81,1.3,1.06,-0.38,-0.03,-0.34,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2011-10-05,47.1,1.16,49.3,47.88,47.99,-4.47,-1.85,27.99,49.81,1.3,1.06,-0.36,-0.1,-0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2011-10-05,47.1,1.16,49.3,47.88,47.99,-4.47,-1.85,27.98,49.81,1.3,1.06,-0.36,-0.1,-0.26,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2011-10-06,47.89,1.19,49.3,47.88,47.99,-2.86,-0.2,28.63,49.81,1.3,1.06,-0.27,-0.13,-0.14,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2011-10-07,47.58,1.18,49.3,47.87,47.98,-3.5,-0.85,27.5,49.81,1.3,1.06,-0.23,-0.15,-0.08,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2011-10-10,49.22,1.26,49.31,47.92,48.0,-0.17,2.55,29.66,49.81,1.3,1.06,-0.06,-0.13,0.07,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -1425,7 +1425,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2012-02-14,55.83,1.59,49.8,52.29,49.87,12.12,11.95,9.0,55.69,1.58,1.37,1.2,1.12,0.08,QLD,Hold QLD,No action,No action; current model state remains valid.
 2012-02-15,55.44,1.57,49.81,52.41,49.93,11.3,11.04,9.03,55.83,1.59,1.41,1.16,1.13,0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2012-02-16,56.2,1.61,49.84,52.56,49.99,12.77,12.42,9.76,55.83,1.59,1.42,1.18,1.14,0.04,QLD,Hold QLD,No action,No action; current model state remains valid.
-2012-02-17,56.02,1.6,49.86,52.7,50.05,12.36,11.94,9.88,56.2,1.61,1.42,1.17,1.14,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
+2012-02-17,56.03,1.6,49.86,52.7,50.05,12.36,11.94,9.88,56.2,1.61,1.42,1.17,1.14,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2012-02-21,56.18,1.61,49.89,52.84,50.11,12.62,12.12,9.83,56.2,1.61,1.42,1.16,1.15,0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
 2012-02-22,55.93,1.6,49.91,52.96,50.17,12.06,11.48,10.06,56.2,1.61,1.42,1.12,1.14,-0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2012-02-23,56.3,1.62,49.93,53.09,50.23,12.74,12.08,9.52,56.2,1.61,1.44,1.1,1.13,-0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -1526,7 +1526,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2012-07-10,56.2,1.59,53.84,56.26,54.35,4.37,3.4,20.41,57.58,1.67,1.51,0.28,0.19,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2012-07-11,55.89,1.57,53.88,56.25,54.36,3.71,2.8,20.14,57.58,1.67,1.52,0.21,0.2,0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2012-07-12,55.36,1.54,53.92,56.21,54.37,2.68,1.82,20.28,57.58,1.67,1.52,0.11,0.18,-0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2012-07-13,56.2,1.59,53.96,56.21,54.39,4.16,3.33,20.92,57.58,1.67,1.53,0.1,0.16,-0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2012-07-13,56.2,1.59,53.96,56.21,54.39,4.16,3.33,20.93,57.58,1.67,1.53,0.1,0.16,-0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2012-07-16,56.05,1.58,54.0,56.21,54.41,3.79,3.01,20.52,57.58,1.67,1.53,0.08,0.15,-0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2012-07-17,56.34,1.59,54.04,56.21,54.43,4.25,3.51,20.32,57.58,1.67,1.53,0.08,0.13,-0.05,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2012-07-18,57.1,1.64,54.1,56.25,54.45,5.55,4.86,20.56,57.58,1.67,1.53,0.15,0.14,0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -1676,7 +1676,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2013-02-14,60.77,1.82,58.35,59.6,58.12,4.15,4.55,12.05,60.82,1.83,1.74,0.37,0.35,0.02,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-02-15,60.59,1.81,58.35,59.64,58.14,3.82,4.2,12.02,60.82,1.83,1.74,0.36,0.35,0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-02-19,61.03,1.84,58.36,59.7,58.17,4.56,4.9,12.21,60.82,1.83,1.74,0.38,0.36,0.02,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2013-02-20,60.09,1.78,58.37,59.71,58.19,2.94,3.25,13.51,61.03,1.84,1.74,0.31,0.35,-0.04,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2013-02-20,60.09,1.78,58.37,59.71,58.19,2.94,3.25,13.52,61.03,1.84,1.74,0.31,0.35,-0.04,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2013-02-21,59.44,1.74,58.37,59.7,58.2,1.83,2.13,13.83,61.03,1.84,1.74,0.21,0.32,-0.11,Cash,Hold Cash,Move to Cash,"Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
 2013-02-22,60.04,1.78,58.39,59.71,58.22,2.84,3.12,13.44,61.03,1.84,1.74,0.17,0.29,-0.12,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2013-02-25,59.3,1.73,58.4,59.7,58.23,1.55,1.83,14.05,61.03,1.84,1.74,0.08,0.25,-0.17,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -1735,7 +1735,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2013-05-10,65.48,2.1,60.02,62.31,59.84,9.09,9.42,16.33,65.17,2.08,1.78,0.99,0.73,0.25,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-05-13,65.56,2.11,60.07,62.44,59.9,9.14,9.45,14.1,65.48,2.1,1.78,1.02,0.79,0.23,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-05-14,65.9,2.13,60.12,62.57,59.96,9.61,9.91,13.63,65.56,2.11,1.78,1.07,0.85,0.22,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2013-05-15,66.03,2.14,60.17,62.71,60.02,9.74,10.02,10.72,65.9,2.13,1.78,1.1,0.9,0.2,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2013-05-15,66.03,2.14,60.17,62.71,60.02,9.74,10.02,10.73,65.9,2.13,1.78,1.1,0.9,0.2,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-05-16,65.96,2.13,60.21,62.84,60.08,9.55,9.8,8.67,66.03,2.14,1.78,1.11,0.94,0.17,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2013-05-17,66.6,2.17,60.26,62.98,60.14,10.52,10.74,8.22,66.03,2.14,1.83,1.15,0.98,0.17,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-05-20,66.5,2.17,60.3,63.12,60.21,10.27,10.46,8.16,66.6,2.17,1.86,1.16,1.02,0.15,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
@@ -1780,7 +1780,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2013-07-16,67.77,2.24,61.26,64.95,61.87,10.63,9.54,14.5,67.86,2.25,1.92,0.73,0.32,0.41,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2013-07-17,67.94,2.25,61.3,65.07,61.93,10.84,9.71,14.31,67.86,2.25,1.92,0.8,0.41,0.39,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-07-18,67.77,2.24,61.33,65.18,61.98,10.51,9.33,13.6,67.94,2.25,1.92,0.84,0.5,0.34,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
-2013-07-19,67.07,2.19,61.36,65.25,62.04,9.31,8.12,10.69,67.94,2.25,1.92,0.8,0.56,0.24,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2013-07-19,67.07,2.19,61.36,65.25,62.04,9.31,8.11,10.69,67.94,2.25,1.92,0.8,0.56,0.24,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-07-22,67.27,2.21,61.39,65.33,62.09,9.58,8.34,10.27,67.94,2.25,1.92,0.78,0.6,0.18,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-07-23,66.77,2.17,61.42,65.39,62.13,8.72,7.47,9.87,67.94,2.25,1.92,0.72,0.63,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-07-24,66.99,2.19,61.45,65.45,62.18,9.02,7.73,9.74,67.94,2.25,1.95,0.67,0.64,0.04,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -1824,9 +1824,9 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2013-09-17,70.47,2.41,63.45,68.23,64.28,11.06,9.62,11.47,70.32,2.4,2.22,0.62,0.5,0.12,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-09-18,71.31,2.47,63.52,68.35,64.35,12.27,10.82,11.98,70.47,2.41,2.22,0.7,0.54,0.16,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2013-09-19,71.48,2.48,63.58,68.47,64.42,12.43,10.96,11.78,71.31,2.47,2.22,0.77,0.59,0.19,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2013-09-20,71.24,2.46,63.65,68.58,64.49,11.93,10.46,11.66,71.48,2.48,2.22,0.8,0.63,0.17,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
-2013-09-23,71.1,2.45,63.71,68.68,64.56,11.58,10.13,11.6,71.48,2.48,2.22,0.8,0.66,0.14,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2013-09-24,71.1,2.45,63.78,68.77,64.62,11.47,10.02,11.61,71.48,2.48,2.22,0.79,0.69,0.1,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2013-09-20,71.24,2.46,63.65,68.58,64.49,11.93,10.47,11.66,71.48,2.48,2.22,0.8,0.63,0.17,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2013-09-23,71.09,2.45,63.71,68.68,64.56,11.58,10.13,11.6,71.48,2.48,2.22,0.8,0.66,0.14,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2013-09-24,71.09,2.45,63.78,68.77,64.62,11.47,10.02,11.61,71.48,2.48,2.22,0.79,0.69,0.1,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-09-25,70.85,2.44,63.84,68.86,64.68,10.97,9.54,8.41,71.48,2.48,2.22,0.76,0.7,0.05,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-09-26,71.4,2.48,63.91,68.96,64.75,11.72,10.27,8.61,71.48,2.48,2.24,0.76,0.71,0.05,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2013-09-27,71.31,2.47,63.98,69.05,64.82,11.47,10.02,8.54,71.48,2.48,2.24,0.75,0.72,0.03,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -2032,7 +2032,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2014-07-16,87.55,3.64,79.23,84.23,78.9,10.5,10.97,8.2,87.5,3.64,3.37,1.04,1.05,-0.01,QLD,Hold QLD,No action,No action; current model state remains valid.
 2014-07-17,86.39,3.54,79.31,84.31,78.97,8.93,9.39,9.7,87.55,3.64,3.4,0.94,1.03,-0.09,QLD,Hold QLD,No action,No action; current model state remains valid.
 2014-07-18,87.76,3.65,79.39,84.45,79.06,10.54,11.0,10.99,87.55,3.64,3.4,0.95,1.01,-0.06,QLD,Hold QLD,No action,No action; current model state remains valid.
-2014-07-21,87.65,3.64,79.47,84.57,79.15,10.3,10.75,11.04,87.76,3.65,3.4,0.95,1.0,-0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
+2014-07-21,87.65,3.64,79.47,84.57,79.15,10.3,10.74,11.04,87.76,3.65,3.4,0.95,1.0,-0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2014-07-22,88.21,3.69,79.55,84.71,79.24,10.88,11.32,11.14,87.76,3.65,3.4,0.98,1.0,-0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2014-07-23,88.77,3.74,79.64,84.87,79.33,11.47,11.9,11.19,88.21,3.69,3.4,1.03,1.0,0.03,QLD,Hold QLD,No action,No action; current model state remains valid.
 2014-07-24,88.67,3.73,79.73,85.02,79.42,11.22,11.64,11.15,88.77,3.74,3.45,1.06,1.01,0.05,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -2275,7 +2275,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2015-07-02,99.62,4.57,96.13,100.24,95.94,3.63,3.83,13.78,102.24,4.82,4.47,-0.24,0.0,-0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-07-06,99.39,4.55,96.17,100.21,95.98,3.34,3.55,13.78,102.24,4.82,4.47,-0.29,-0.06,-0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-07-07,99.64,4.57,96.21,100.19,96.01,3.56,3.78,13.34,102.24,4.82,4.47,-0.31,-0.11,-0.2,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2015-07-08,97.9,4.41,96.25,100.1,96.03,1.72,1.95,14.73,102.24,4.82,4.47,-0.46,-0.18,-0.28,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2015-07-08,97.9,4.41,96.25,100.1,96.03,1.72,1.95,14.72,102.24,4.82,4.47,-0.46,-0.18,-0.28,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-07-09,97.85,4.4,96.28,100.01,96.05,1.63,1.87,13.71,102.24,4.82,4.41,-0.57,-0.26,-0.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-07-10,99.34,4.54,96.33,99.98,96.08,3.13,3.39,14.91,102.24,4.82,4.4,-0.54,-0.31,-0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-07-13,101.09,4.7,96.38,100.03,96.13,4.89,5.15,15.96,102.24,4.82,4.4,-0.36,-0.32,-0.04,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -2337,7 +2337,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2015-09-30,94.14,4.0,98.42,97.66,97.23,-4.35,-3.18,23.23,98.86,4.43,3.83,-1.15,-0.83,-0.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-10-01,94.56,4.04,98.42,97.54,97.2,-3.92,-2.71,20.96,98.86,4.43,3.83,-1.12,-0.89,-0.23,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-10-02,96.22,4.18,98.45,97.49,97.19,-2.27,-1.0,21.84,98.86,4.43,3.83,-0.95,-0.9,-0.05,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2015-10-05,97.6,4.3,98.47,97.49,97.19,-0.89,0.41,21.85,98.86,4.43,3.83,-0.7,-0.86,0.16,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2015-10-05,97.6,4.3,98.47,97.49,97.19,-0.89,0.41,21.84,98.86,4.43,3.83,-0.7,-0.86,0.16,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-10-06,97.13,4.26,98.48,97.48,97.19,-1.37,-0.06,19.64,98.86,4.43,3.83,-0.53,-0.79,0.27,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-10-07,97.72,4.31,98.49,97.49,97.2,-0.78,0.53,19.26,98.86,4.43,3.83,-0.34,-0.7,0.36,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2015-10-08,98.1,4.34,98.5,97.51,97.21,-0.4,0.92,18.95,98.86,4.43,3.83,-0.16,-0.6,0.43,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -2348,7 +2348,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2015-10-15,99.6,4.48,98.56,97.71,97.28,1.06,2.39,19.41,98.86,4.43,3.83,0.45,-0.01,0.45,QQQ,Hold QQQ,Buy QQQ,"QQQ recovered above EMA200, broke its prior 20-day high, and volatility is below 30%."
 2015-10-16,100.02,4.52,98.59,97.8,97.3,1.45,2.79,18.64,99.6,4.48,3.83,0.6,0.11,0.48,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2015-10-19,100.59,4.57,98.62,97.91,97.34,2.0,3.35,18.7,100.02,4.52,3.83,0.75,0.24,0.51,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2015-10-20,100.08,4.52,98.65,98.0,97.36,1.44,2.78,17.85,100.59,4.57,3.83,0.83,0.36,0.47,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2015-10-20,100.08,4.52,98.65,98.0,97.36,1.44,2.79,17.85,100.59,4.57,3.83,0.83,0.36,0.47,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2015-10-21,99.46,4.46,98.69,98.06,97.38,0.78,2.14,18.08,100.59,4.57,3.83,0.83,0.45,0.38,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2015-10-22,101.49,4.65,98.73,98.19,97.43,2.79,4.17,19.11,100.59,4.57,3.83,0.98,0.56,0.42,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2015-10-23,104.33,4.91,98.78,98.43,97.49,5.62,7.01,20.53,101.49,4.65,3.83,1.31,0.71,0.6,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
@@ -2682,7 +2682,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-02-13,120.19,6.18,108.14,115.12,109.31,11.14,9.95,6.16,119.51,6.11,5.69,1.44,1.34,0.11,QLD,Hold QLD,No action,No action; current model state remains valid.
 2017-02-14,120.59,6.22,108.25,115.34,109.42,11.4,10.21,5.89,120.19,6.18,5.69,1.51,1.37,0.14,QLD,Hold QLD,No action,No action; current model state remains valid.
 2017-02-15,121.31,6.29,108.36,115.57,109.54,11.94,10.74,6.03,120.59,6.22,5.71,1.61,1.42,0.19,QLD,Hold QLD,No action,No action; current model state remains valid.
-2017-02-16,121.27,6.29,108.48,115.8,109.66,11.79,10.59,6.01,121.31,6.29,5.71,1.66,1.47,0.19,QLD,Hold QLD,No action,No action; current model state remains valid.
+2017-02-16,121.27,6.29,108.48,115.8,109.66,11.79,10.59,6.02,121.31,6.29,5.71,1.66,1.47,0.19,QLD,Hold QLD,No action,No action; current model state remains valid.
 2017-02-17,121.79,6.35,108.6,116.03,109.78,12.15,10.95,6.05,121.31,6.29,5.73,1.72,1.52,0.2,QLD,Hold QLD,No action,No action; current model state remains valid.
 2017-02-21,122.39,6.41,108.72,116.28,109.9,12.57,11.37,6.06,121.79,6.35,5.74,1.8,1.58,0.23,QLD,Hold QLD,No action,No action; current model state remains valid.
 2017-02-22,122.44,6.41,108.84,116.52,110.03,12.49,11.28,5.94,122.39,6.41,5.82,1.85,1.63,0.22,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -2715,7 +2715,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-03-31,124.46,6.61,111.88,120.97,113.13,11.25,10.02,7.5,124.55,6.62,6.36,0.82,0.86,-0.04,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2017-04-03,124.39,6.6,111.99,121.11,113.24,11.07,9.84,7.44,124.55,6.62,6.36,0.82,0.85,-0.03,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-04-04,124.58,6.62,112.12,121.24,113.36,11.12,9.91,7.39,124.55,6.62,6.36,0.83,0.85,-0.02,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2017-04-05,124.08,6.57,112.24,121.35,113.46,10.54,9.35,7.58,124.58,6.62,6.36,0.78,0.83,-0.05,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2017-04-05,124.08,6.57,112.24,121.35,113.46,10.54,9.36,7.58,124.58,6.62,6.36,0.78,0.83,-0.05,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2017-04-06,124.14,6.57,112.36,121.46,113.57,10.49,9.31,7.58,124.58,6.62,6.36,0.74,0.82,-0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-04-07,124.08,6.57,112.48,121.57,113.67,10.31,9.15,7.47,124.58,6.62,6.36,0.7,0.79,-0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-04-10,124.12,6.57,112.59,121.67,113.78,10.24,9.09,7.45,124.58,6.62,6.36,0.66,0.77,-0.11,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -2776,7 +2776,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-06-28,132.0,7.37,119.08,130.19,120.77,10.85,9.31,16.2,134.98,7.74,7.17,0.28,0.53,-0.25,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-06-29,129.71,7.12,119.2,130.17,120.86,8.82,7.33,17.21,134.98,7.74,7.17,0.08,0.44,-0.36,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-06-30,129.76,7.11,119.3,130.16,120.94,8.76,7.29,16.56,134.98,7.74,7.12,-0.07,0.34,-0.41,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2017-07-03,128.39,6.97,119.4,130.09,121.02,7.54,6.09,16.83,134.98,7.74,7.11,-0.3,0.21,-0.51,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2017-07-03,128.39,6.97,119.4,130.09,121.02,7.54,6.09,16.82,134.98,7.74,7.11,-0.3,0.21,-0.51,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-07-05,129.66,7.11,119.5,130.07,121.1,8.5,7.06,17.36,134.98,7.74,6.97,-0.38,0.09,-0.47,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-07-06,128.49,6.98,119.59,130.01,121.18,7.44,6.03,17.41,134.98,7.74,6.97,-0.53,-0.03,-0.5,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-07-07,129.87,7.12,119.69,130.0,121.26,8.5,7.1,17.99,134.98,7.74,6.97,-0.53,-0.13,-0.4,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -2791,7 +2791,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-07-20,135.92,7.8,120.72,131.13,122.33,12.59,11.11,14.55,135.74,7.78,6.97,1.03,0.43,0.6,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-07-21,135.86,7.79,120.85,131.32,122.46,12.42,10.94,14.55,135.92,7.8,6.97,1.15,0.58,0.57,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2017-07-24,136.48,7.86,120.98,131.52,122.6,12.82,11.32,14.57,135.92,7.8,6.97,1.28,0.72,0.56,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2017-07-25,136.13,7.82,121.1,131.7,122.74,12.41,10.92,14.48,136.48,7.86,6.97,1.34,0.84,0.5,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2017-07-25,136.13,7.82,121.1,131.7,122.74,12.41,10.92,14.47,136.48,7.86,6.97,1.34,0.84,0.5,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2017-07-26,136.58,7.87,121.23,131.89,122.87,12.66,11.15,12.48,136.48,7.86,6.97,1.41,0.96,0.45,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-07-27,135.72,7.78,121.35,132.04,123.0,11.84,10.34,12.01,136.58,7.87,6.97,1.38,1.04,0.34,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2017-07-28,135.61,7.76,121.48,132.18,123.13,11.63,10.14,9.78,136.58,7.87,6.97,1.33,1.1,0.23,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -2812,7 +2812,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-08-18,133.15,7.45,123.35,133.44,124.78,7.94,6.7,12.99,136.58,7.87,7.44,0.19,0.55,-0.36,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-08-21,132.98,7.45,123.48,133.42,124.87,7.69,6.5,12.83,136.58,7.87,7.44,0.04,0.45,-0.41,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-08-22,135.0,7.67,123.62,133.48,124.97,9.21,8.03,14.07,136.58,7.87,7.44,0.08,0.38,-0.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2017-08-23,134.52,7.61,123.76,133.52,125.06,8.7,7.56,14.04,136.58,7.87,7.44,0.08,0.32,-0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2017-08-23,134.52,7.61,123.76,133.52,125.06,8.7,7.56,14.05,136.58,7.87,7.44,0.08,0.32,-0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-08-24,134.13,7.57,123.89,133.55,125.15,8.27,7.17,13.92,136.28,7.83,7.44,0.04,0.26,-0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-08-25,133.84,7.54,124.01,133.56,125.24,7.93,6.87,13.93,136.28,7.83,7.44,-0.01,0.21,-0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2017-08-28,134.26,7.57,124.13,133.59,125.33,8.16,7.13,13.92,136.28,7.83,7.44,-0.02,0.16,-0.18,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -2852,7 +2852,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-10-16,140.64,8.28,128.67,136.87,128.89,9.3,9.11,7.47,140.15,8.23,7.64,1.05,0.82,0.23,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-10-17,140.82,8.3,128.82,137.03,129.01,9.31,9.15,7.47,140.64,8.28,7.64,1.1,0.88,0.23,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-10-18,140.65,8.28,128.96,137.17,129.13,9.06,8.92,7.36,140.82,8.3,7.64,1.12,0.92,0.2,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
-2017-10-19,140.13,8.22,129.1,137.29,129.24,8.54,8.42,7.08,140.82,8.3,7.64,1.08,0.96,0.12,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2017-10-19,140.13,8.22,129.1,137.29,129.24,8.54,8.43,7.08,140.82,8.3,7.64,1.08,0.96,0.12,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-10-20,140.5,8.26,129.24,137.41,129.35,8.72,8.62,7.04,140.82,8.3,7.64,1.06,0.98,0.09,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-10-23,139.59,8.16,129.36,137.5,129.45,7.9,7.83,6.22,140.82,8.3,7.64,0.97,0.98,-0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-10-24,139.82,8.19,129.49,137.59,129.55,7.98,7.93,6.21,140.82,8.3,7.68,0.9,0.96,-0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -2862,9 +2862,9 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-10-30,143.22,8.58,130.0,138.11,130.01,10.16,10.16,11.43,142.89,8.53,7.93,1.07,0.92,0.15,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-10-31,143.75,8.64,130.15,138.33,130.14,10.46,10.46,11.45,143.22,8.58,7.97,1.24,0.98,0.26,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-11-01,143.71,8.63,130.29,138.55,130.28,10.3,10.31,11.47,143.75,8.64,7.98,1.36,1.06,0.31,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
-2017-11-02,143.43,8.59,130.43,138.74,130.41,9.97,9.99,11.18,143.75,8.64,8.07,1.42,1.13,0.29,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2017-11-02,143.43,8.59,130.43,138.74,130.41,9.97,9.99,11.17,143.75,8.64,8.07,1.42,1.13,0.29,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-11-03,144.81,8.76,130.57,138.98,130.55,10.91,10.92,11.54,143.75,8.64,8.07,1.56,1.22,0.34,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2017-11-06,145.3,8.82,130.72,139.22,130.7,11.16,11.17,11.5,144.81,8.76,8.07,1.69,1.31,0.38,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2017-11-06,145.3,8.82,130.72,139.22,130.7,11.16,11.17,11.49,144.81,8.76,8.07,1.69,1.31,0.38,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-11-07,145.39,8.83,130.86,139.47,130.85,11.1,11.11,11.5,145.3,8.82,8.07,1.78,1.4,0.37,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-11-08,145.97,8.9,131.01,139.72,131.0,11.43,11.43,11.51,145.39,8.83,8.07,1.87,1.5,0.38,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2017-11-09,145.21,8.8,131.14,139.94,131.14,10.73,10.73,11.73,145.97,8.9,8.07,1.86,1.57,0.29,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
@@ -2888,7 +2888,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2017-12-06,145.03,8.76,133.52,142.97,133.56,8.62,8.59,11.21,147.95,9.13,8.67,0.73,1.19,-0.46,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-12-07,145.52,8.82,133.64,143.07,133.68,8.89,8.86,11.18,147.95,9.13,8.67,0.67,1.08,-0.41,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-12-08,146.16,8.9,133.76,143.19,133.8,9.27,9.24,11.12,147.95,9.13,8.67,0.67,1.0,-0.33,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2017-12-11,147.3,9.04,133.89,143.35,133.94,10.02,9.97,11.43,147.95,9.13,8.67,0.75,0.95,-0.2,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2017-12-11,147.3,9.04,133.89,143.35,133.94,10.02,9.97,11.42,147.95,9.13,8.67,0.75,0.95,-0.2,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-12-12,147.1,9.01,134.01,143.5,134.07,9.77,9.72,11.45,147.95,9.13,8.67,0.79,0.92,-0.13,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-12-13,147.38,9.04,134.13,143.65,134.2,9.88,9.82,11.34,147.95,9.13,8.67,0.83,0.9,-0.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2017-12-14,147.28,9.03,134.25,143.79,134.33,9.7,9.64,11.17,147.95,9.13,8.67,0.85,0.89,-0.04,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -2963,7 +2963,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2018-03-27,150.86,9.26,144.08,156.23,145.14,4.71,3.94,26.42,164.82,11.11,9.22,-0.83,0.47,-1.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-03-28,149.12,9.06,144.17,155.95,145.18,3.44,2.72,26.58,164.82,11.11,9.22,-1.36,0.1,-1.47,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-03-29,151.86,9.39,144.27,155.79,145.25,5.26,4.55,27.09,164.82,11.11,9.06,-1.55,-0.23,-1.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2018-04-02,147.47,8.85,144.35,155.46,145.27,2.17,1.52,28.53,164.82,11.11,9.06,-2.02,-0.59,-1.44,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2018-04-02,147.47,8.85,144.35,155.46,145.27,2.17,1.52,28.52,164.82,11.11,9.06,-2.02,-0.59,-1.44,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-04-03,149.13,9.04,144.44,155.21,145.31,3.25,2.63,28.54,164.82,11.11,8.85,-2.24,-0.92,-1.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-04-04,151.49,9.28,144.55,155.07,145.37,4.8,4.21,29.21,164.82,11.11,8.85,-2.19,-1.17,-1.02,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-04-05,152.35,9.43,144.65,154.96,145.44,5.33,4.75,29.31,164.82,11.11,8.85,-2.07,-1.35,-0.72,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3012,7 +3012,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2018-06-06,166.77,11.2,149.74,158.44,149.74,11.38,11.37,10.4,165.81,11.06,10.01,2.36,1.85,0.51,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2018-06-07,165.42,11.02,149.9,158.71,149.9,10.35,10.35,10.65,166.77,11.2,10.17,2.39,1.96,0.43,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2018-06-08,165.43,11.01,150.05,158.97,150.06,10.25,10.24,10.19,166.77,11.2,10.17,2.39,2.04,0.34,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2018-06-11,165.87,11.07,150.21,159.25,150.21,10.43,10.42,10.16,166.77,11.2,10.17,2.4,2.11,0.28,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2018-06-11,165.87,11.07,150.21,159.25,150.21,10.43,10.43,10.16,166.77,11.2,10.17,2.4,2.11,0.28,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2018-06-12,166.74,11.19,150.37,159.54,150.38,10.89,10.88,10.24,166.77,11.2,10.17,2.44,2.18,0.26,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2018-06-13,166.74,11.18,150.54,159.82,150.54,10.76,10.76,9.08,166.77,11.2,10.17,2.45,2.24,0.22,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2018-06-14,168.42,11.41,150.71,160.16,150.72,11.76,11.75,9.38,166.77,11.2,10.17,2.57,2.3,0.27,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
@@ -3025,7 +3025,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2018-06-25,162.86,10.65,151.76,161.76,151.8,7.32,7.28,13.16,168.45,11.41,10.35,1.69,2.22,-0.53,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2018-06-26,163.53,10.74,151.9,161.83,151.92,7.66,7.64,13.07,168.45,11.41,10.35,1.36,2.05,-0.68,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2018-06-27,161.3,10.43,152.02,161.81,152.01,6.11,6.11,13.85,168.45,11.41,10.48,0.91,1.82,-0.9,Cash,Hold Cash,Move to Cash,"Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
-2018-06-28,162.69,10.62,152.14,161.84,152.12,6.93,6.95,14.17,168.45,11.41,10.43,0.66,1.59,-0.92,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2018-06-28,162.69,10.62,152.14,161.84,152.12,6.94,6.95,14.17,168.45,11.41,10.43,0.66,1.59,-0.92,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-06-29,163.13,10.66,152.27,161.89,152.23,7.13,7.16,13.04,168.45,11.41,10.43,0.5,1.37,-0.87,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-07-02,164.22,10.82,152.4,161.99,152.35,7.76,7.79,12.85,168.45,11.41,10.43,0.44,1.18,-0.74,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-07-03,162.32,10.56,152.52,162.0,152.45,6.42,6.48,13.38,168.45,11.41,10.43,0.25,1.0,-0.75,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3133,8 +3133,8 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2018-11-27,155.61,9.4,163.7,162.89,161.89,-4.94,-3.88,28.09,167.16,10.9,8.92,-3.12,-2.88,-0.24,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-11-28,160.61,9.99,163.75,162.8,161.88,-1.91,-0.78,29.74,167.16,10.9,8.92,-2.54,-2.81,0.27,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-11-29,160.09,9.93,163.78,162.69,161.86,-2.25,-1.1,28.56,167.16,10.9,8.92,-2.1,-2.67,0.56,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2018-11-30,161.25,10.09,163.8,162.64,161.86,-1.55,-0.37,28.26,167.16,10.9,8.92,-1.65,-2.46,0.82,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2018-12-03,164.07,10.42,163.84,162.69,161.88,0.14,1.35,28.38,167.16,10.9,8.92,-1.04,-2.18,1.14,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2018-11-30,161.25,10.09,163.8,162.64,161.86,-1.55,-0.37,28.27,167.16,10.9,8.92,-1.65,-2.46,0.82,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2018-12-03,164.07,10.42,163.84,162.69,161.88,0.14,1.35,28.39,167.16,10.9,8.92,-1.04,-2.18,1.14,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-12-04,157.78,9.62,163.84,162.5,161.84,-3.7,-2.51,31.74,167.16,10.9,8.92,-1.06,-1.96,0.9,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-12-06,158.89,9.76,163.86,162.36,161.81,-3.03,-1.8,31.72,167.16,10.9,8.92,-0.97,-1.76,0.79,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2018-12-07,153.64,9.11,163.85,162.02,161.73,-6.23,-5.0,31.38,167.16,10.9,8.92,-1.31,-1.67,0.36,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3194,8 +3194,8 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2019-02-27,165.74,10.36,163.8,159.49,159.57,1.18,3.87,13.43,165.85,10.38,9.02,2.55,2.54,0.02,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2019-02-28,165.36,10.31,163.83,159.72,159.63,0.94,3.59,10.89,165.85,10.38,9.49,2.46,2.52,-0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2019-03-01,166.51,10.46,163.86,159.99,159.7,1.62,4.26,9.99,165.85,10.38,9.68,2.46,2.51,-0.05,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2019-03-04,166.53,10.46,163.89,160.25,159.76,1.61,4.24,9.76,166.51,10.46,9.68,2.43,2.49,-0.07,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
-2019-03-05,166.66,10.47,163.92,160.5,159.83,1.67,4.27,8.97,166.53,10.46,9.76,2.39,2.47,-0.09,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2019-03-04,166.54,10.46,163.89,160.25,159.76,1.61,4.24,9.76,166.51,10.46,9.68,2.43,2.49,-0.07,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2019-03-05,166.66,10.47,163.92,160.5,159.83,1.67,4.27,8.97,166.54,10.46,9.76,2.39,2.47,-0.09,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2019-03-06,165.71,10.35,163.95,160.7,159.89,1.07,3.64,8.87,166.66,10.47,9.76,2.25,2.43,-0.18,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2019-03-07,163.68,10.1,163.98,160.82,159.93,-0.18,2.35,9.95,166.66,10.47,9.76,1.96,2.33,-0.38,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2019-03-08,163.43,10.06,164.0,160.92,159.96,-0.34,2.17,8.56,166.66,10.47,9.76,1.68,2.2,-0.52,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -3210,7 +3210,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2019-03-21,174.63,11.47,164.38,163.77,160.84,6.24,8.57,11.39,171.95,11.13,10.06,2.83,2.36,0.47,QLD,Hold QLD,Complete DCA to QLD,QLD entry conditions stayed valid through the 5-day DCA process.
 2019-03-22,170.8,10.95,164.41,164.05,160.94,3.89,6.12,14.39,174.63,11.47,10.06,2.71,2.43,0.28,QLD,Hold QLD,No action,No action; current model state remains valid.
 2019-03-25,170.47,10.93,164.43,164.3,161.04,3.68,5.86,14.43,174.63,11.47,10.06,2.56,2.46,0.1,QLD,Hold QLD,No action,No action; current model state remains valid.
-2019-03-26,171.27,11.02,164.46,164.57,161.14,4.14,6.29,14.47,174.63,11.47,10.06,2.48,2.46,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
+2019-03-26,171.27,11.02,164.46,164.57,161.14,4.14,6.28,14.47,174.63,11.47,10.06,2.48,2.46,0.02,QLD,Hold QLD,No action,No action; current model state remains valid.
 2019-03-27,170.17,10.89,164.48,164.79,161.23,3.46,5.54,14.74,174.63,11.47,10.06,2.3,2.43,-0.13,QLD,Hold QLD,No action,No action; current model state remains valid.
 2019-03-28,170.56,10.93,164.5,165.02,161.32,3.68,5.73,14.68,174.63,11.47,10.06,2.16,2.38,-0.22,QLD,Hold QLD,No action,No action; current model state remains valid.
 2019-03-29,171.85,11.1,164.53,165.29,161.43,4.45,6.46,14.71,174.63,11.47,10.06,2.13,2.33,-0.2,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -3248,7 +3248,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2019-05-15,175.13,11.42,166.21,174.59,166.03,5.37,5.48,18.43,182.8,12.5,10.88,-0.33,0.92,-1.25,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-05-16,176.89,11.65,166.26,174.68,166.13,6.39,6.48,18.78,182.8,12.5,10.88,-0.29,0.68,-0.97,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-05-17,175.08,11.41,166.3,174.7,166.22,5.28,5.33,19.07,182.8,12.5,10.88,-0.41,0.46,-0.87,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2019-05-20,172.13,11.04,166.32,174.6,166.28,3.49,3.52,19.81,182.8,12.5,10.88,-0.73,0.22,-0.95,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2019-05-20,172.13,11.04,166.32,174.6,166.28,3.49,3.52,19.8,182.8,12.5,10.88,-0.73,0.22,-0.95,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-05-21,173.93,11.26,166.34,174.57,166.36,4.56,4.55,19.6,182.8,12.5,10.88,-0.83,0.01,-0.84,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-05-22,173.15,11.16,166.35,174.51,166.43,4.09,4.04,19.61,182.8,12.5,10.88,-0.96,-0.18,-0.78,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-05-23,170.5,10.81,166.34,174.36,166.47,2.5,2.42,19.98,182.8,12.5,10.88,-1.26,-0.4,-0.86,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3305,7 +3305,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2019-08-06,175.68,11.33,167.85,180.18,171.66,4.66,2.34,18.12,187.21,12.9,11.01,-0.55,0.99,-1.55,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-08-07,176.63,11.43,167.91,180.04,171.71,5.19,2.87,17.8,187.21,12.9,11.01,-0.88,0.62,-1.5,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-08-08,180.47,11.95,167.99,180.06,171.8,7.43,5.05,19.7,187.21,12.9,11.01,-0.81,0.33,-1.15,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2019-08-09,178.78,11.72,168.06,180.01,171.87,6.38,4.02,19.73,187.21,12.9,11.01,-0.89,0.09,-0.98,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2019-08-09,178.78,11.72,168.06,180.01,171.87,6.38,4.02,19.74,187.21,12.9,11.01,-0.89,0.09,-0.98,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-08-12,176.73,11.45,168.12,179.88,171.91,5.12,2.8,19.93,187.21,12.9,11.01,-1.1,-0.15,-0.95,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-08-13,180.6,11.97,168.23,179.91,172.0,7.35,5.0,21.67,187.21,12.9,11.01,-0.95,-0.31,-0.64,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2019-08-14,175.2,11.22,168.29,179.72,172.03,4.11,1.84,23.99,187.21,12.9,11.01,-1.25,-0.5,-0.75,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3432,7 +3432,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2020-02-06,221.6,17.55,187.6,207.2,190.13,18.12,16.55,16.37,219.7,17.26,15.68,3.4,3.13,0.27,QLD,Hold QLD,No action,No action; current model state remains valid.
 2020-02-07,220.64,17.39,187.8,207.73,190.44,17.49,15.86,16.42,221.6,17.55,15.79,3.54,3.21,0.33,QLD,Hold QLD,No action,No action; current model state remains valid.
 2020-02-10,223.31,17.82,188.0,208.34,190.76,18.78,17.06,16.67,221.6,17.55,15.79,3.82,3.33,0.49,QLD,Hold QLD,No action,No action; current model state remains valid.
-2020-02-11,223.35,17.82,188.21,208.93,191.09,18.67,16.88,16.39,223.31,17.82,15.79,4.0,3.47,0.53,QLD,Hold QLD,No action,No action; current model state remains valid.
+2020-02-11,223.35,17.82,188.21,208.93,191.09,18.67,16.88,16.38,223.31,17.82,15.79,4.0,3.47,0.53,QLD,Hold QLD,No action,No action; current model state remains valid.
 2020-02-12,225.52,18.17,188.42,209.58,191.43,19.69,17.81,16.4,223.35,17.82,15.79,4.27,3.63,0.64,QLD,Hold QLD,No action,No action; current model state remains valid.
 2020-02-13,225.23,18.11,188.64,210.19,191.77,19.4,17.45,16.44,225.52,18.17,15.79,4.41,3.78,0.62,QLD,Hold QLD,No action,No action; current model state remains valid.
 2020-02-14,225.88,18.21,188.87,210.81,192.11,19.6,17.58,16.26,225.52,18.17,15.79,4.52,3.93,0.59,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -3447,7 +3447,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2020-02-28,198.12,14.03,190.51,211.46,193.97,3.99,2.14,29.5,228.13,18.58,13.89,-2.21,1.3,-3.51,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2020-03-02,208.34,15.35,190.68,211.34,194.12,9.26,7.33,34.82,228.13,18.58,13.89,-2.35,0.57,-2.92,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2020-03-03,201.66,14.37,190.8,210.96,194.19,5.69,3.84,36.06,228.13,18.58,13.89,-2.96,-0.14,-2.82,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2020-03-04,210.07,15.55,190.98,210.92,194.35,10.0,8.09,38.29,228.13,18.58,13.89,-2.74,-0.66,-2.08,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2020-03-04,210.07,15.55,190.98,210.92,194.35,10.0,8.09,38.3,228.13,18.58,13.89,-2.74,-0.66,-2.08,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2020-03-05,203.69,14.62,191.13,210.64,194.44,6.57,4.76,39.56,228.13,18.58,13.89,-3.04,-1.14,-1.91,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2020-03-06,200.25,14.12,191.27,210.23,194.5,4.7,2.96,39.54,228.13,18.58,13.89,-3.52,-1.61,-1.91,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2020-03-09,186.34,12.18,191.33,209.29,194.42,-2.61,-4.15,46.12,228.13,18.58,13.89,-4.96,-2.28,-2.68,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3562,7 +3562,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2020-08-12,262.72,21.9,213.57,245.72,217.42,23.02,20.84,23.37,265.41,22.35,19.39,4.69,4.83,-0.14,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-08-13,263.32,21.98,213.94,246.41,217.88,23.08,20.86,23.13,265.41,22.35,19.39,4.71,4.8,-0.1,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-08-14,263.01,21.94,214.31,247.07,218.33,22.73,20.47,23.16,265.41,22.35,19.39,4.64,4.77,-0.13,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2020-08-17,266.07,22.43,214.69,247.81,218.8,23.93,21.6,21.43,265.41,22.35,19.39,4.78,4.77,0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2020-08-17,266.07,22.43,214.69,247.81,218.8,23.93,21.6,21.42,265.41,22.35,19.39,4.78,4.77,0.01,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-08-18,268.63,22.87,215.09,248.63,219.3,24.89,22.49,21.11,266.07,22.43,19.39,5.04,4.83,0.21,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-08-19,266.82,22.57,215.47,249.34,219.77,23.83,21.41,21.36,268.63,22.87,19.39,5.04,4.87,0.17,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-08-20,270.52,23.19,215.86,250.17,220.28,25.32,22.81,18.86,268.63,22.87,19.39,5.28,4.95,0.33,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -3583,7 +3583,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2020-09-11,261.36,21.45,222.04,261.5,228.03,17.71,14.62,32.85,292.58,27.08,21.41,1.81,4.96,-3.15,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-09-14,265.91,22.2,222.38,261.67,228.41,19.57,16.42,33.43,292.58,27.08,21.41,1.25,4.22,-2.97,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-09-15,269.68,22.83,222.74,261.99,228.82,21.07,17.86,33.55,292.58,27.08,21.41,1.1,3.6,-2.5,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2020-09-16,265.38,22.08,223.08,262.12,229.18,18.96,15.79,33.89,292.58,27.08,21.41,0.62,3.0,-2.38,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2020-09-16,265.38,22.08,223.08,262.12,229.18,18.96,15.8,33.89,292.58,27.08,21.41,0.62,3.0,-2.38,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-09-17,261.23,21.42,223.41,262.08,229.5,16.93,13.83,34.25,292.58,27.08,21.41,-0.09,2.38,-2.47,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2020-09-18,257.9,20.85,223.74,261.92,229.78,15.27,12.24,34.02,292.58,27.08,21.41,-0.91,1.73,-2.63,Cash,Hold Cash,Move to Cash,"Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
 2020-09-21,258.52,21.03,224.06,261.79,230.07,15.38,12.37,33.9,292.58,27.08,20.85,-1.49,1.08,-2.57,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -3780,7 +3780,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2021-06-24,339.56,34.58,302.14,324.97,300.82,12.39,12.88,11.37,337.48,34.16,30.72,4.32,3.42,0.89,QLD,Hold QLD,No action,No action; current model state remains valid.
 2021-06-25,339.15,34.51,302.49,325.53,301.21,12.12,12.6,11.22,339.56,34.58,30.72,4.45,3.63,0.82,QLD,Hold QLD,No action,No action; current model state remains valid.
 2021-06-28,343.27,35.34,302.89,326.23,301.62,13.33,13.81,11.73,339.56,34.58,30.72,4.84,3.87,0.97,QLD,Hold QLD,No action,No action; current model state remains valid.
-2021-06-29,344.51,35.59,303.31,326.94,302.05,13.59,14.06,11.5,343.27,35.34,30.72,5.19,4.14,1.05,QLD,Hold QLD,No action,No action; current model state remains valid.
+2021-06-29,344.51,35.59,303.31,326.94,302.05,13.59,14.06,11.49,343.27,35.34,30.72,5.19,4.14,1.05,QLD,Hold QLD,No action,No action; current model state remains valid.
 2021-06-30,343.97,35.49,303.7,327.61,302.47,13.26,13.72,11.62,344.51,35.59,30.72,5.36,4.38,0.98,QLD,Hold QLD,No action,No action; current model state remains valid.
 2021-07-01,344.11,35.51,304.07,328.26,302.88,13.17,13.61,10.52,344.51,35.59,30.72,5.44,4.59,0.85,QLD,Hold QLD,No action,No action; current model state remains valid.
 2021-07-02,348.06,36.31,304.48,329.03,303.33,14.31,14.74,9.77,344.51,35.59,31.81,5.76,4.83,0.93,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -3855,13 +3855,13 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2021-10-11,348.2,36.05,331.28,355.07,330.16,5.11,5.46,18.14,367.15,40.23,34.93,-3.49,-2.91,-0.58,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-10-12,346.98,35.81,331.51,354.75,330.33,4.67,5.04,18.15,367.15,40.23,34.93,-3.59,-3.05,-0.54,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-10-13,349.76,36.37,331.75,354.55,330.52,5.43,5.82,18.19,367.15,40.23,34.93,-3.4,-3.12,-0.29,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2021-10-14,356.21,37.71,332.02,354.62,330.78,7.29,7.69,19.6,367.15,40.23,34.93,-2.71,-3.04,0.33,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2021-10-14,356.2,37.71,332.02,354.62,330.78,7.29,7.69,19.6,367.15,40.23,34.93,-2.71,-3.04,0.33,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-10-15,358.45,38.18,332.29,354.77,331.05,7.87,8.27,19.38,362.8,39.28,34.93,-1.95,-2.82,0.87,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-10-18,362.05,38.95,332.58,355.05,331.36,8.86,9.26,18.15,362.71,39.2,34.93,-1.05,-2.46,1.42,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-10-19,364.79,39.52,332.91,355.44,331.7,9.58,9.98,18.3,362.71,39.2,34.93,-0.11,-1.99,1.88,QQQ,Hold QQQ,Buy QQQ,"QQQ recovered above EMA200, broke its prior 20-day high, and volatility is below 30%."
 2021-10-20,364.32,39.43,333.22,355.78,332.02,9.33,9.73,18.07,364.79,39.52,34.93,0.59,-1.48,2.07,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2021-10-21,366.54,39.91,333.57,356.21,332.36,9.89,10.28,17.91,364.79,39.52,34.93,1.31,-0.92,2.23,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2021-10-22,363.46,39.23,333.86,356.49,332.67,8.87,9.25,18.19,366.54,39.91,34.93,1.61,-0.41,2.02,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
+2021-10-22,363.46,39.23,333.86,356.49,332.67,8.87,9.26,18.19,366.54,39.91,34.93,1.61,-0.41,2.02,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2021-10-25,367.18,40.03,334.15,356.91,333.02,9.89,10.26,18.26,366.54,39.91,34.93,2.12,0.09,2.03,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2021-10-26,368.34,40.25,334.47,357.36,333.37,10.13,10.49,14.5,367.18,40.03,34.93,2.59,0.59,2.0,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2021-10-27,369.19,40.46,334.8,357.82,333.72,10.27,10.63,14.42,368.34,40.25,34.93,3.0,1.07,1.93,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
@@ -3900,7 +3900,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2021-12-14,377.16,42.0,346.02,376.03,347.48,9.0,8.54,22.04,392.5,45.65,40.97,1.15,2.1,-0.95,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-12-15,385.76,43.87,346.45,376.41,347.86,11.35,10.89,23.41,392.5,45.65,40.97,1.38,1.96,-0.58,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-12-16,375.84,41.63,346.85,376.39,348.14,8.36,7.96,25.16,392.5,45.65,40.97,0.75,1.71,-0.97,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2021-12-17,373.97,41.21,347.23,376.3,348.4,7.7,7.34,24.81,392.5,45.65,40.97,0.09,1.39,-1.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2021-12-17,373.97,41.21,347.23,376.3,348.4,7.7,7.34,24.8,392.5,45.65,40.97,0.09,1.39,-1.3,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-12-20,370.34,40.38,347.63,376.06,348.62,6.53,6.23,24.77,392.5,45.65,40.97,-0.71,0.97,-1.68,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-12-21,378.63,42.18,348.01,376.16,348.92,8.8,8.51,26.06,388.32,44.62,40.38,-0.67,0.64,-1.31,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2021-12-22,383.24,43.22,348.43,376.44,349.26,9.99,9.73,26.44,388.32,44.62,40.38,-0.26,0.46,-0.72,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -4002,7 +4002,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2022-05-11,284.25,22.64,355.23,325.99,341.54,-19.98,-16.77,42.27,337.35,32.41,23.51,-11.71,-9.04,-2.68,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-05-12,283.58,22.54,354.87,324.33,340.96,-20.09,-16.83,41.05,337.35,32.41,22.64,-12.47,-9.72,-2.75,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-05-13,294.09,24.19,354.56,323.14,340.5,-17.05,-13.63,43.63,337.26,32.33,22.54,-12.09,-10.2,-1.89,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2022-05-16,290.68,23.65,354.25,321.87,340.0,-17.94,-14.51,43.6,337.26,32.33,22.54,-11.92,-10.54,-1.38,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2022-05-16,290.68,23.65,354.25,321.87,340.0,-17.94,-14.51,43.61,337.26,32.33,22.54,-11.92,-10.54,-1.38,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-05-17,298.21,24.87,353.97,320.94,339.59,-15.75,-12.18,43.92,337.26,32.33,22.54,-11.05,-10.64,-0.41,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-05-18,283.57,22.4,353.61,319.48,339.03,-19.81,-16.36,46.58,332.34,31.39,22.54,-11.41,-10.8,-0.62,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-05-19,282.05,22.17,353.23,318.01,338.46,-20.15,-16.67,46.33,325.47,30.14,22.4,-11.69,-10.97,-0.71,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -4016,7 +4016,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2022-06-01,298.05,24.67,350.55,310.57,334.76,-14.98,-10.97,43.0,321.03,29.09,21.78,-5.96,-8.99,3.03,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-02,306.21,26.03,350.31,310.4,334.48,-12.59,-8.45,42.38,321.03,29.09,21.78,-4.48,-8.09,3.61,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-03,298.24,24.64,350.04,309.92,334.12,-14.8,-10.74,39.31,306.21,26.2,21.78,-3.9,-7.25,3.35,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2022-06-06,299.24,24.83,349.77,309.5,333.77,-14.45,-10.35,39.12,306.21,26.03,21.78,-3.32,-6.47,3.14,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2022-06-06,299.23,24.83,349.77,309.5,333.77,-14.45,-10.35,39.12,306.21,26.03,21.78,-3.32,-6.47,3.14,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-07,301.82,25.27,349.49,309.2,333.45,-13.64,-9.49,36.3,306.21,26.03,21.78,-2.63,-5.7,3.07,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-08,299.64,24.89,349.18,308.82,333.12,-14.19,-10.05,36.24,306.21,26.03,21.78,-2.23,-5.0,2.78,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-09,291.62,23.53,348.82,308.15,332.7,-16.4,-12.35,35.92,306.21,26.03,21.78,-2.53,-4.51,1.98,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -4032,7 +4032,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2022-06-24,287.5,22.71,344.13,296.98,327.12,-16.46,-12.11,40.09,306.21,26.03,19.23,-6.39,-7.12,0.73,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-27,285.4,22.32,343.72,296.52,326.7,-16.97,-12.64,38.9,306.21,26.03,19.23,-5.45,-6.79,1.34,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-28,276.7,20.95,343.28,295.74,326.2,-19.39,-15.18,38.2,306.21,26.03,19.23,-5.35,-6.5,1.15,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2022-06-29,276.96,21.01,342.84,295.01,325.71,-19.22,-14.97,38.24,306.21,26.03,19.23,-5.18,-6.24,1.05,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2022-06-29,276.95,21.01,342.84,295.01,325.71,-19.22,-14.97,38.24,306.21,26.03,19.23,-5.18,-6.24,1.05,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-06-30,273.52,20.46,342.38,294.17,325.19,-20.11,-15.89,38.34,306.21,26.03,19.23,-5.27,-6.04,0.77,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-07-01,275.33,20.73,341.92,293.43,324.7,-19.48,-15.21,36.78,306.21,26.03,19.23,-5.14,-5.86,0.73,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-07-05,280.04,21.44,341.49,292.9,324.25,-17.99,-13.64,36.71,301.82,25.27,19.23,-4.59,-5.61,1.01,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -4107,7 +4107,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2022-10-11,256.87,17.45,314.23,284.1,307.41,-18.25,-16.44,27.18,288.89,22.28,17.9,-7.98,-7.55,-0.43,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-10-12,256.79,17.43,313.55,283.03,306.91,-18.1,-16.33,26.79,288.89,22.28,17.45,-8.3,-7.7,-0.6,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-10-13,262.81,18.22,312.91,282.24,306.47,-16.01,-14.25,28.35,284.54,21.59,17.43,-7.97,-7.75,-0.22,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2022-10-14,254.91,17.11,312.23,281.16,305.96,-18.36,-16.69,29.89,284.54,21.59,17.43,-8.25,-7.85,-0.4,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2022-10-14,254.91,17.11,312.23,281.16,305.96,-18.36,-16.69,29.88,284.54,21.59,17.43,-8.25,-7.85,-0.4,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-10-17,263.33,18.27,311.6,280.46,305.53,-15.49,-13.81,32.47,284.54,21.59,17.11,-7.71,-7.83,0.11,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-10-18,265.41,18.56,311.0,279.87,305.13,-14.66,-13.02,32.7,282.27,21.23,17.11,-7.03,-7.67,0.64,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2022-10-19,264.44,18.4,310.36,279.27,304.73,-14.8,-13.22,32.22,277.22,20.46,17.11,-6.5,-7.43,0.94,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -4255,12 +4255,12 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2023-05-15,320.74,25.22,288.78,307.88,297.12,11.07,7.95,16.26,320.16,25.14,22.81,3.34,2.97,0.37,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-16,321.11,25.27,288.84,308.4,297.36,11.17,7.99,16.25,320.74,25.22,22.81,3.44,3.07,0.38,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-17,324.99,25.89,288.93,309.05,297.63,12.48,9.19,16.67,321.11,25.27,22.81,3.8,3.21,0.58,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2023-05-18,331.03,26.82,289.05,309.91,297.96,14.52,11.1,17.25,324.99,25.89,22.81,4.51,3.47,1.04,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2023-05-18,331.03,26.82,289.05,309.91,297.96,14.52,11.1,17.24,324.99,25.89,22.81,4.51,3.47,1.04,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-19,330.28,26.7,289.13,310.71,298.29,14.23,10.73,17.34,331.03,26.82,22.81,4.96,3.77,1.19,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2023-05-22,331.39,26.86,289.2,311.52,298.61,14.59,10.98,17.23,331.03,26.82,22.81,5.35,4.09,1.26,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-23,327.19,26.18,289.27,312.14,298.9,13.11,9.47,16.27,331.39,26.86,22.81,5.25,4.32,0.93,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
 2023-05-24,325.51,25.91,289.33,312.66,299.16,12.51,8.81,16.53,331.39,26.86,23.07,4.98,4.45,0.53,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2023-05-25,333.43,27.15,289.45,313.47,299.51,15.2,11.33,16.02,331.39,26.86,23.67,5.35,4.63,0.72,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2023-05-25,333.43,27.15,289.45,313.47,299.5,15.2,11.33,16.02,331.39,26.86,23.67,5.35,4.63,0.72,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-26,341.95,28.54,289.57,314.59,299.93,18.09,14.01,17.84,333.43,27.15,23.67,6.25,4.95,1.3,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-30,343.5,28.79,289.71,315.72,300.36,18.57,14.36,17.74,341.95,28.54,23.67,7.01,5.37,1.65,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2023-05-31,341.55,28.41,289.8,316.74,300.77,17.86,13.56,17.48,343.5,28.79,23.67,7.37,5.77,1.61,QQQ,Hold QQQ,Reset DCA,QLD entry conditions failed during DCA; reset to QQQ.
@@ -4306,7 +4306,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2023-07-28,376.9,34.15,304.3,355.43,321.1,23.86,17.38,15.16,379.12,34.68,30.96,5.31,5.98,-0.68,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-07-31,377.1,34.21,304.9,356.28,321.66,23.68,17.23,14.41,379.12,34.68,31.31,5.38,5.86,-0.48,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-08-01,376.22,34.02,305.49,357.06,322.2,23.15,16.77,14.49,379.12,34.68,31.31,5.3,5.75,-0.45,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2023-08-02,367.96,32.51,306.02,357.49,322.66,20.24,14.04,16.78,379.12,34.68,31.31,4.53,5.5,-0.98,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2023-08-02,367.97,32.51,306.02,357.49,322.66,20.24,14.04,16.78,379.12,34.68,31.31,4.53,5.5,-0.98,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-08-03,367.38,32.4,306.58,357.88,323.1,19.83,13.7,16.53,379.12,34.68,31.31,3.82,5.17,-1.35,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-08-04,365.66,32.08,307.09,358.18,323.52,19.07,13.02,16.58,379.12,34.68,31.31,3.08,4.75,-1.67,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-08-07,368.75,32.63,307.61,358.6,323.97,19.88,13.82,16.8,379.12,34.68,31.35,2.72,4.34,-1.63,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -4393,7 +4393,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2023-11-30,382.71,34.15,342.81,367.52,346.01,11.64,10.61,13.78,384.59,34.57,29.02,6.92,6.63,0.29,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-12-01,383.8,34.35,343.22,368.15,346.38,11.82,10.8,12.8,384.59,34.57,30.04,6.7,6.64,0.06,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-12-04,380.24,33.69,343.63,368.63,346.72,10.65,9.67,13.19,384.59,34.57,30.74,6.17,6.55,-0.38,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2023-12-05,381.19,33.85,344.06,369.12,347.06,10.79,9.83,13.18,384.59,34.57,30.98,5.76,6.39,-0.63,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2023-12-05,381.19,33.85,344.06,369.12,347.06,10.79,9.83,13.17,384.59,34.57,30.98,5.76,6.39,-0.63,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-12-06,378.99,33.46,344.52,369.51,347.38,10.01,9.1,13.21,384.59,34.57,31.1,5.2,6.15,-0.95,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-12-07,384.29,34.4,345.0,370.09,347.75,11.39,10.51,13.89,384.59,34.57,31.1,5.12,5.95,-0.82,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2023-12-08,386.0,34.67,345.47,370.71,348.13,11.73,10.88,13.39,384.59,34.57,31.1,5.14,5.78,-0.65,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
@@ -4416,7 +4416,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2024-01-04,391.03,35.36,354.68,384.81,356.11,10.25,9.81,13.87,406.05,38.21,33.46,4.66,6.6,-1.94,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2024-01-05,391.49,35.45,355.11,385.07,356.46,10.24,9.83,13.61,406.05,38.21,33.46,3.81,6.04,-2.23,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2024-01-08,399.58,36.91,355.61,385.64,356.89,12.37,11.96,14.57,406.05,38.21,34.4,3.75,5.58,-1.84,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
-2024-01-09,400.37,37.05,356.09,386.22,357.32,12.43,12.05,14.54,406.05,38.21,34.67,3.72,5.21,-1.5,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
+2024-01-09,400.37,37.05,356.09,386.22,357.32,12.44,12.05,14.54,406.05,38.21,34.67,3.72,5.21,-1.5,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2024-01-10,403.09,37.53,356.58,386.88,357.78,13.04,12.66,14.44,406.05,38.21,35.26,3.87,4.94,-1.08,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2024-01-11,403.92,37.65,357.09,387.55,358.24,13.12,12.75,14.26,406.05,38.21,35.36,4.01,4.75,-0.75,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2024-01-12,404.13,37.7,357.6,388.2,358.69,13.01,12.67,13.63,406.05,38.21,35.36,4.09,4.62,-0.53,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
@@ -4424,7 +4424,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2024-01-17,401.81,37.25,358.55,389.33,359.57,12.07,11.75,13.73,406.05,38.21,35.36,3.88,4.39,-0.51,QQQ,Hold QQQ,No action,Hold QQQ until QLD leverage-entry conditions confirm.
 2024-01-18,407.52,38.31,359.01,390.05,360.05,13.51,13.18,14.44,406.05,38.21,35.36,4.12,4.34,-0.21,QQQ + QLD,DCA to QLD,DCA day 1,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2024-01-19,415.6,39.8,359.52,391.05,360.6,15.6,15.25,15.87,407.52,38.31,35.36,4.91,4.45,0.46,QQQ + QLD,DCA to QLD,DCA day 2,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
-2024-01-22,416.14,39.9,360.03,392.03,361.15,15.59,15.23,14.63,415.6,39.8,35.36,5.51,4.66,0.85,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
+2024-01-22,416.14,39.9,360.03,392.03,361.15,15.58,15.23,14.63,415.6,39.8,35.36,5.51,4.66,0.85,QQQ + QLD,DCA to QLD,DCA day 3,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2024-01-23,417.87,40.22,360.57,393.04,361.72,15.89,15.52,14.24,416.14,39.9,35.36,6.06,4.94,1.12,QQQ + QLD,DCA to QLD,DCA day 4,QLD entry conditions are valid; continue gradual conversion from QQQ to QLD.
 2024-01-24,420.19,40.64,361.11,394.11,362.3,16.36,15.98,14.3,417.87,40.22,35.36,6.6,5.27,1.33,QLD,Hold QLD,Complete DCA to QLD,QLD entry conditions stayed valid through the 5-day DCA process.
 2024-01-25,420.7,40.72,361.65,395.15,362.88,16.33,15.93,14.22,420.19,40.64,35.36,7.0,5.62,1.38,QLD,Hold QLD,No action,No action; current model state remains valid.
@@ -4487,7 +4487,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2024-04-17,420.75,39.88,389.78,428.87,392.66,7.95,7.15,14.76,441.05,44.06,40.88,-1.45,0.53,-1.98,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-04-18,418.35,39.4,390.05,428.45,392.92,7.26,6.47,13.96,441.05,44.06,39.88,-2.36,-0.05,-2.32,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-04-19,409.7,37.78,390.28,427.72,393.08,4.98,4.23,15.15,441.05,44.06,39.4,-3.74,-0.79,-2.95,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2024-04-22,413.82,38.52,390.54,427.17,393.29,5.96,5.22,15.84,441.05,44.06,37.78,-4.45,-1.52,-2.93,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2024-04-22,413.82,38.52,390.54,427.17,393.29,5.96,5.22,15.83,441.05,44.06,37.78,-4.45,-1.52,-2.93,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-04-23,419.99,39.67,390.84,426.89,393.56,7.46,6.72,17.07,440.05,43.76,37.78,-4.46,-2.11,-2.35,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-04-24,421.41,39.93,391.15,426.68,393.83,7.74,7.0,17.18,440.05,43.76,37.78,-4.3,-2.54,-1.76,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-04-25,419.38,39.51,391.43,426.39,394.09,7.14,6.42,17.09,440.05,43.76,37.78,-4.29,-2.89,-1.4,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
@@ -4564,7 +4564,7 @@ date,qqq_close,qld_close,sma200,ema50,ema200,distance_to_sma200_pct,distance_to_
 2024-08-07,430.26,40.4,425.16,460.93,427.95,1.2,0.54,27.26,497.74,54.74,40.61,-10.12,-5.55,-4.57,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-08-08,443.42,42.88,425.63,460.24,428.11,4.18,3.58,29.69,491.19,53.22,40.4,-9.89,-6.42,-3.47,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-08-09,445.74,43.31,426.11,459.67,428.28,4.61,4.08,29.66,491.19,53.22,40.4,-9.41,-7.02,-2.4,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-2024-08-12,446.7,43.47,426.58,459.16,428.47,4.72,4.25,29.64,491.19,53.22,40.4,-8.85,-7.39,-1.47,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+2024-08-12,446.7,43.47,426.58,459.16,428.47,4.72,4.25,29.64,491.19,53.22,40.4,-8.85,-7.38,-1.47,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-08-13,457.78,45.62,427.14,459.11,428.76,7.17,6.77,31.38,491.19,53.22,40.4,-7.43,-7.39,-0.04,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-08-14,457.93,45.65,427.74,459.06,429.05,7.06,6.73,29.82,477.31,50.11,40.4,-6.22,-7.16,0.94,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
 2024-08-15,469.5,47.93,428.39,459.47,429.45,9.6,9.33,31.28,477.31,50.11,40.4,-4.28,-6.58,2.31,Cash,Hold Cash,No action,"Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
