@@ -13,8 +13,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     env:
-      EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
-      EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+      PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
+      PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -33,6 +33,6 @@ jobs:
           commit_message: "Update daily QQQ/QLD signals"
           file_pattern: data/signals.json data/signals.csv
 
-      - name: Email refresh confirmation
-        if: ${{ env.EMAIL_USERNAME != '' && env.EMAIL_APP_PASSWORD != '' }}
-        run: python scripts/send_refresh_email.py
+      - name: Send phone notification
+        if: ${{ env.PUSHOVER_APP_TOKEN != '' && env.PUSHOVER_USER_KEY != '' }}
+        run: python scripts/send_pushover_notification.py
