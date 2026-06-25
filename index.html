@@ -3,28 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Daily Donchian20 QLD to QQQ to Cash strategy dashboard">
   <title>QQQ/QLD Signal Desk</title>
   <style>
     :root {
-      --bg: #f6f7f9;
+      --bg: #f4f6f8;
       --surface: #ffffff;
-      --surface-2: #eef2f6;
+      --surface-2: #eef2f5;
       --text: #17202a;
       --muted: #667085;
-      --border: #d9e0e8;
-      --blue: #1f5eff;
-      --green: #17855c;
-      --green-bg: #e8f6ef;
-      --amber: #b46a00;
-      --amber-bg: #fff4dc;
-      --red: #bc3131;
-      --red-bg: #fff0f0;
-      --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --border: #d9e0e7;
+      --blue: #2563eb;
+      --green: #16805c;
+      --amber: #a86108;
+      --red: #b83232;
+      --shadow: 0 12px 32px rgba(15, 23, 42, 0.07);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -37,426 +33,223 @@
     .shell {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 28px 0 44px;
+      padding: 26px 0 42px;
     }
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 18px;
-      padding-bottom: 22px;
+      margin-bottom: 20px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
+    .brand { display: flex; gap: 12px; align-items: center; min-width: 0; }
 
     .mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #17202a, #1f5eff);
-      color: #ffffff;
+      width: 40px;
+      height: 40px;
       display: grid;
       place-items: center;
-      font-size: 15px;
-      font-weight: 800;
       flex: 0 0 auto;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1.1;
-      font-weight: 760;
-    }
-
-    .subtitle {
-      margin: 3px 0 0;
-      color: var(--muted);
+      border-radius: 7px;
+      background: #182230;
+      color: #fff;
+      font-weight: 800;
       font-size: 14px;
-      line-height: 1.4;
     }
 
-    .updated {
-      color: var(--muted);
-      font-size: 13px;
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .top-grid {
-      display: grid;
-      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.6fr);
-      gap: 18px;
-      align-items: stretch;
-      min-width: 0;
-    }
+    h1 { margin: 0; font-size: clamp(24px, 3vw, 34px); line-height: 1.08; }
+    .subtitle { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+    .updated { color: var(--muted); font-size: 13px; text-align: right; line-height: 1.45; }
 
     .panel {
+      min-width: 0;
+      overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       box-shadow: var(--shadow);
-      min-width: 0;
-      overflow: hidden;
     }
 
-    .status-panel {
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(310px, 0.9fr) minmax(0, 1.55fr);
+      gap: 18px;
+    }
+
+    .position-panel {
+      min-height: 350px;
       padding: 24px;
       display: flex;
       flex-direction: column;
-      min-height: 340px;
     }
 
-    .status-kicker {
+    .label {
+      margin: 0 0 8px;
       color: var(--muted);
-      font-size: 12px;
-      font-weight: 720;
+      font-size: 11px;
+      font-weight: 760;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
     }
 
-    .status-title {
-      margin: 12px 0 8px;
-      font-size: clamp(34px, 6vw, 58px);
-      line-height: 0.96;
+    .position-title {
+      margin: 8px 0 12px;
+      font-size: clamp(42px, 6vw, 62px);
+      line-height: 0.98;
       font-weight: 820;
       color: var(--green);
     }
 
-    .status-panel.cash .status-title,
-    .status-panel.waiting .status-title {
-      color: var(--red);
-    }
+    .position-panel.cash .position-title { color: var(--red); }
+    .position-panel.qqq .position-title { color: var(--blue); }
 
-    .status-panel.qqq .status-title {
-      color: var(--blue);
-    }
-
-    .status-panel.dca .status-title {
-      color: var(--amber);
-    }
-
-    .state-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 10px 0 18px;
-    }
-
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
     .chip {
       display: inline-flex;
       align-items: center;
       min-height: 30px;
       padding: 6px 10px;
-      border-radius: 8px;
       border: 1px solid var(--border);
+      border-radius: 7px;
       background: var(--surface-2);
       color: var(--text);
-      font-size: 13px;
-      font-weight: 650;
+      font-size: 12px;
+      font-weight: 690;
     }
 
-    .rule-line {
-      margin: 0;
-      color: #344054;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
+    .explanation { margin: 0; color: #344054; font-size: 15px; line-height: 1.5; }
     .manual-link {
-      margin-top: auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       width: fit-content;
-      min-height: 38px;
+      margin-top: auto;
       padding: 9px 13px;
-      border-radius: 8px;
       border: 1px solid var(--text);
+      border-radius: 7px;
       color: var(--text);
       text-decoration: none;
       font-size: 13px;
       font-weight: 720;
     }
 
-    .metrics {
+    .signal-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      overflow: hidden;
     }
 
     .metric {
-      min-height: 112px;
+      min-height: 116px;
       padding: 18px;
-      background: var(--surface);
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
-    .metric:nth-child(3n) {
-      border-right: 0;
+    .metric:nth-child(3n) { border-right: 0; }
+    .metric:nth-child(n + 4) { border-bottom: 0; }
+    .value { margin: 0; font-size: clamp(23px, 3vw, 32px); line-height: 1.08; font-weight: 780; }
+    .note { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+
+    .signal-value {
+      display: inline-grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 7px;
+      background: #e7f6ef;
+      color: var(--green);
+      font-size: 30px;
+      font-weight: 850;
     }
 
-    .label {
-      margin: 0 0 8px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 720;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+    .signal-value.zero { background: #fff0f0; color: var(--red); }
+    .positive { color: var(--green); }
+    .negative { color: var(--red); }
+    .neutral { color: var(--muted); }
 
-    .value {
-      margin: 0;
-      font-size: clamp(23px, 3vw, 32px);
-      line-height: 1.08;
-      font-weight: 780;
+    .performance-panel { margin-top: 18px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
     }
-
-    .note {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.8fr);
-      gap: 18px;
-      margin-top: 18px;
-      min-width: 0;
-    }
-
-    .performance-panel {
-      margin-top: 18px;
-    }
+    h2 { margin: 0; font-size: 17px; line-height: 1.25; }
 
     .performance-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 14px;
       border-top: 1px solid var(--border);
     }
 
-    .performance-grid .metric {
-      min-height: 106px;
+    .performance-grid .metric:nth-child(4n) { border-right: 0; }
+    .performance-grid .metric:nth-child(n + 5) { border-bottom: 0; }
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.78fr);
+      gap: 18px;
+      margin-top: 18px;
     }
 
-    .performance-grid .metric:nth-child(4n) {
-      border-right: 0;
-    }
-
-    .performance-grid .metric:nth-child(n + 5) {
-      border-bottom: 0;
-    }
-
-    .performance-grid .metric:last-child {
-      grid-column: span 2;
-      border-right: 0;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 18px 18px 0;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.25;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 13px;
-    }
-
-    th,
-    td {
-      padding: 12px 18px;
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td {
+      padding: 11px 16px;
       border-top: 1px solid var(--border);
       text-align: left;
       vertical-align: top;
       white-space: nowrap;
     }
-
     th {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 760;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
+    td.reason { white-space: normal; min-width: 220px; color: #344054; }
 
-    td.reason {
-      white-space: normal;
-      min-width: 260px;
-      color: #344054;
-    }
-
-    .checklist {
-      padding: 18px;
-    }
-
-    .check {
+    .path { padding: 0 18px 18px; }
+    .path-step {
       display: grid;
-      grid-template-columns: 18px 1fr;
-      gap: 10px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: 34px 1fr;
+      gap: 11px;
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
     }
-
-    .check:last-child {
-      border-bottom: 0;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      margin-top: 5px;
+    .step-number {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
       border-radius: 50%;
-      background: var(--blue);
-    }
-
-    .check.good .dot {
-      background: var(--green);
-    }
-
-    .check.warn .dot {
-      background: var(--amber);
-    }
-
-    .check.risk .dot {
-      background: var(--red);
-    }
-
-    .check-title {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 740;
-    }
-
-    .check-copy {
-      margin: 3px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    .footer {
-      margin-top: 18px;
-      color: var(--muted);
+      background: var(--surface-2);
       font-size: 12px;
-      line-height: 1.5;
+      font-weight: 800;
     }
+    .path-title { margin: 0; font-size: 14px; font-weight: 740; }
+    .path-copy { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.42; }
 
-    .positive {
-      color: var(--green);
-    }
-
-    .negative {
-      color: var(--red);
-    }
-
-    .neutral {
-      color: var(--muted);
-    }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
     @media (max-width: 880px) {
-      header,
-      .top-grid,
-      .section-grid {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .updated {
-        text-align: left;
-        white-space: normal;
-      }
-
-      .metrics {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .performance-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .metric:nth-child(3n) {
-        border-right: 1px solid var(--border);
-      }
-
-      .metric:nth-child(2n) {
-        border-right: 0;
-      }
-
-      .performance-grid .metric:nth-child(n) {
-        border-right: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-      }
-
-      .performance-grid .metric:nth-child(2n) {
-        border-right: 0;
-      }
-
-      .performance-grid .metric:last-child {
-        border-bottom: 0;
-      }
-
-      table {
-        display: block;
-        overflow-x: auto;
-      }
+      header { align-items: flex-start; flex-direction: column; }
+      .updated { text-align: left; }
+      .lead-grid, .lower-grid { grid-template-columns: 1fr; }
+      .performance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .performance-grid .metric:nth-child(n) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .performance-grid .metric:nth-child(2n) { border-right: 0; }
+      .performance-grid .metric:nth-child(n + 7) { border-bottom: 0; }
+      table { display: block; overflow-x: auto; }
     }
 
     @media (max-width: 560px) {
-      .shell {
-        width: min(100% - 20px, 1180px);
-        padding-top: 18px;
-      }
-
-      .metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .performance-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metric {
-        border-right: 0;
-      }
-
-      .performance-grid .metric:nth-child(n) {
-        border-right: 0;
-      }
-
-      .performance-grid .metric:last-child {
-        grid-column: span 1;
-      }
-
-      th,
-      td {
-        padding: 10px 12px;
-      }
+      .shell { width: calc(100% - 20px); padding-top: 17px; }
+      .signal-grid, .performance-grid { grid-template-columns: 1fr; }
+      .metric, .metric:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--border); }
+      .signal-grid .metric:last-child, .performance-grid .metric:last-child { border-bottom: 0; }
+      th, td { padding: 10px 12px; }
+      .section-head { align-items: flex-start; }
     }
   </style>
 </head>
@@ -464,57 +257,57 @@
   <main class="shell">
     <header>
       <div class="brand">
-        <div class="mark">Q2</div>
+        <div class="mark">D20</div>
         <div>
           <h1>QQQ/QLD Signal Desk</h1>
-          <p class="subtitle">QQQ signal source, QLD leveraged holding, Cash as a normal risk state.</p>
+          <p class="subtitle">Donchian20 QLD → QQQ → Cash exit strategy</p>
         </div>
       </div>
-      <div class="updated" id="updated">Loading latest signal...</div>
+      <div class="updated" id="updated">Loading latest completed close...</div>
     </header>
 
-    <section class="top-grid">
-      <article class="panel status-panel waiting" id="statusPanel">
-        <div class="status-kicker">Current Status</div>
-        <div class="status-title" id="headlineStatus">Loading</div>
-        <div class="state-row">
-          <span class="chip" id="modelState">Model state: --</span>
-          <span class="chip" id="lastTrade">Last trade: --</span>
+    <section class="lead-grid">
+      <article class="panel position-panel cash" id="positionPanel">
+        <p class="label">Current Position</p>
+        <div class="position-title" id="headlineStatus">Loading</div>
+        <div class="chips">
+          <span class="chip" id="requiredAction">Required action: --</span>
+          <span class="chip" id="lastTrade">Last transition: --</span>
         </div>
-        <p class="rule-line" id="ruleExplanation">Fetching signal data...</p>
+        <p class="explanation" id="ruleExplanation">Fetching signal data...</p>
         <a class="manual-link" href="Real_Account_Tracking_System.doc">Open operating manual</a>
       </article>
 
-      <article class="panel metrics" aria-label="Market indicators">
+      <article class="panel signal-grid" aria-label="Current Donchian and market metrics">
+        <div class="metric">
+          <p class="label">Donchian20 Signal</p>
+          <div class="signal-value zero" id="donchianSignal">--</div>
+          <p class="note">1 = QLD mode · 0 = outside QLD</p>
+        </div>
         <div class="metric">
           <p class="label">QQQ Close</p>
           <p class="value" id="qqqClose">--</p>
-          <p class="note">Adjusted close</p>
+          <p class="note" id="emaDistance">EMA200 distance: --</p>
         </div>
         <div class="metric">
-          <p class="label">SMA200</p>
-          <p class="value" id="sma200">--</p>
-          <p class="note" id="smaDistance">Distance: --</p>
-        </div>
-        <div class="metric">
-          <p class="label">EMA50 / EMA200</p>
-          <p class="value" id="emaPair">--</p>
-          <p class="note" id="emaStatus">--</p>
+          <p class="label">QQQ EMA200</p>
+          <p class="value" id="ema200">--</p>
+          <p class="note" id="emaCondition">Long-term exit layer</p>
         </div>
         <div class="metric">
           <p class="label">QLD Close</p>
           <p class="value" id="qldClose">--</p>
-          <p class="note">Leveraged ETF check</p>
+          <p class="note" id="channelStatus">Channel status: --</p>
         </div>
         <div class="metric">
-          <p class="label">Volatility</p>
-          <p class="value" id="volatility">--</p>
-          <p class="note">QQQ 20-day annualized</p>
+          <p class="label">Prior 20-Day High</p>
+          <p class="value" id="qldHigh">--</p>
+          <p class="note">Strictly above triggers signal 1</p>
         </div>
         <div class="metric">
-          <p class="label">MACD Context</p>
-          <p class="value" id="macdStatus">--</p>
-          <p class="note" id="macdValues">Display-only</p>
+          <p class="label">Prior 20-Day Low</p>
+          <p class="value" id="qldLow">--</p>
+          <p class="note">Strictly below triggers signal 0</p>
         </div>
       </article>
     </section>
@@ -522,159 +315,108 @@
     <section class="panel performance-panel" aria-labelledby="performanceHeading">
       <div class="section-head">
         <h2 id="performanceHeading">Performance Since Tracking Began</h2>
-        <span class="chip">QQQ buy-and-hold benchmark</span>
+        <span class="chip">Adjusted close · $1,000 start</span>
       </div>
       <div class="performance-grid">
-        <div class="metric">
-          <p class="label">Starting Date</p>
-          <p class="value" id="trackingStartDate">--</p>
-          <p class="note">First actual QLD data date</p>
-        </div>
-        <div class="metric">
-          <p class="label">Initial Investment</p>
-          <p class="value" id="initialInvestment">--</p>
-          <p class="note">Strategy and QQQ each</p>
-        </div>
-        <div class="metric">
-          <p class="label">Current Strategy Value</p>
-          <p class="value" id="strategyValue">--</p>
-          <p class="note">QLD / QQQ / Cash model</p>
-        </div>
-        <div class="metric">
-          <p class="label">QQQ Buy &amp; Hold Value</p>
-          <p class="value" id="benchmarkValue">--</p>
-          <p class="note">Same starting investment</p>
-        </div>
-        <div class="metric">
-          <p class="label">Strategy Max Drawdown</p>
-          <p class="value" id="strategyMaxDrawdown">--</p>
-          <p class="note">Worst peak-to-trough decline</p>
-        </div>
-        <div class="metric">
-          <p class="label">QQQ Max Drawdown</p>
-          <p class="value" id="benchmarkMaxDrawdown">--</p>
-          <p class="note">Buy-and-hold benchmark</p>
-        </div>
-        <div class="metric">
-          <p class="label">Current Drawdown</p>
-          <p class="value" id="currentDrawdown">--</p>
-          <p class="note">Strategy value below its peak</p>
-        </div>
+        <div class="metric"><p class="label">Starting Date</p><p class="value" id="startDate">--</p><p class="note">First actual QLD date</p></div>
+        <div class="metric"><p class="label">Strategy Value</p><p class="value" id="strategyValue">--</p><p class="note">Donchian exit strategy</p></div>
+        <div class="metric"><p class="label">QQQ Hold Value</p><p class="value" id="benchmarkValue">--</p><p class="note">Same start date and dollars</p></div>
+        <div class="metric"><p class="label">Strategy vs QQQ</p><p class="value" id="leadLag">--</p><p class="note" id="leadLagPct">--</p></div>
+        <div class="metric"><p class="label">Current Drawdown</p><p class="value" id="currentDrawdown">--</p><p class="note">Strategy below prior peak</p></div>
+        <div class="metric"><p class="label">Strategy Max Drawdown</p><p class="value" id="strategyMaxDrawdown">--</p><p class="note" id="strategyDrawdownPeriod">--</p></div>
+        <div class="metric"><p class="label">QQQ Max Drawdown</p><p class="value" id="benchmarkMaxDrawdown">--</p><p class="note" id="benchmarkDrawdownPeriod">--</p></div>
+        <div class="metric"><p class="label">QLD Channel Position</p><p class="value" id="channelPosition">--</p><p class="note">0% prior low · 100% prior high</p></div>
       </div>
     </section>
 
-    <section class="section-grid">
+    <section class="lower-grid">
       <article class="panel">
         <div class="section-head">
-          <h2>Recent Signal History</h2>
-          <span class="chip" id="historyCount">-- rows</span>
+          <h2>Recent Transition History</h2>
+          <span class="chip" id="transitionCount">-- transitions</span>
         </div>
         <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Status</th>
-              <th>QQQ</th>
-              <th>SMA Dist.</th>
-              <th>Action</th>
-              <th>Reason</th>
-            </tr>
-          </thead>
-          <tbody id="historyBody">
-            <tr><td colspan="6">Loading...</td></tr>
-          </tbody>
+          <thead><tr><th>Date</th><th>Signal</th><th>Position</th><th>Action</th><th>Strategy</th><th>Reason</th></tr></thead>
+          <tbody id="transitionBody"><tr><td colspan="6">Loading...</td></tr></tbody>
         </table>
       </article>
 
       <aside class="panel">
-        <div class="section-head">
-          <h2>Rule Checklist</h2>
+        <div class="section-head"><h2>Decision Path</h2></div>
+        <div class="path">
+          <div class="path-step"><span class="step-number">1</span><div><p class="path-title">Breakout → QLD</p><p class="path-copy">Signal 0 changes to 1 only when QLD closes strictly above its prior 20-day high.</p></div></div>
+          <div class="path-step"><span class="step-number">2</span><div><p class="path-title">Channel exit → QQQ</p><p class="path-copy">Signal 1 changes to 0 only when QLD closes strictly below its prior 20-day low.</p></div></div>
+          <div class="path-step"><span class="step-number">3</span><div><p class="path-title">QQQ below EMA200 → Cash</p><p class="path-copy">After the QLD exit, hold QQQ only while it remains at or above EMA200.</p></div></div>
+          <div class="path-step"><span class="step-number">4</span><div><p class="path-title">Cash waits for QLD</p><p class="path-copy">QQQ crossing above EMA200 alone does not re-enter. A new QLD breakout is required.</p></div></div>
         </div>
-        <div class="checklist" id="checklist"></div>
       </aside>
     </section>
 
-    <p class="footer">
-      Data updates are scheduled for 6:15 PM New York time. MACD is displayed only as context and is not used by the model rule. This dashboard is an operating display, not financial advice.
-    </p>
+    <p class="footer">Scheduled daily at 6:15 PM New York time. Signals use adjusted closes and apply at the model close. This is an operating display, not financial advice.</p>
   </main>
 
   <script>
     const money = (value) => Number.isFinite(value) ? `$${value.toFixed(2)}` : "--";
     const pct = (value) => Number.isFinite(value) ? `${value >= 0 ? "+" : ""}${value.toFixed(2)}%` : "--";
-    const num = (value) => Number.isFinite(value) ? value.toFixed(2) : "--";
-
-    function clsForStatus(value) {
-      if (!value) return "neutral";
-      if (value > 0) return "positive";
-      if (value < 0) return "negative";
-      return "neutral";
-    }
+    const cls = (value) => value > 0 ? "positive" : value < 0 ? "negative" : "neutral";
 
     function panelClass(state) {
       if (state === "Cash") return "cash";
       if (state === "QQQ") return "qqq";
-      if (state === "QQQ + QLD") return "dca";
-      if (state === "QLD") return "qld";
-      return "waiting";
-    }
-
-    function checkItem(kind, title, copy) {
-      return `<div class="check ${kind}"><span class="dot"></span><div><p class="check-title">${title}</p><p class="check-copy">${copy}</p></div></div>`;
+      return "qld";
     }
 
     function render(data) {
       const current = data.current || {};
       const market = data.market || {};
-      const macd = data.macd_context || {};
-      const bands = data.bands || {};
       const performance = data.performance || {};
-      const history = data.recent_history || [];
+      const transitions = data.recent_transitions || [];
 
-      document.getElementById("updated").textContent = `Last update: ${data.last_updated || "--"} | Source: ${data.data_source || "--"}`;
-      document.getElementById("headlineStatus").textContent = current.headline_status || "Waiting";
-      document.getElementById("modelState").textContent = `Model state: ${current.model_state || "--"}`;
-      document.getElementById("lastTrade").textContent = `Last trade: ${current.last_trade_date || "--"}${current.last_trade_action ? `, ${current.last_trade_action}` : ""}`;
+      document.getElementById("updated").textContent = `Latest close: ${data.last_updated || "--"} | Generated: ${data.generated_at_utc || "--"} | ${data.data_source || "--"}`;
+      document.getElementById("headlineStatus").textContent = current.headline_status || "--";
+      document.getElementById("requiredAction").textContent = `Required action: ${current.required_action || "--"}`;
+      document.getElementById("lastTrade").textContent = `Last transition: ${current.last_trade_date || "--"}${current.last_trade_action ? `, ${current.last_trade_action}` : ""}`;
       document.getElementById("ruleExplanation").textContent = current.rule_explanation || "--";
-      document.getElementById("statusPanel").className = `panel status-panel ${panelClass(current.model_state)}`;
+      document.getElementById("positionPanel").className = `panel position-panel ${panelClass(current.model_state)}`;
+
+      const signal = Number(current.donchian_signal);
+      const signalNode = document.getElementById("donchianSignal");
+      signalNode.textContent = Number.isFinite(signal) ? signal : "--";
+      signalNode.className = `signal-value${signal === 0 ? " zero" : ""}`;
 
       document.getElementById("qqqClose").textContent = money(market.qqq_close);
       document.getElementById("qldClose").textContent = money(market.qld_close);
-      document.getElementById("sma200").textContent = money(market.sma200);
-      document.getElementById("smaDistance").innerHTML = `Distance: <span class="${clsForStatus(market.distance_to_sma200_pct)}">${pct(market.distance_to_sma200_pct)}</span>`;
-      document.getElementById("emaPair").textContent = `${num(market.ema50)} / ${num(market.ema200)}`;
-      document.getElementById("emaStatus").textContent = bands.ema_status || "--";
-      document.getElementById("volatility").textContent = pct(market.qqq_vol20_annualized_pct);
-      document.getElementById("macdStatus").textContent = macd.status || "--";
-      document.getElementById("macdValues").textContent = `MACD ${num(macd.macd)} | Signal ${num(macd.signal)} | Hist ${num(macd.histogram)}`;
-      document.getElementById("trackingStartDate").textContent = performance.tracking_start_date || "--";
-      document.getElementById("initialInvestment").textContent = money(performance.initial_investment);
+      document.getElementById("ema200").textContent = money(market.qqq_ema200);
+      document.getElementById("emaDistance").innerHTML = `EMA200 distance: <span class="${cls(market.qqq_distance_to_ema200_pct)}">${pct(market.qqq_distance_to_ema200_pct)}</span>`;
+      document.getElementById("emaCondition").textContent = market.qqq_close >= market.qqq_ema200 ? "QQQ at or above EMA200" : "QQQ below EMA200";
+      document.getElementById("qldHigh").textContent = money(market.qld_prior_20d_high);
+      document.getElementById("qldLow").textContent = money(market.qld_prior_20d_low);
+      document.getElementById("channelStatus").textContent = market.channel_status || "--";
+
+      document.getElementById("startDate").textContent = performance.tracking_start_date || "--";
       document.getElementById("strategyValue").textContent = money(performance.strategy_value);
       document.getElementById("benchmarkValue").textContent = money(performance.qqq_buy_hold_value);
+      document.getElementById("leadLag").className = `value ${cls(performance.lead_lag_dollars)}`;
+      document.getElementById("leadLag").textContent = money(performance.lead_lag_dollars);
+      document.getElementById("leadLagPct").textContent = pct(performance.lead_lag_pct);
+      document.getElementById("currentDrawdown").textContent = pct(performance.current_strategy_drawdown_pct);
       document.getElementById("strategyMaxDrawdown").textContent = pct(performance.strategy_max_drawdown_pct);
       document.getElementById("benchmarkMaxDrawdown").textContent = pct(performance.qqq_max_drawdown_pct);
-      document.getElementById("currentDrawdown").textContent = pct(performance.current_strategy_drawdown_pct);
-      document.getElementById("historyCount").textContent = `${history.length} rows`;
+      document.getElementById("strategyDrawdownPeriod").textContent = `${performance.strategy_max_drawdown_peak_date || "--"} to ${performance.strategy_max_drawdown_trough_date || "--"}`;
+      document.getElementById("benchmarkDrawdownPeriod").textContent = `${performance.qqq_max_drawdown_peak_date || "--"} to ${performance.qqq_max_drawdown_trough_date || "--"}`;
+      document.getElementById("channelPosition").textContent = pct(market.qld_channel_position_pct);
 
-      const body = document.getElementById("historyBody");
-      body.innerHTML = history.slice(-12).reverse().map((row) => `
+      document.getElementById("transitionCount").textContent = `${transitions.length} transitions`;
+      document.getElementById("transitionBody").innerHTML = transitions.slice().reverse().map((row) => `
         <tr>
           <td>${row.date}</td>
-          <td>${row.headline_status}</td>
-          <td>${money(row.qqq_close)}</td>
-          <td class="${clsForStatus(row.distance_to_sma200_pct)}">${pct(row.distance_to_sma200_pct)}</td>
+          <td>${row.donchian_signal}</td>
+          <td>${row.model_state}</td>
           <td>${row.action}</td>
+          <td>${money(row.strategy_value)}</td>
           <td class="reason">${row.rule_explanation}</td>
         </tr>
-      `).join("");
-
-      const checks = [
-        checkItem(market.distance_to_sma200_pct >= 0 ? "good" : "risk", bands.trend_status || "Trend unknown", `QQQ is ${pct(market.distance_to_sma200_pct)} versus SMA200.`),
-        checkItem((market.ema50 || 0) >= (market.ema200 || Infinity) ? "good" : "warn", bands.ema_status || "EMA status unknown", "EMA50 must be above EMA200 for QLD entry."),
-        checkItem((market.qqq_vol20_annualized_pct || 100) <= 25 ? "good" : (market.qqq_vol20_annualized_pct || 0) > 35 ? "risk" : "warn", bands.risk_status || "Risk status unknown", `20-day annualized volatility is ${pct(market.qqq_vol20_annualized_pct)}.`),
-        checkItem(macd.status === "Bullish" ? "good" : macd.status === "Bearish" ? "warn" : "", `MACD ${macd.status || "Neutral"}`, "Display-only context; not a trading rule.")
-      ];
-      document.getElementById("checklist").innerHTML = checks.join("");
+      `).join("") || `<tr><td colspan="6">No transitions available.</td></tr>`;
     }
 
     fetch("data/signals.json", { cache: "no-store" })

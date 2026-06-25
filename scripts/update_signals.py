@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
-"""Update QQQ/QLD Signal Desk data files from free end-of-day market data."""
+"""Refresh the Donchian20 QLD -> QQQ -> Cash Signal Desk."""
 
 from __future__ import annotations
 
 import csv
 import json
-import math
-import statistics
 import sys
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterable
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -20,7 +17,11 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 INITIAL_INVESTMENT = 1000.0
-YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?period1=915148800&period2={period2}&interval=1d&events=history&includeAdjustedClose=true"
+YAHOO_URL = (
+    "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+    "?period1=915148800&period2={period2}&interval=1d"
+    "&events=history&includeAdjustedClose=true"
+)
 
 
 @dataclass
@@ -28,305 +29,91 @@ class Row:
     date: str
     qqq_close: float | None = None
     qld_close: float | None = None
-    sma200: float | None = None
-    ema50: float | None = None
     ema200: float | None = None
-    distance_to_sma200_pct: float | None = None
     distance_to_ema200_pct: float | None = None
-    qqq_prior_20d_high: float | None = None
     qld_prior_20d_high: float | None = None
     qld_prior_20d_low: float | None = None
-    qqq_vol20_annualized_pct: float | None = None
-    macd: float | None = None
-    macd_signal: float | None = None
-    macd_histogram: float | None = None
+    qld_channel_position_pct: float | None = None
+    prior_signal: int = 0
+    donchian_signal: int = 0
     model_state: str = "Cash"
     headline_status: str = "Hold Cash"
-    action: str = "No action"
-    rule_explanation: str = "Waiting for valid trend and risk conditions."
-    qqq_weight: float = 0.0
-    qld_weight: float = 0.0
-    strategy_daily_return_pct: float | None = None
-    strategy_value: float | None = None
-    qqq_benchmark_value: float | None = None
-    strategy_drawdown_pct: float | None = None
-    qqq_drawdown_pct: float | None = None
+    action: str = "Waiting"
+    trade_reason: str = ""
+    rule_explanation: str = "Waiting for enough QLD history to calculate the Donchian20 channel."
+    cash_value: float = INITIAL_INVESTMENT
+    qqq_value: float = 0.0
+    qld_value: float = 0.0
+    strategy_value: float = INITIAL_INVESTMENT
+    qqq_benchmark_value: float = INITIAL_INVESTMENT
+    strategy_drawdown_pct: float = 0.0
+    qqq_drawdown_pct: float = 0.0
 
 
 def fetch_yahoo(symbol: str) -> dict[str, float]:
     period2 = int(time.time()) + 86400
-    url = YAHOO_URL.format(symbol=symbol, period2=period2)
-    request = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    request = Request(
+        YAHOO_URL.format(symbol=symbol, period2=period2),
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
     try:
         with urlopen(request, timeout=30) as response:
             payload = json.load(response)
     except (HTTPError, URLError, TimeoutError) as exc:
-        raise RuntimeError(f"Could not fetch {symbol} data from Yahoo Finance: {exc}") from exc
+        raise RuntimeError(f"Could not fetch {symbol} from Yahoo Finance: {exc}") from exc
 
     result = payload["chart"]["result"][0]
     timestamps = result["timestamp"]
-    closes = result["indicators"]["adjclose"][0]["adjclose"]
+    adjusted = result["indicators"]["adjclose"][0]["adjclose"]
     series: dict[str, float] = {}
-    for stamp, close in zip(timestamps, closes):
+    for stamp, close in zip(timestamps, adjusted):
         if close is None:
             continue
         day = datetime.fromtimestamp(stamp, tz=timezone.utc).strftime("%Y-%m-%d")
         series[day] = float(close)
     if not series:
-        raise RuntimeError(f"Yahoo Finance returned no usable adjusted-close rows for {symbol}.")
+        raise RuntimeError(f"Yahoo Finance returned no adjusted-close data for {symbol}.")
     return series
 
 
 def ema(values: list[float | None], span: int) -> list[float | None]:
     alpha = 2 / (span + 1)
     output: list[float | None] = []
+    seed: list[float] = []
     current: float | None = None
-    seeded: list[float] = []
     for value in values:
         if value is None:
-            output.append(current)
+            output.append(None)
             continue
         if current is None:
-            seeded.append(value)
-            if len(seeded) < span:
+            seed.append(value)
+            if len(seed) < span:
                 output.append(None)
                 continue
-            current = sum(seeded[-span:]) / span
+            current = sum(seed[-span:]) / span
         else:
             current = value * alpha + current * (1 - alpha)
         output.append(current)
     return output
 
 
-def sma(values: list[float | None], window: int) -> list[float | None]:
+def prior_extreme(
+    values: list[float | None], window: int, use_maximum: bool
+) -> list[float | None]:
     output: list[float | None] = []
     for index in range(len(values)):
-        sample = [v for v in values[max(0, index - window + 1) : index + 1] if v is not None]
-        output.append(sum(sample) / window if len(sample) == window else None)
-    return output
-
-
-def prior_high(values: list[float | None], window: int) -> list[float | None]:
-    output: list[float | None] = []
-    for index in range(len(values)):
-        sample = [v for v in values[max(0, index - window) : index] if v is not None]
-        output.append(max(sample) if len(sample) == window else None)
-    return output
-
-
-def prior_low(values: list[float | None], window: int) -> list[float | None]:
-    output: list[float | None] = []
-    for index in range(len(values)):
-        sample = [v for v in values[max(0, index - window) : index] if v is not None]
-        output.append(min(sample) if len(sample) == window else None)
-    return output
-
-
-def vol20(values: list[float | None]) -> list[float | None]:
-    returns: list[float | None] = [None]
-    for prev, current in zip(values, values[1:]):
-        if prev is None or current is None or prev <= 0 or current <= 0:
-            returns.append(None)
+        sample = [value for value in values[max(0, index - window) : index] if value is not None]
+        if len(sample) != window:
+            output.append(None)
         else:
-            returns.append(math.log(current / prev))
-
-    output: list[float | None] = []
-    for index in range(len(values)):
-        sample = [v for v in returns[max(0, index - 19) : index + 1] if v is not None]
-        output.append(statistics.stdev(sample) * math.sqrt(252) * 100 if len(sample) == 20 else None)
+            output.append(max(sample) if use_maximum else min(sample))
     return output
 
 
 def pct(numerator: float | None, denominator: float | None) -> float | None:
-    if numerator is None or denominator is None or denominator == 0:
+    if numerator is None or denominator in {None, 0}:
         return None
     return (numerator / denominator - 1) * 100
-
-
-def is_ready(row: Row) -> bool:
-    fields = [
-        row.qqq_close,
-        row.qld_close,
-        row.ema50,
-        row.ema200,
-        row.qqq_prior_20d_high,
-        row.qld_prior_20d_high,
-        row.qld_prior_20d_low,
-        row.qqq_vol20_annualized_pct,
-        row.distance_to_ema200_pct,
-    ]
-    return all(value is not None for value in fields)
-
-
-def simulate(rows: list[Row]) -> None:
-    cash = INITIAL_INVESTMENT
-    qqq_shares = 0.0
-    qld_shares = 0.0
-    dca_day = 0
-    last_trade_date: str | None = None
-    previous_value = INITIAL_INVESTMENT
-    benchmark_value = INITIAL_INVESTMENT
-    strategy_peak = INITIAL_INVESTMENT
-    benchmark_peak = INITIAL_INVESTMENT
-    previous_complete: Row | None = None
-
-    for row in rows:
-        if row.qqq_close is None or row.qld_close is None:
-            continue
-
-        if previous_complete is not None:
-            assert previous_complete.qqq_close is not None
-            benchmark_value *= row.qqq_close / previous_complete.qqq_close
-
-        value_before = cash + qqq_shares * row.qqq_close + qld_shares * row.qld_close
-        action_parts: list[str] = []
-        explanation_parts: list[str] = []
-        ready = is_ready(row)
-
-        if ready:
-            assert row.ema50 is not None
-            assert row.ema200 is not None
-            assert row.qqq_prior_20d_high is not None
-            assert row.qld_prior_20d_high is not None
-            assert row.qld_prior_20d_low is not None
-            assert row.qqq_vol20_annualized_pct is not None
-            assert row.distance_to_ema200_pct is not None
-
-            has_qqq = qqq_shares * row.qqq_close > 0.01
-            has_qld = qld_shares * row.qld_close > 0.01
-            cash_to_qqq = (
-                row.qqq_close > row.ema200
-                and row.qqq_close > row.qqq_prior_20d_high
-                and row.qqq_vol20_annualized_pct < 30
-            )
-            qld_entry = (
-                row.ema50 > row.ema200
-                and row.qqq_vol20_annualized_pct <= 25
-                and row.distance_to_ema200_pct <= 20
-                and row.qld_close > row.qld_prior_20d_high
-            )
-            qld_reentry = (
-                row.distance_to_ema200_pct < 15
-                and row.qld_close > row.qld_prior_20d_high
-            )
-            qld_to_qqq = row.distance_to_ema200_pct > 20
-            any_to_cash = (
-                row.qqq_close < row.ema200
-                or row.qld_close < row.qld_prior_20d_low
-                or row.qqq_vol20_annualized_pct > 35
-            )
-
-            if (has_qqq or has_qld) and any_to_cash:
-                cash = value_before
-                qqq_shares = 0.0
-                qld_shares = 0.0
-                dca_day = 0
-                action_parts.append("Move to Cash")
-                explanation_parts.append(
-                    "Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
-                )
-
-            has_qqq = qqq_shares * row.qqq_close > 0.01
-            has_qld = qld_shares * row.qld_close > 0.01
-            if has_qld and qld_to_qqq:
-                qqq_shares += qld_shares * row.qld_close / row.qqq_close
-                qld_shares = 0.0
-                dca_day = 0
-                action_parts.append("Reduce to QQQ")
-                explanation_parts.append(
-                    "QQQ is more than 20% above EMA200; reduce leverage but stay invested."
-                )
-
-            has_qqq = qqq_shares * row.qqq_close > 0.01
-            has_qld = qld_shares * row.qld_close > 0.01
-            if cash > 0.01 and not has_qqq and not has_qld and cash_to_qqq:
-                qqq_shares = cash / row.qqq_close
-                cash = 0.0
-                dca_day = 0
-                action_parts.append("Buy QQQ")
-                explanation_parts.append(
-                    "QQQ recovered above EMA200, broke its prior 20-day high, and volatility is below 30%."
-                )
-
-            has_qqq = qqq_shares * row.qqq_close > 0.01
-            qld_condition = qld_entry or qld_reentry
-            if has_qqq and qld_condition:
-                dca_day += 1
-                qqq_value = qqq_shares * row.qqq_close
-                convert_value = qqq_value / max(1, 6 - dca_day)
-                qqq_shares -= convert_value / row.qqq_close
-                qld_shares += convert_value / row.qld_close
-                if dca_day >= 5:
-                    action_parts.append("Complete DCA to QLD")
-                    explanation_parts.append(
-                        "Completed the fifth gradual conversion from QQQ to QLD."
-                    )
-                    dca_day = 0
-                else:
-                    action_parts.append(f"DCA day {dca_day}")
-                    explanation_parts.append(
-                        "QLD entry conditions are valid; converted the next portion of QQQ to QLD."
-                    )
-            elif not qld_condition:
-                dca_day = 0
-
-        qqq_value = qqq_shares * row.qqq_close
-        qld_value = qld_shares * row.qld_close
-        strategy_value = cash + qqq_value + qld_value
-        invested_value = qqq_value + qld_value
-        if cash > 0.01 and invested_value <= 0.01:
-            state = "Cash"
-        elif qqq_value > 0.01 and qld_value > 0.01:
-            state = "QQQ + QLD"
-        elif qqq_value > 0.01:
-            state = "QQQ"
-        else:
-            state = "QLD"
-
-        if action_parts:
-            action = "; ".join(action_parts)
-            explanation = " ".join(explanation_parts)
-            last_trade_date = row.date
-        elif not ready:
-            action = "Waiting"
-            explanation = "Waiting for enough QQQ and QLD history to calculate all indicators."
-        elif state == "Cash":
-            action = "No action"
-            explanation = "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-        elif state == "QQQ":
-            action = "No action"
-            explanation = "Hold QQQ until QLD leverage-entry conditions confirm."
-        elif state == "QQQ + QLD":
-            action = "No action"
-            explanation = "Hold the current QQQ/QLD mix until the next rule-triggered conversion or exit."
-        else:
-            action = "No action"
-            explanation = "Hold QLD while leverage and risk-exit rules remain valid."
-
-        strategy_peak = max(strategy_peak, strategy_value)
-        benchmark_peak = max(benchmark_peak, benchmark_value)
-        row.strategy_daily_return_pct = (
-            0.0 if previous_complete is None else (strategy_value / previous_value - 1) * 100
-        )
-        row.strategy_value = strategy_value
-        row.qqq_benchmark_value = benchmark_value
-        row.strategy_drawdown_pct = (strategy_value / strategy_peak - 1) * 100
-        row.qqq_drawdown_pct = (benchmark_value / benchmark_peak - 1) * 100
-        assert row.qqq_close is not None
-        row.model_state = state
-        row.headline_status = {
-            "Cash": "Hold Cash",
-            "QQQ": "Hold QQQ",
-            "QQQ + QLD": "DCA to QLD",
-            "QLD": "Hold QLD",
-        }[state]
-        row.action = action
-        row.rule_explanation = explanation
-        row.last_trade_date = last_trade_date  # type: ignore[attr-defined]
-        row.qqq_weight = qqq_value / strategy_value if strategy_value else 0.0
-        row.qld_weight = qld_value / strategy_value if strategy_value else 0.0
-        previous_value = strategy_value
-        previous_complete = row
 
 
 def round_value(value: float | None, digits: int = 2) -> float | None:
@@ -336,47 +123,153 @@ def round_value(value: float | None, digits: int = 2) -> float | None:
     return 0.0 if rounded == 0 else rounded
 
 
+def calculate_indicators(rows: list[Row]) -> None:
+    qqq_values = [row.qqq_close for row in rows]
+    qld_values = [row.qld_close for row in rows]
+    ema200_values = ema(qqq_values, 200)
+    qld_highs = prior_extreme(qld_values, 20, True)
+    qld_lows = prior_extreme(qld_values, 20, False)
+
+    for index, row in enumerate(rows):
+        row.ema200 = ema200_values[index]
+        row.distance_to_ema200_pct = pct(row.qqq_close, row.ema200)
+        row.qld_prior_20d_high = qld_highs[index]
+        row.qld_prior_20d_low = qld_lows[index]
+        if (
+            row.qld_close is not None
+            and row.qld_prior_20d_high is not None
+            and row.qld_prior_20d_low is not None
+            and row.qld_prior_20d_high != row.qld_prior_20d_low
+        ):
+            row.qld_channel_position_pct = (
+                (row.qld_close - row.qld_prior_20d_low)
+                / (row.qld_prior_20d_high - row.qld_prior_20d_low)
+                * 100
+            )
+
+
+def simulate(rows: list[Row]) -> None:
+    complete = [row for row in rows if row.qqq_close is not None and row.qld_close is not None]
+    if not complete:
+        raise RuntimeError("No common QQQ/QLD adjusted-close rows are available.")
+
+    cash = INITIAL_INVESTMENT
+    qqq_shares = 0.0
+    qld_shares = 0.0
+    position = "Cash"
+    signal = 0
+    strategy_peak = INITIAL_INVESTMENT
+    benchmark_peak = INITIAL_INVESTMENT
+    benchmark_shares = INITIAL_INVESTMENT / complete[0].qqq_close
+
+    for row in complete:
+        assert row.qqq_close is not None
+        assert row.qld_close is not None
+        row.prior_signal = signal
+        channel_ready = (
+            row.qld_prior_20d_high is not None
+            and row.qld_prior_20d_low is not None
+        )
+
+        if channel_ready:
+            if signal == 0 and row.qld_close > row.qld_prior_20d_high:
+                signal = 1
+            elif signal == 1 and row.qld_close < row.qld_prior_20d_low:
+                signal = 0
+        row.donchian_signal = signal
+
+        action_parts: list[str] = []
+        reason_parts: list[str] = []
+
+        def account_value() -> float:
+            return cash + qqq_shares * row.qqq_close + qld_shares * row.qld_close
+
+        if signal == 1 and position != "QLD":
+            value = account_value()
+            cash = 0.0
+            qqq_shares = 0.0
+            qld_shares = value / row.qld_close
+            position = "QLD"
+            action_parts.append("Buy QLD")
+            reason_parts.append("toQLD")
+        elif signal == 0 and position == "QLD":
+            value = account_value()
+            cash = 0.0
+            qld_shares = 0.0
+            qqq_shares = value / row.qqq_close
+            position = "QQQ"
+            action_parts.append("Reduce QLD to QQQ")
+            reason_parts.append("QLD->QQQ_on_Donchian_exit")
+
+        if (
+            position == "QQQ"
+            and row.ema200 is not None
+            and row.qqq_close < row.ema200
+        ):
+            cash = account_value()
+            qqq_shares = 0.0
+            qld_shares = 0.0
+            position = "Cash"
+            action_parts.append("Sell QQQ to Cash")
+            reason_parts.append("QQQ->Cash_below_EMA200")
+
+        strategy_value = account_value()
+        benchmark_value = benchmark_shares * row.qqq_close
+        strategy_peak = max(strategy_peak, strategy_value)
+        benchmark_peak = max(benchmark_peak, benchmark_value)
+
+        row.model_state = position
+        row.headline_status = f"Hold {position}"
+        row.cash_value = cash
+        row.qqq_value = qqq_shares * row.qqq_close
+        row.qld_value = qld_shares * row.qld_close
+        row.strategy_value = strategy_value
+        row.qqq_benchmark_value = benchmark_value
+        row.strategy_drawdown_pct = (strategy_value / strategy_peak - 1) * 100
+        row.qqq_drawdown_pct = (benchmark_value / benchmark_peak - 1) * 100
+        row.trade_reason = "; ".join(reason_parts)
+
+        if action_parts:
+            row.action = "; ".join(action_parts)
+            row.rule_explanation = explain_trade(row.trade_reason)
+        elif not channel_ready:
+            row.action = "Waiting"
+            row.rule_explanation = (
+                "Waiting for 20 completed QLD trading days to establish the channel."
+            )
+        else:
+            row.action = "No action"
+            row.rule_explanation = explain_hold(position, signal, row)
+
+
+def explain_trade(reason: str) -> str:
+    if reason == "toQLD":
+        return "QLD closed above its prior 20-day high; the signal changed to 1 and the account moved fully into QLD."
+    if reason == "QLD->QQQ_on_Donchian_exit":
+        return "QLD closed below its prior 20-day low; the signal changed to 0 and the account reduced to QQQ."
+    if reason == "QQQ->Cash_below_EMA200":
+        return "QQQ closed below EMA200 while held; the account moved fully to Cash."
+    if reason == "QLD->QQQ_on_Donchian_exit; QQQ->Cash_below_EMA200":
+        return "QLD exited its channel and QQQ was below EMA200, so the account passed through QQQ and finished in Cash."
+    return reason
+
+
+def explain_hold(position: str, signal: int, row: Row) -> str:
+    if position == "QLD":
+        return "Hold QLD while the Donchian20 signal remains 1."
+    if position == "QQQ":
+        return "Hold QQQ after the Donchian exit while QQQ remains at or above EMA200."
+    if signal == 0 and row.ema200 is not None and row.qqq_close is not None:
+        return "Hold Cash until QLD creates a new Donchian20 breakout; QQQ moving above EMA200 alone is not a re-entry."
+    return "Hold Cash until QLD creates a new Donchian20 breakout."
+
+
 def build_rows() -> list[Row]:
     qqq = fetch_yahoo("QQQ")
     qld = fetch_yahoo("QLD")
     dates = sorted(set(qqq) | set(qld))
     rows = [Row(date=day, qqq_close=qqq.get(day), qld_close=qld.get(day)) for day in dates]
-
-    qqq_values = [row.qqq_close for row in rows]
-    qld_values = [row.qld_close for row in rows]
-    sma200_values = sma(qqq_values, 200)
-    ema50_values = ema(qqq_values, 50)
-    ema200_values = ema(qqq_values, 200)
-    ema12_values = ema(qqq_values, 12)
-    ema26_values = ema(qqq_values, 26)
-    macd_line = [
-        fast - slow if fast is not None and slow is not None else None
-        for fast, slow in zip(ema12_values, ema26_values)
-    ]
-    signal_line = ema(macd_line, 9)
-    qqq_high20 = prior_high(qqq_values, 20)
-    qld_high20 = prior_high(qld_values, 20)
-    qld_low20 = prior_low(qld_values, 20)
-    volatility = vol20(qqq_values)
-
-    for index, row in enumerate(rows):
-        row.sma200 = sma200_values[index]
-        row.ema50 = ema50_values[index]
-        row.ema200 = ema200_values[index]
-        row.distance_to_sma200_pct = pct(row.qqq_close, row.sma200)
-        row.distance_to_ema200_pct = pct(row.qqq_close, row.ema200)
-        row.qqq_prior_20d_high = qqq_high20[index]
-        row.qld_prior_20d_high = qld_high20[index]
-        row.qld_prior_20d_low = qld_low20[index]
-        row.qqq_vol20_annualized_pct = volatility[index]
-        row.macd = macd_line[index]
-        row.macd_signal = signal_line[index]
-        row.macd_histogram = (
-            row.macd - row.macd_signal
-            if row.macd is not None and row.macd_signal is not None
-            else None
-        )
-
+    calculate_indicators(rows)
     simulate(rows)
     return rows
 
@@ -386,25 +279,21 @@ def csv_row(row: Row) -> dict[str, object]:
         "date": row.date,
         "qqq_close": round_value(row.qqq_close),
         "qld_close": round_value(row.qld_close),
-        "sma200": round_value(row.sma200),
-        "ema50": round_value(row.ema50),
-        "ema200": round_value(row.ema200),
-        "distance_to_sma200_pct": round_value(row.distance_to_sma200_pct),
-        "distance_to_ema200_pct": round_value(row.distance_to_ema200_pct),
-        "qqq_vol20_annualized_pct": round_value(row.qqq_vol20_annualized_pct),
-        "qqq_prior_20d_high": round_value(row.qqq_prior_20d_high),
+        "qqq_ema200": round_value(row.ema200),
+        "qqq_distance_to_ema200_pct": round_value(row.distance_to_ema200_pct),
         "qld_prior_20d_high": round_value(row.qld_prior_20d_high),
         "qld_prior_20d_low": round_value(row.qld_prior_20d_low),
-        "macd": round_value(row.macd),
-        "macd_signal": round_value(row.macd_signal),
-        "macd_histogram": round_value(row.macd_histogram),
+        "qld_channel_position_pct": round_value(row.qld_channel_position_pct),
+        "prior_donchian_signal": row.prior_signal,
+        "donchian_signal": row.donchian_signal,
         "model_state": row.model_state,
         "headline_status": row.headline_status,
         "action": row.action,
+        "trade_reason": row.trade_reason,
         "rule_explanation": row.rule_explanation,
-        "qqq_weight_pct": round_value(row.qqq_weight * 100),
-        "qld_weight_pct": round_value(row.qld_weight * 100),
-        "strategy_daily_return_pct": round_value(row.strategy_daily_return_pct, 4),
+        "cash_value": round_value(row.cash_value),
+        "qqq_value": round_value(row.qqq_value),
+        "qld_value": round_value(row.qld_value),
         "strategy_value": round_value(row.strategy_value),
         "qqq_benchmark_value": round_value(row.qqq_benchmark_value),
         "strategy_drawdown_pct": round_value(row.strategy_drawdown_pct),
@@ -412,116 +301,114 @@ def csv_row(row: Row) -> dict[str, object]:
     }
 
 
-def latest_complete(rows: Iterable[Row]) -> Row:
-    complete = [row for row in rows if row.qqq_close is not None and row.qld_close is not None]
-    if not complete:
-        raise RuntimeError("No complete QQQ/QLD rows are available.")
-    return complete[-1]
+def drawdown_summary(rows: list[Row], field: str) -> dict[str, object]:
+    peak = float("-inf")
+    peak_date = ""
+    minimum = 0.0
+    minimum_peak = ""
+    trough_date = ""
+    for row in rows:
+        value = float(getattr(row, field))
+        if value > peak:
+            peak = value
+            peak_date = row.date
+        drawdown = value / peak - 1
+        if drawdown < minimum:
+            minimum = drawdown
+            minimum_peak = peak_date
+            trough_date = row.date
+    return {
+        "pct": round_value(minimum * 100),
+        "peak_date": minimum_peak,
+        "trough_date": trough_date,
+    }
 
 
 def write_outputs(rows: list[Row]) -> None:
     DATA_DIR.mkdir(exist_ok=True)
-    complete_rows = [row for row in rows if row.qqq_close is not None and row.qld_close is not None]
-    latest = latest_complete(rows)
-    recent = complete_rows[-45:]
-    last_actions = [row for row in complete_rows if row.action not in {"No action", "Waiting"}]
-    last_trade = last_actions[-1] if last_actions else None
-    strategy_drawdowns = [
-        row.strategy_drawdown_pct
-        for row in complete_rows
-        if row.strategy_drawdown_pct is not None
-    ]
-    benchmark_drawdowns = [
-        row.qqq_drawdown_pct
-        for row in complete_rows
-        if row.qqq_drawdown_pct is not None
-    ]
+    complete = [row for row in rows if row.qqq_close is not None and row.qld_close is not None]
+    latest = complete[-1]
+    trades = [row for row in complete if row.trade_reason]
+    recent = complete[-45:]
+    strategy_dd = drawdown_summary(complete, "strategy_value")
+    benchmark_dd = drawdown_summary(complete, "qqq_benchmark_value")
+    lead_dollars = latest.strategy_value - latest.qqq_benchmark_value
+    lead_pct = latest.strategy_value / latest.qqq_benchmark_value - 1
 
     csv_path = DATA_DIR / "signals.csv"
     fieldnames = list(csv_row(latest).keys())
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
-        for row in complete_rows:
+        for row in complete:
             writer.writerow(csv_row(row))
 
-    macd_status = "Neutral"
-    if latest.macd is not None and latest.macd_signal is not None:
-        if latest.macd > latest.macd_signal and latest.macd_histogram and latest.macd_histogram > 0:
-            macd_status = "Bullish"
-        elif latest.macd < latest.macd_signal and latest.macd_histogram and latest.macd_histogram < 0:
-            macd_status = "Bearish"
+    channel_status = "Channel forming"
+    if latest.qld_prior_20d_high is not None and latest.qld_prior_20d_low is not None:
+        if latest.qld_close > latest.qld_prior_20d_high:
+            channel_status = "Above prior 20-day high"
+        elif latest.qld_close < latest.qld_prior_20d_low:
+            channel_status = "Below prior 20-day low"
+        else:
+            channel_status = "Inside prior 20-day channel"
 
     payload = {
         "project": "QQQ/QLD Signal Desk",
+        "strategy_name": "Donchian20 QLD -> QQQ -> Cash exit strategy",
         "last_updated": latest.date,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "data_source": "Yahoo Finance chart API adjusted close",
         "current": {
             "model_state": latest.model_state,
             "headline_status": latest.headline_status,
+            "donchian_signal": latest.donchian_signal,
+            "required_action": latest.action,
             "rule_explanation": latest.rule_explanation,
-            "last_trade_date": last_trade.date if last_trade else None,
-            "last_trade_action": last_trade.action if last_trade else None,
+            "last_trade_date": trades[-1].date if trades else None,
+            "last_trade_action": trades[-1].action if trades else None,
+            "last_trade_reason": trades[-1].trade_reason if trades else None,
         },
         "market": {
             "qqq_close": round_value(latest.qqq_close),
             "qld_close": round_value(latest.qld_close),
-            "sma200": round_value(latest.sma200),
-            "ema50": round_value(latest.ema50),
-            "ema200": round_value(latest.ema200),
-            "distance_to_sma200_pct": round_value(latest.distance_to_sma200_pct),
-            "distance_to_ema200_pct": round_value(latest.distance_to_ema200_pct),
-            "qqq_prior_20d_high": round_value(latest.qqq_prior_20d_high),
+            "qqq_ema200": round_value(latest.ema200),
+            "qqq_distance_to_ema200_pct": round_value(latest.distance_to_ema200_pct),
             "qld_prior_20d_high": round_value(latest.qld_prior_20d_high),
             "qld_prior_20d_low": round_value(latest.qld_prior_20d_low),
-            "qqq_vol20_annualized_pct": round_value(latest.qqq_vol20_annualized_pct),
-        },
-        "macd_context": {
-            "macd": round_value(latest.macd),
-            "signal": round_value(latest.macd_signal),
-            "histogram": round_value(latest.macd_histogram),
-            "status": macd_status,
-            "rule_role": "Display-only context; not part of the trading rule.",
-        },
-        "bands": {
-            "trend_status": "Above SMA200"
-            if latest.distance_to_sma200_pct is not None and latest.distance_to_sma200_pct >= 0
-            else "Below SMA200",
-            "ema_status": "EMA50 above EMA200"
-            if latest.ema50 is not None and latest.ema200 is not None and latest.ema50 >= latest.ema200
-            else "EMA50 below EMA200",
-            "risk_status": "Extended"
-            if latest.distance_to_ema200_pct is not None and latest.distance_to_ema200_pct > 20
-            else "Exit risk"
-            if latest.qqq_vol20_annualized_pct is not None and latest.qqq_vol20_annualized_pct > 35
-            else "Normal",
+            "qld_channel_position_pct": round_value(latest.qld_channel_position_pct),
+            "channel_status": channel_status,
         },
         "performance": {
-            "tracking_start_date": complete_rows[0].date,
+            "tracking_start_date": complete[0].date,
             "initial_investment": INITIAL_INVESTMENT,
             "strategy_value": round_value(latest.strategy_value),
             "qqq_buy_hold_value": round_value(latest.qqq_benchmark_value),
-            "strategy_max_drawdown_pct": round_value(min(strategy_drawdowns)),
-            "qqq_max_drawdown_pct": round_value(min(benchmark_drawdowns)),
+            "lead_lag_dollars": round_value(lead_dollars),
+            "lead_lag_pct": round_value(lead_pct * 100),
+            "strategy_max_drawdown_pct": strategy_dd["pct"],
+            "strategy_max_drawdown_peak_date": strategy_dd["peak_date"],
+            "strategy_max_drawdown_trough_date": strategy_dd["trough_date"],
+            "qqq_max_drawdown_pct": benchmark_dd["pct"],
+            "qqq_max_drawdown_peak_date": benchmark_dd["peak_date"],
+            "qqq_max_drawdown_trough_date": benchmark_dd["trough_date"],
             "current_strategy_drawdown_pct": round_value(latest.strategy_drawdown_pct),
             "current_qqq_drawdown_pct": round_value(latest.qqq_drawdown_pct),
         },
+        "recent_transitions": [csv_row(row) for row in trades[-12:]],
         "recent_history": [csv_row(row) for row in recent],
     }
-
-    json_path = DATA_DIR / "signals.json"
-    json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    (DATA_DIR / "signals.json").write_text(
+        json.dumps(payload, indent=2) + "\n", encoding="utf-8"
+    )
 
 
 def main() -> int:
     try:
-        rows = build_rows()
-        write_outputs(rows)
+        write_outputs(build_rows())
     except Exception as exc:
         print(f"update_signals failed: {exc}", file=sys.stderr)
         return 1
-    print("Updated data/signals.json and data/signals.csv")
+    print("Updated Donchian20 data/signals.json and data/signals.csv")
     return 0
 
 

@@ -1,164 +1,397 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>QQQ/QLD Signal Desk - Real Account Tracking System</title>
+<title>Real Account Tracking System - Donchian20 QLD to QQQ to Cash</title>
 <style>
-body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #111111; line-height: 1.38; }
-h1 { font-size: 20pt; margin-bottom: 8px; }
-h2 { font-size: 14pt; margin-top: 20px; margin-bottom: 8px; }
-h3 { font-size: 12pt; margin-top: 14px; margin-bottom: 6px; }
-table { border-collapse: collapse; width: 100%; margin: 8px 0 16px 0; }
-th, td { border: 1px solid #999999; padding: 6px 8px; vertical-align: top; }
-th { background: #e8eef7; font-weight: bold; }
-li { margin-bottom: 4px; }
-.note { background: #fff7dd; border: 1px solid #d7b95e; padding: 9px 11px; margin: 10px 0 14px 0; }
+body {
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 11pt;
+  color: #111111;
+  line-height: 1.38;
+}
+h1 {
+  font-size: 20pt;
+  margin-bottom: 8px;
+}
+h2 {
+  font-size: 14pt;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+h3 {
+  font-size: 12pt;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8px 0 16px 0;
+}
+th, td {
+  border: 1px solid #999999;
+  padding: 6px 8px;
+  vertical-align: top;
+}
+th {
+  background: #e8eef7;
+  font-weight: bold;
+}
+ul, ol {
+  margin-top: 6px;
+}
+li {
+  margin-bottom: 4px;
+}
+.note {
+  background: #fff7dd;
+  border: 1px solid #d7b95e;
+  padding: 9px 11px;
+  margin: 10px 0 14px 0;
+}
+.warning {
+  background: #fdeaea;
+  border: 1px solid #c97979;
+  padding: 9px 11px;
+  margin: 10px 0 14px 0;
+}
+code {
+  font-family: Consolas, "Courier New", monospace;
+}
 </style>
 </head>
 <body>
 
-<h1>QQQ/QLD Signal Desk - Real Account Tracking System</h1>
+<h1>Real Account Tracking System</h1>
 
-<p>This document is the operating manual for the QQQ/QLD Signal Desk dashboard. The dashboard is the daily live display. This Word-readable file defines the rules, data source, update process, and what to do when the model shows Cash, QQQ, QQQ + QLD, or QLD.</p>
+<p>
+This document explains how to track the real <b>Donchian20 QLD &rarr; QQQ &rarr; Cash exit strategy</b>
+without needing to read the backtest scripts.
+</p>
 
 <div class="note">
-Main version to track: <b>QLD / QQQ / Cash with 5-Day DCA from QQQ to QLD</b>. Signal source is <b>QQQ</b>. Leveraged holding is <b>QLD</b>. Benchmark language remains <b>QQQ Hold</b>. Cash is a normal model state.
+Main version to track: <b>Donchian20 QLD &rarr; QQQ &rarr; Cash exit strategy</b>.
+The benchmark is <b>QQQ Hold</b>. The strategy can hold QLD, QQQ, or Cash.
+There is no gradual DCA transition.
 </div>
 
-<h2>1. Dashboard Purpose</h2>
+<h2>1. Purpose</h2>
 
-<p>The dashboard should answer these questions after the daily update:</p>
+<p>The tracking system should answer these questions after every trading day:</p>
 
 <ol>
-<li>What is the current model state: Cash, QQQ, QQQ + QLD, or QLD?</li>
-<li>What is the plain-English status: Hold Cash, Hold QQQ, DCA to QLD, or Hold QLD?</li>
-<li>Which rule explains the current state?</li>
-<li>What are the current QQQ and QLD prices and trend indicators?</li>
-<li>When was the last model trade or model action?</li>
+<li>Is the Donchian20 signal currently 1 or 0?</li>
+<li>Should the account hold QLD, QQQ, or Cash?</li>
+<li>Did today create a trade?</li>
+<li>What are the real account shares, cash, and total value?</li>
+<li>How is the account performing compared with QQQ Hold?</li>
+<li>Are current and maximum drawdown still acceptable?</li>
 </ol>
 
-<h2>2. Daily Data Source and Timing</h2>
+<h2>2. Required Market Data</h2>
+
+<p>Use daily adjusted-close data for model calculations.</p>
 
 <table>
-<tr><th>Item</th><th>Rule</th></tr>
-<tr><td>Market data</td><td>Free end-of-day adjusted close data from the Yahoo Finance chart API.</td></tr>
-<tr><td>Symbols</td><td>QQQ for signal and trend conditions. QLD for leveraged ETF entry and risk checks.</td></tr>
-<tr><td>Update time</td><td>Every day at 6:00 PM New York time. GitHub Actions uses UTC scheduling.</td></tr>
-<tr><td>Live signal history</td><td>Use real QQQ and QLD data. Do not use synthetic QLD history for live decisions.</td></tr>
+<tr><th>Field</th><th>Use</th></tr>
+<tr><td>QQQ adjusted close</td><td>Calculate QQQ EMA200 and value the QQQ position.</td></tr>
+<tr><td>QLD adjusted close</td><td>Calculate the Donchian20 channel and value the QLD position.</td></tr>
+<tr><td>QLD prior 20-day high</td><td>Creates a Donchian entry when QLD closes strictly above it.</td></tr>
+<tr><td>QLD prior 20-day low</td><td>Creates a Donchian exit when QLD closes strictly below it.</td></tr>
+<tr><td>QQQ EMA200</td><td>Determines whether the post-QLD-exit position remains in QQQ or moves to Cash.</td></tr>
 </table>
 
-<h2>3. Model States</h2>
+<p>
+The prior 20-day high and low exclude the current trading day. Use the most recent 20 completed
+trading-day adjusted closes.
+</p>
+
+<h2>3. Strategy States</h2>
 
 <table>
-<tr><th>State</th><th>Dashboard Status</th><th>Meaning</th></tr>
-<tr><td>Cash</td><td>Hold Cash</td><td>No QQQ or QLD position. Waiting for recovery and risk conditions.</td></tr>
-<tr><td>QQQ</td><td>Hold QQQ</td><td>Market recovery has started, but leverage conditions are not yet confirmed.</td></tr>
-<tr><td>QQQ + QLD</td><td>DCA to QLD</td><td>Temporary 5-day transition from QQQ into QLD.</td></tr>
-<tr><td>QLD</td><td>Hold QLD</td><td>Trend and risk conditions support 2x QLD exposure.</td></tr>
+<tr><th>State</th><th>Meaning</th><th>Purpose</th></tr>
+<tr>
+<td>QLD</td>
+<td>The Donchian20 signal is 1 and the account is fully invested in QLD.</td>
+<td>Capture strong upward trends with 2x Nasdaq-100 exposure.</td>
+</tr>
+<tr>
+<td>QQQ</td>
+<td>The Donchian20 signal has exited QLD, but QQQ is still at or above EMA200.</td>
+<td>Reduce leverage from 2x to 1x without leaving a healthy long-term trend.</td>
+</tr>
+<tr>
+<td>Cash</td>
+<td>The account is outside QLD and QQQ is below EMA200.</td>
+<td>Avoid holding QQQ during a weak long-term trend.</td>
+</tr>
 </table>
 
-<h2>4. Exact Strategy Rules</h2>
+<h2>4. Donchian20 Signal</h2>
 
-<h3>Cash to QQQ</h3>
-<p>When the model is in Cash, buy QQQ when all conditions are true:</p>
+<h3>Signal Changes from 0 to 1</h3>
+
+<p>
+If the prior signal is 0, change the signal to 1 only when:
+</p>
+
 <ul>
-<li>QQQ price is above EMA200.</li>
-<li>QQQ closes above its prior 20-day high.</li>
-<li>QQQ 20-day annualized volatility is below 30%.</li>
+<li>QLD adjusted close is strictly greater than QLD's prior 20-day high.</li>
 </ul>
 
-<h3>QQQ to QLD: 5-Day DCA</h3>
-<p>When the model is already in QQQ, begin converting QQQ into QLD when all conditions are true:</p>
+<p>
+When the signal becomes 1, invest the entire strategy account in QLD at the model close.
+This rule applies whether the prior account state was QQQ or Cash.
+</p>
+
+<h3>Signal Stays at 1</h3>
+
+<p>
+While the signal is 1, continue holding QLD until the exit condition occurs. A close that is
+equal to the prior 20-day low does not trigger an exit.
+</p>
+
+<h3>Signal Changes from 1 to 0</h3>
+
+<p>
+If the prior signal is 1, change the signal to 0 only when:
+</p>
+
 <ul>
-<li>QQQ EMA50 is above QQQ EMA200.</li>
-<li>QQQ 20-day annualized volatility is less than or equal to 25%.</li>
-<li>QQQ EMA200 deviation is less than or equal to 20%.</li>
-<li>QLD closes above its prior 20-day high.</li>
+<li>QLD adjusted close is strictly less than QLD's prior 20-day low.</li>
 </ul>
 
+<p>
+When the signal becomes 0, sell all QLD and initially convert the full account value to QQQ.
+Then immediately apply the QQQ EMA200 exit layer described below.
+</p>
+
+<h2>5. QLD &rarr; QQQ &rarr; Cash Exit Layer</h2>
+
 <table>
-<tr><th>DCA Day</th><th>Action</th></tr>
-<tr><td>Day 1</td><td>Convert 1/5 of remaining QQQ value into QLD.</td></tr>
-<tr><td>Day 2</td><td>Convert 1/4 of remaining QQQ value into QLD.</td></tr>
-<tr><td>Day 3</td><td>Convert 1/3 of remaining QQQ value into QLD.</td></tr>
-<tr><td>Day 4</td><td>Convert 1/2 of remaining QQQ value into QLD.</td></tr>
-<tr><td>Day 5</td><td>Convert all remaining QQQ value into QLD.</td></tr>
+<tr><th>Current condition</th><th>Required model position</th><th>Action</th></tr>
+<tr>
+<td>Donchian20 signal = 1</td>
+<td>QLD</td>
+<td>Hold or buy QLD with 100% of the strategy value.</td>
+</tr>
+<tr>
+<td>Donchian20 changes from 1 to 0 and QQQ is at or above EMA200</td>
+<td>QQQ</td>
+<td>Sell all QLD and buy QQQ.</td>
+</tr>
+<tr>
+<td>Donchian20 changes from 1 to 0 and QQQ is below EMA200</td>
+<td>Cash</td>
+<td>Sell all QLD. The model passes through QQQ and exits to Cash on the same close.</td>
+</tr>
+<tr>
+<td>Already holding QQQ and QQQ later closes below EMA200</td>
+<td>Cash</td>
+<td>Sell all QQQ and hold Cash.</td>
+</tr>
+<tr>
+<td>Donchian20 signal remains 0 while in Cash</td>
+<td>Cash</td>
+<td>Remain in Cash, even if QQQ later moves above EMA200.</td>
+</tr>
+<tr>
+<td>Donchian20 changes from 0 to 1 while in QQQ or Cash</td>
+<td>QLD</td>
+<td>Invest the entire account in QLD.</td>
+</tr>
 </table>
 
-<p>If QLD entry conditions fail during DCA, reset the DCA counter. If any exit rule triggers, stop DCA and move to Cash.</p>
+<div class="warning">
+<b>Important:</b> QQQ moving back above EMA200 by itself is not a re-entry signal.
+After the account reaches Cash, it remains in Cash until QLD produces a new Donchian20 breakout.
+</div>
 
-<h3>QLD to QQQ: Reduce Leverage</h3>
-<p>When QQQ EMA200 deviation is greater than 20%, reduce from QLD to QQQ. This is not a full exit; it reduces from 2x exposure to 1x exposure.</p>
+<h2>6. Daily Decision Order</h2>
 
-<h3>QQQ to QLD Again</h3>
-<p>After reducing from QLD to QQQ, use 5-day DCA back into QLD when all conditions are true:</p>
+<p>Apply the rules in this exact order after the market closes:</p>
+
+<ol>
+<li>Update QQQ and QLD adjusted closes.</li>
+<li>Calculate QLD's prior 20-day high and prior 20-day low.</li>
+<li>Update the stateful Donchian20 signal.</li>
+<li>If the signal is 1 and the account is not in QLD, move the full account to QLD.</li>
+<li>If the signal changes to 0 while holding QLD, move the full account from QLD to QQQ.</li>
+<li>If the account is now in QQQ and QQQ adjusted close is below QQQ EMA200, move the full account to Cash.</li>
+<li>Record the ending position, account value, trade reason, shares, and cash.</li>
+</ol>
+
+<h2>7. Trade Reasons</h2>
+
+<table>
+<tr><th>Model code</th><th>Plain-English meaning</th></tr>
+<tr><td><code>toQLD</code></td><td>Donchian20 signal is 1; move the full account into QLD.</td></tr>
+<tr><td><code>QLD-&gt;QQQ_on_Donchian_exit</code></td><td>QLD broke below its prior 20-day low; sell QLD and buy QQQ.</td></tr>
+<tr><td><code>QQQ-&gt;Cash_below_EMA200</code></td><td>QQQ is below EMA200; sell QQQ and hold Cash.</td></tr>
+<tr>
+<td><code>QLD-&gt;QQQ_on_Donchian_exit; QQQ-&gt;Cash_below_EMA200</code></td>
+<td>The Donchian exit and EMA200 exit occurred together; the final required position is Cash.</td>
+</tr>
+</table>
+
+<h2>8. Real Account Workbook Structure</h2>
+
+<table>
+<tr><th>Tab</th><th>Purpose</th><th>Main columns</th></tr>
+<tr>
+<td>settings</td>
+<td>Inputs defining the account and tracking assumptions.</td>
+<td>Start date, starting value, account name, benchmark, fees/slippage, current mode.</td>
+</tr>
+<tr>
+<td>prices</td>
+<td>Daily adjusted-close data and indicators.</td>
+<td>Date, QQQ close, QLD close, QQQ EMA200, prior 20-day QLD high, prior 20-day QLD low.</td>
+</tr>
+<tr>
+<td>model_signal</td>
+<td>Daily signal and target position.</td>
+<td>Prior signal, current signal, model position, required action, trade reason, strategy value.</td>
+</tr>
+<tr>
+<td>real_account</td>
+<td>Actual brokerage holdings and value.</td>
+<td>QQQ shares, QLD shares, cash, market value, account value, actual position, model difference.</td>
+</tr>
+<tr>
+<td>trade_log</td>
+<td>Permanent record of actual trades.</td>
+<td>Date, buy/sell, symbol, shares, fill price, dollar amount, reason, entered by, notes.</td>
+</tr>
+<tr>
+<td>benchmark</td>
+<td>QQQ Hold comparison from the same real-account start date.</td>
+<td>Benchmark shares, benchmark value, benchmark return, strategy value, lead/lag.</td>
+</tr>
+<tr>
+<td>dashboard</td>
+<td>One-page operational view.</td>
+<td>Donchian signal, current position, required action, values, drawdown, latest trade reason.</td>
+</tr>
+</table>
+
+<h2>9. Daily Real-Account Update</h2>
+
+<ol>
+<li>Update market data after the final adjusted-close data is available.</li>
+<li>Confirm the prior 20-day QLD high and low exclude today's close.</li>
+<li>Confirm the QQQ EMA200 value.</li>
+<li>Run the decision order in Section 6.</li>
+<li>If there is no transition, record <b>No action</b>.</li>
+<li>If there is a transition, calculate the target shares using the full account value.</li>
+<li>Confirm the signal and target allocation before placing a real trade.</li>
+<li>Record actual fill prices, actual shares, fees, and remaining cash in the trade log.</li>
+<li>Reconcile the brokerage value against the workbook.</li>
+</ol>
+
+<h2>10. How to Track Real Shares</h2>
+
+<p>Use actual account data for the real account. Do not replace actual fills with model closes.</p>
+
+<table>
+<tr><th>Field</th><th>How to update</th></tr>
+<tr><td>QQQ shares</td><td>Previous shares plus actual buys minus actual sells.</td></tr>
+<tr><td>QLD shares</td><td>Previous shares plus actual buys minus actual sells.</td></tr>
+<tr><td>Cash</td><td>Previous cash minus purchases plus sale proceeds, after fees.</td></tr>
+<tr><td>Account value</td><td>QQQ shares &times; QQQ price + QLD shares &times; QLD price + Cash.</td></tr>
+<tr><td>Model difference</td><td>Actual asset value minus the model's target asset value.</td></tr>
+</table>
+
+<h2>11. Benchmark Rules</h2>
+
 <ul>
-<li>QQQ EMA200 deviation is less than 15%.</li>
-<li>QLD closes above its prior 20-day high.</li>
-<li>QLD entry conditions remain valid.</li>
+<li>The primary benchmark is QQQ Hold.</li>
+<li>The benchmark starts on the same date as the real strategy account.</li>
+<li>The benchmark starts with the same initial value.</li>
+<li>The benchmark remains fully invested in QQQ.</li>
+<li>Use adjusted-close data so distributions are included consistently.</li>
+<li>Compare strategy and benchmark values daily.</li>
 </ul>
 
-<h3>Any Position to Cash</h3>
-<p>Move to Cash if any one of these risk exit rules is true:</p>
+<h2>12. Dashboard Metrics</h2>
+
+<table>
+<tr><th>Metric</th><th>Meaning</th></tr>
+<tr><td>Donchian20 signal</td><td>1 means QLD mode; 0 means the strategy is outside QLD.</td></tr>
+<tr><td>Current model position</td><td>QLD, QQQ, or Cash.</td></tr>
+<tr><td>Required action</td><td>No action, buy QLD, reduce QLD to QQQ, or sell QQQ to Cash.</td></tr>
+<tr><td>Real account value</td><td>Actual value using brokerage holdings and current prices.</td></tr>
+<tr><td>QQQ Hold value</td><td>Value of a same-date, same-dollar QQQ buy-and-hold account.</td></tr>
+<tr><td>Strategy versus benchmark</td><td>Dollar and percentage lead or lag versus QQQ Hold.</td></tr>
+<tr><td>Current drawdown</td><td>Decline from the strategy account's prior high.</td></tr>
+<tr><td>Maximum drawdown</td><td>Worst peak-to-trough decline since tracking began.</td></tr>
+<tr><td>Latest trade reason</td><td>Plain-English explanation of the most recent transition.</td></tr>
+</table>
+
+<h2>13. Historical Research Reference</h2>
+
+<p>
+The saved research snapshot covering June 21, 2006 through May 29, 2026 reported:
+</p>
+
+<table>
+<tr><th>Metric</th><th>Donchian exit strategy</th><th>QQQ Hold</th></tr>
+<tr><td>Starting value</td><td>$1,000</td><td>$1,000</td></tr>
+<tr><td>Ending value</td><td>$55,874.66</td><td>$19,087.74</td></tr>
+<tr><td>CAGR</td><td>22.36%</td><td>Not stored in the strategy summary</td></tr>
+<tr><td>Maximum drawdown</td><td>-35.91%</td><td>-53.55%</td></tr>
+</table>
+
+<p>
+These figures are historical backtest results, not guaranteed future results. Real performance will
+differ because of trade timing, spreads, taxes, fees, slippage, and data revisions.
+</p>
+
+<h2>14. Weekly Review Checklist</h2>
+
 <ul>
-<li>QQQ closes below EMA200.</li>
-<li>QLD closes below its prior 20-day low.</li>
-<li>QQQ 20-day annualized volatility is greater than 35%.</li>
+<li>Confirm all QQQ and QLD adjusted-close prices are current.</li>
+<li>Confirm the Donchian20 signal agrees with the prior 20-day QLD channel.</li>
+<li>Confirm QQQ EMA200 is current.</li>
+<li>Confirm real shares and cash match the brokerage account.</li>
+<li>Confirm every actual trade appears in the trade log.</li>
+<li>Review current drawdown and strategy lead/lag versus QQQ Hold.</li>
+<li>Document any manual override and its reason.</li>
 </ul>
 
-<h2>5. Dashboard Indicators</h2>
-
-<table>
-<tr><th>Indicator</th><th>Meaning</th></tr>
-<tr><td>QQQ close</td><td>Adjusted close for the signal ETF.</td></tr>
-<tr><td>QLD close</td><td>Adjusted close for the leveraged ETF used for entries and risk checks.</td></tr>
-<tr><td>SMA200</td><td>Long-term QQQ trend reference shown on the dashboard.</td></tr>
-<tr><td>EMA50 / EMA200</td><td>Trend confirmation used for QLD entry.</td></tr>
-<tr><td>Distance above/below SMA200</td><td>Plain trend context for the dashboard.</td></tr>
-<tr><td>Distance above/below EMA200</td><td>Used for leverage extension and re-entry rules.</td></tr>
-<tr><td>20-day annualized volatility</td><td>Risk filter for Cash to QQQ, QQQ to QLD, and Cash exit rules.</td></tr>
-<tr><td>Prior 20-day highs/lows</td><td>Breakout and risk levels for QQQ and QLD.</td></tr>
-<tr><td>MACD</td><td>Display-only context. MACD is not part of the trading rule unless promoted later.</td></tr>
-</table>
-
-<h2>6. What To Do By Dashboard Status</h2>
-
-<table>
-<tr><th>Status</th><th>Operating Action</th></tr>
-<tr><td>Hold Cash</td><td>Stay in cash. Do not buy QQQ or QLD until Cash-to-QQQ conditions trigger.</td></tr>
-<tr><td>Hold QQQ</td><td>Hold 1x QQQ. Wait for QLD entry conditions or a risk exit.</td></tr>
-<tr><td>DCA to QLD</td><td>Follow the current DCA day instruction. If conditions fail, reset DCA and return to QQQ.</td></tr>
-<tr><td>Hold QLD</td><td>Hold QLD unless an extension reduction or cash exit rule triggers.</td></tr>
-</table>
-
-<h2>7. Dashboard Files</h2>
-
-<table>
-<tr><th>File</th><th>Purpose</th></tr>
-<tr><td>index.html</td><td>Live GitHub Pages dashboard.</td></tr>
-<tr><td>data/signals.json</td><td>Current dashboard data and recent history.</td></tr>
-<tr><td>data/signals.csv</td><td>Full daily signal history.</td></tr>
-<tr><td>scripts/update_signals.py</td><td>Daily update script.</td></tr>
-<tr><td>.github/workflows/daily-update.yml</td><td>GitHub Actions schedule for daily updates.</td></tr>
-</table>
-
-<h2>8. Weekly Review Checklist</h2>
+<h2>15. Monthly Review Checklist</h2>
 
 <ul>
-<li>Confirm the latest dashboard date matches the latest available market close.</li>
-<li>Confirm QQQ and QLD prices updated successfully.</li>
-<li>Check whether the model state changed.</li>
-<li>If a real trade was placed, record actual fill prices and shares separately.</li>
-<li>Confirm any manual override is written down with the reason.</li>
+<li>Save the brokerage statement.</li>
+<li>Reconcile ending account value and cash.</li>
+<li>Review monthly return versus QQQ Hold.</li>
+<li>Review maximum drawdown and recovery progress.</li>
+<li>Check for missing prices or indicator discontinuities.</li>
+<li>Do not change the strategy rules without creating and testing a separate version.</li>
 </ul>
 
-<h2>9. Important Operating Notes</h2>
+<h2>16. File References</h2>
+
+<table>
+<tr><th>File</th><th>Use</th></tr>
+<tr><td>build_donchian20_qld_to_qqq_cash_exit.ps1</td><td>Implemented source of truth for the strategy transitions.</td></tr>
+<tr><td>donchian20_qld_to_qqq_cash_exit_daily.csv</td><td>Daily model history, positions, values, and trade reasons.</td></tr>
+<tr><td>donchian20_qld_to_qqq_cash_exit_summary.csv</td><td>Saved performance and drawdown summary.</td></tr>
+<tr><td>QQQ_daily_raw_with_donchian20.xls</td><td>QQQ data, EMA200, and Donchian signal source.</td></tr>
+<tr><td>QQQ_daily_raw_with_synthetic_qld_from_2000_corrected.xls</td><td>QLD adjusted-price history and corrected research series.</td></tr>
+</table>
+
+<h2>17. Important Operating Rules</h2>
 
 <ul>
-<li>The dashboard is a signal display, not financial advice.</li>
-<li>The model uses adjusted close data, so intraday prices may disagree with the dashboard before the next update.</li>
-<li>QQQ is the signal source. Do not accidentally switch the signal source to QLD.</li>
-<li>QLD is the leveraged holding. Do not use synthetic QLD for live decisions.</li>
-<li>MACD is visible for context only.</li>
+<li>Use adjusted closes for model signals and indicators.</li>
+<li>Use actual fill prices for the real account.</li>
+<li>Do not mix model account value with real brokerage value.</li>
+<li>Apply strict comparisons: QLD must be above the prior high to enter and below the prior low to exit.</li>
+<li>Do not buy QQQ merely because QQQ rises above EMA200 while the account is in Cash.</li>
+<li>Do not add DCA, volatility, EMA50, or EMA200-deviation filters to this strategy.</li>
+<li>Do not revise historical trade-log rows; add correction rows.</li>
+<li>If a signal is unclear or market data is incomplete, do not trade until it is verified.</li>
 </ul>
 
 </body>

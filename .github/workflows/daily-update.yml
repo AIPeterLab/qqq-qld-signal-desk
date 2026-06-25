@@ -44,7 +44,7 @@ jobs:
         if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Update daily QQQ/QLD signals"
+          commit_message: "Update daily Donchian20 signals"
           file_pattern: data/signals.json data/signals.csv
 
       - name: Send phone notification

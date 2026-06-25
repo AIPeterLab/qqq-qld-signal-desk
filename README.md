@@ -1,46 +1,45 @@
 # QQQ/QLD Signal Desk
 
-Static GitHub Pages dashboard for the QQQ-signal / QLD-position strategy.
+Static GitHub Pages dashboard for the **Donchian20 QLD -> QQQ -> Cash exit strategy**.
 
-The signal source is QQQ. The model can hold Cash, QQQ, QQQ + QLD during the 5-day transition, or QLD. MACD appears as display-only context and is not part of the trading rule.
+The stateful Donchian20 signal comes from QLD adjusted closes. The model holds QLD while the signal is 1, reduces to QQQ after a Donchian exit, and moves QQQ to Cash when QQQ closes below EMA200. Cash remains Cash until QLD creates a new Donchian breakout.
 
 ## Files
 
-- `index.html` is the live dashboard.
-- `data/signals.json` is the dashboard data source.
-- `data/signals.csv` is the daily signal history.
-- `scripts/update_signals.py` refreshes market data and indicators.
-- `Real_Account_Tracking_System.doc` is the operating manual.
+- `index.html` is the live operational dashboard.
+- `data/signals.json` is the dashboard snapshot.
+- `data/signals.csv` is the full daily model history.
+- `scripts/update_signals.py` downloads adjusted closes and rebuilds the model.
+- `scripts/send_pushover_notification.py` sends the post-refresh phone alert.
+- `Real_Account_Tracking_System.doc` is the governing operating manual.
 
-## Update Schedule
+## Exact Rules
 
-The GitHub Action checks at 22:15 and 23:15 UTC and runs the update only when the New York hour is 6 PM. This keeps the effective schedule at 6:15 PM through daylight-saving changes. The non-zero minute reduces the chance of GitHub Actions delays or dropped jobs during the start-of-hour load spike.
+1. If signal 0 and QLD closes strictly above its prior 20-day high, signal becomes 1 and the full account moves to QLD.
+2. While signal 1, continue holding QLD.
+3. If signal 1 and QLD closes strictly below its prior 20-day low, signal becomes 0 and the full account moves from QLD to QQQ.
+4. If QQQ is below EMA200 while held, move the full account to Cash.
+5. While signal remains 0, Cash does not re-enter merely because QQQ rises above EMA200. A new QLD breakout is required.
 
-After a successful refresh, the workflow sends the current signal summary and dashboard link to Pushover when these GitHub Actions repository secrets are configured:
+There is no DCA, volatility filter, EMA50 filter, SMA200 rule, or EMA200-deviation filter.
 
-- `PUSHOVER_APP_TOKEN`: API token for the QQQ/QLD Signal Desk Pushover application.
-- `PUSHOVER_USER_KEY`: Pushover user key for the destination phone.
+## Data And Performance
 
-The notification uses normal priority and opens the public dashboard when tapped.
+The updater uses Yahoo Finance chart API adjusted-close data for QQQ and QLD. Model tracking starts with `$1,000` on QLD's first available date. The benchmark is QQQ Hold from the same date and initial value.
 
-## Data Source
+The operating manual contains a saved historical research snapshot built from legacy research files that include synthetic pre-QLD history. The live dashboard does not import that inherited pre-launch signal state. It rebuilds the investable model from actual QLD history, initializes the Donchian signal at `0`, and waits for 20 completed QLD trading days before allowing the first breakout.
 
-The updater uses free Yahoo Finance chart API adjusted-close data for QQQ and QLD.
-
-## Local Update
+Run locally:
 
 ```powershell
 python scripts/update_signals.py
 ```
 
-The script writes `data/signals.json` and `data/signals.csv`.
+## Automation
 
-## Strategy Summary
+GitHub Actions checks at 22:15 and 23:15 UTC and updates only when the New York hour is 6 PM, maintaining an effective 6:15 PM New York schedule through daylight-saving changes.
 
-Cash to QQQ requires QQQ above EMA200, QQQ above its prior 20-day high, and QQQ 20-day annualized volatility below 30%.
+Pushover uses these repository secrets:
 
-QQQ to QLD uses a 5-day DCA process when EMA50 is above EMA200, QQQ volatility is at or below 25%, QQQ is no more than 20% above EMA200, and QLD closes above its prior 20-day high.
-
-Any invested state moves to Cash if QQQ closes below EMA200, QLD closes below its prior 20-day low, or QQQ 20-day annualized volatility is above 35%.
-
-When QQQ is more than 20% above EMA200, the model reduces from QLD to QQQ. It can DCA back into QLD after QQQ EMA200 deviation drops below 15% and QLD entry conditions remain valid.
+- `PUSHOVER_APP_TOKEN`
+- `PUSHOVER_USER_KEY`

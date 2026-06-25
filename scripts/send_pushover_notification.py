@@ -34,14 +34,16 @@ def main():
         {
             "token": app_token,
             "user": user_key,
-            "title": f"QQQ/QLD: {current['headline_status']}",
+            "title": f"Donchian20: {current['headline_status']}",
             "message": "\n".join(
                 [
                     f"Market date: {update_date}",
-                    f"State: {current['model_state']}",
+                    f"Signal: {current['donchian_signal']}",
+                    f"Position: {current['model_state']}",
+                    f"Action: {current['required_action']}",
                     f"QQQ: ${market['qqq_close']:.2f}",
                     f"QLD: ${market['qld_close']:.2f}",
-                    f"vs SMA200: {market['distance_to_sma200_pct']:+.2f}%",
+                    f"QQQ vs EMA200: {market['qqq_distance_to_ema200_pct']:+.2f}%",
                     current["rule_explanation"],
                 ]
             ),
