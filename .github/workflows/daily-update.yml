@@ -2,8 +2,8 @@ name: Daily signal update
 
 on:
   schedule:
-    - cron: "15 18 * * *"
-      timezone: "America/New_York"
+    - cron: "15 22 * * *"
+    - cron: "15 23 * * *"
   workflow_dispatch:
 
 permissions:
@@ -16,23 +16,37 @@ jobs:
       PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
     steps:
+      - name: Check New York update window
+        id: schedule_gate
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" != "schedule" || "$(TZ=America/New_York date +%H)" == "18" ]]; then
+            echo "run_update=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_update=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Check out repository
+        if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Update signal files
+        if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
         run: python scripts/update_signals.py
 
       - name: Commit updated data
+        if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update daily QQQ/QLD signals"
           file_pattern: data/signals.json data/signals.csv
 
       - name: Send phone notification
-        if: ${{ env.PUSHOVER_APP_TOKEN != '' && env.PUSHOVER_USER_KEY != '' }}
+        if: ${{ steps.schedule_gate.outputs.run_update == 'true' && env.PUSHOVER_APP_TOKEN != '' && env.PUSHOVER_USER_KEY != '' }}
         run: python scripts/send_pushover_notification.py

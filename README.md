@@ -14,7 +14,7 @@ The signal source is QQQ. The model can hold Cash, QQQ, QQQ + QLD during the 5-d
 
 ## Update Schedule
 
-The GitHub Action runs daily at 6:15 PM in the `America/New_York` timezone. The non-zero minute reduces the chance of GitHub Actions delays or dropped jobs during the start-of-hour load spike.
+The GitHub Action checks at 22:15 and 23:15 UTC and runs the update only when the New York hour is 6 PM. This keeps the effective schedule at 6:15 PM through daylight-saving changes. The non-zero minute reduces the chance of GitHub Actions delays or dropped jobs during the start-of-hour load spike.
 
 After a successful refresh, the workflow sends the current signal summary and dashboard link to Pushover when these GitHub Actions repository secrets are configured:
 
