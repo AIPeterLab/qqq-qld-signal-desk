@@ -235,6 +235,34 @@
       min-width: 0;
     }
 
+    .performance-panel {
+      margin-top: 18px;
+    }
+
+    .performance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .performance-grid .metric {
+      min-height: 106px;
+    }
+
+    .performance-grid .metric:nth-child(4n) {
+      border-right: 0;
+    }
+
+    .performance-grid .metric:nth-child(n + 5) {
+      border-bottom: 0;
+    }
+
+    .performance-grid .metric:last-child {
+      grid-column: span 2;
+      border-right: 0;
+    }
+
     .section-head {
       display: flex;
       align-items: center;
@@ -368,12 +396,29 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .performance-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .metric:nth-child(3n) {
         border-right: 1px solid var(--border);
       }
 
       .metric:nth-child(2n) {
         border-right: 0;
+      }
+
+      .performance-grid .metric:nth-child(n) {
+        border-right: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .performance-grid .metric:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .performance-grid .metric:last-child {
+        border-bottom: 0;
       }
 
       table {
@@ -392,8 +437,20 @@
         grid-template-columns: 1fr;
       }
 
+      .performance-grid {
+        grid-template-columns: 1fr;
+      }
+
       .metric {
         border-right: 0;
+      }
+
+      .performance-grid .metric:nth-child(n) {
+        border-right: 0;
+      }
+
+      .performance-grid .metric:last-child {
+        grid-column: span 1;
       }
 
       th,
@@ -462,6 +519,50 @@
       </article>
     </section>
 
+    <section class="panel performance-panel" aria-labelledby="performanceHeading">
+      <div class="section-head">
+        <h2 id="performanceHeading">Performance Since Tracking Began</h2>
+        <span class="chip">QQQ buy-and-hold benchmark</span>
+      </div>
+      <div class="performance-grid">
+        <div class="metric">
+          <p class="label">Starting Date</p>
+          <p class="value" id="trackingStartDate">--</p>
+          <p class="note">First actual QLD data date</p>
+        </div>
+        <div class="metric">
+          <p class="label">Initial Investment</p>
+          <p class="value" id="initialInvestment">--</p>
+          <p class="note">Strategy and QQQ each</p>
+        </div>
+        <div class="metric">
+          <p class="label">Current Strategy Value</p>
+          <p class="value" id="strategyValue">--</p>
+          <p class="note">QLD / QQQ / Cash model</p>
+        </div>
+        <div class="metric">
+          <p class="label">QQQ Buy &amp; Hold Value</p>
+          <p class="value" id="benchmarkValue">--</p>
+          <p class="note">Same starting investment</p>
+        </div>
+        <div class="metric">
+          <p class="label">Strategy Max Drawdown</p>
+          <p class="value" id="strategyMaxDrawdown">--</p>
+          <p class="note">Worst peak-to-trough decline</p>
+        </div>
+        <div class="metric">
+          <p class="label">QQQ Max Drawdown</p>
+          <p class="value" id="benchmarkMaxDrawdown">--</p>
+          <p class="note">Buy-and-hold benchmark</p>
+        </div>
+        <div class="metric">
+          <p class="label">Current Drawdown</p>
+          <p class="value" id="currentDrawdown">--</p>
+          <p class="note">Strategy value below its peak</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section-grid">
       <article class="panel">
         <div class="section-head">
@@ -494,7 +595,7 @@
     </section>
 
     <p class="footer">
-      Data updates are scheduled for 6:00 PM New York time during daylight saving time. MACD is displayed only as context and is not used by the model rule. This dashboard is an operating display, not financial advice.
+      Data updates are scheduled for 6:15 PM New York time. MACD is displayed only as context and is not used by the model rule. This dashboard is an operating display, not financial advice.
     </p>
   </main>
 
@@ -527,6 +628,7 @@
       const market = data.market || {};
       const macd = data.macd_context || {};
       const bands = data.bands || {};
+      const performance = data.performance || {};
       const history = data.recent_history || [];
 
       document.getElementById("updated").textContent = `Last update: ${data.last_updated || "--"} | Source: ${data.data_source || "--"}`;
@@ -545,6 +647,13 @@
       document.getElementById("volatility").textContent = pct(market.qqq_vol20_annualized_pct);
       document.getElementById("macdStatus").textContent = macd.status || "--";
       document.getElementById("macdValues").textContent = `MACD ${num(macd.macd)} | Signal ${num(macd.signal)} | Hist ${num(macd.histogram)}`;
+      document.getElementById("trackingStartDate").textContent = performance.tracking_start_date || "--";
+      document.getElementById("initialInvestment").textContent = money(performance.initial_investment);
+      document.getElementById("strategyValue").textContent = money(performance.strategy_value);
+      document.getElementById("benchmarkValue").textContent = money(performance.qqq_buy_hold_value);
+      document.getElementById("strategyMaxDrawdown").textContent = pct(performance.strategy_max_drawdown_pct);
+      document.getElementById("benchmarkMaxDrawdown").textContent = pct(performance.qqq_max_drawdown_pct);
+      document.getElementById("currentDrawdown").textContent = pct(performance.current_strategy_drawdown_pct);
       document.getElementById("historyCount").textContent = `${history.length} rows`;
 
       const body = document.getElementById("historyBody");

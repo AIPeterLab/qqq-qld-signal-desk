@@ -19,7 +19,8 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
-YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?period1=1136073600&period2={period2}&interval=1d&events=history&includeAdjustedClose=true"
+INITIAL_INVESTMENT = 1000.0
+YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?period1=915148800&period2={period2}&interval=1d&events=history&includeAdjustedClose=true"
 
 
 @dataclass
@@ -43,6 +44,13 @@ class Row:
     headline_status: str = "Hold Cash"
     action: str = "No action"
     rule_explanation: str = "Waiting for valid trend and risk conditions."
+    qqq_weight: float = 0.0
+    qld_weight: float = 0.0
+    strategy_daily_return_pct: float | None = None
+    strategy_value: float | None = None
+    qqq_benchmark_value: float | None = None
+    strategy_drawdown_pct: float | None = None
+    qqq_drawdown_pct: float | None = None
 
 
 def fetch_yahoo(symbol: str) -> dict[str, float]:
@@ -255,10 +263,63 @@ def simulate(rows: list[Row]) -> None:
         row.action = action
         row.rule_explanation = explanation
         row.last_trade_date = last_trade_date  # type: ignore[attr-defined]
+        if state == "QQQ":
+            row.qqq_weight = 1.0
+            row.qld_weight = 0.0
+        elif state == "QQQ + QLD":
+            row.qld_weight = dca_day / 5
+            row.qqq_weight = 1 - row.qld_weight
+        elif state == "QLD":
+            row.qqq_weight = 0.0
+            row.qld_weight = 1.0
+        else:
+            row.qqq_weight = 0.0
+            row.qld_weight = 0.0
+
+
+def calculate_performance(rows: list[Row]) -> None:
+    complete_rows = [row for row in rows if row.qqq_close is not None and row.qld_close is not None]
+    if not complete_rows:
+        raise RuntimeError("No complete rows are available for performance calculations.")
+
+    strategy_value = INITIAL_INVESTMENT
+    benchmark_value = INITIAL_INVESTMENT
+    strategy_peak = INITIAL_INVESTMENT
+    benchmark_peak = INITIAL_INVESTMENT
+
+    for index, row in enumerate(complete_rows):
+        if index == 0:
+            strategy_return = 0.0
+        else:
+            previous = complete_rows[index - 1]
+            assert previous.qqq_close is not None
+            assert previous.qld_close is not None
+            assert row.qqq_close is not None
+            assert row.qld_close is not None
+
+            qqq_return = row.qqq_close / previous.qqq_close - 1
+            qld_return = row.qld_close / previous.qld_close - 1
+            strategy_return = (
+                previous.qqq_weight * qqq_return
+                + previous.qld_weight * qld_return
+            )
+            strategy_value *= 1 + strategy_return
+            benchmark_value *= 1 + qqq_return
+
+        strategy_peak = max(strategy_peak, strategy_value)
+        benchmark_peak = max(benchmark_peak, benchmark_value)
+        row.strategy_daily_return_pct = strategy_return * 100
+        row.strategy_value = strategy_value
+        row.qqq_benchmark_value = benchmark_value
+        row.strategy_drawdown_pct = (strategy_value / strategy_peak - 1) * 100
+        row.qqq_drawdown_pct = (benchmark_value / benchmark_peak - 1) * 100
 
 
 def round_value(value: float | None, digits: int = 2) -> float | None:
-    return round(value, digits) if value is not None else None
+    if value is None:
+        return None
+    rounded = round(value, digits)
+    return 0.0 if rounded == 0 else rounded
 
 
 def build_rows() -> list[Row]:
@@ -303,6 +364,7 @@ def build_rows() -> list[Row]:
         )
 
     simulate(rows)
+    calculate_performance(rows)
     return rows
 
 
@@ -327,6 +389,13 @@ def csv_row(row: Row) -> dict[str, object]:
         "headline_status": row.headline_status,
         "action": row.action,
         "rule_explanation": row.rule_explanation,
+        "qqq_weight_pct": round_value(row.qqq_weight * 100),
+        "qld_weight_pct": round_value(row.qld_weight * 100),
+        "strategy_daily_return_pct": round_value(row.strategy_daily_return_pct, 4),
+        "strategy_value": round_value(row.strategy_value),
+        "qqq_benchmark_value": round_value(row.qqq_benchmark_value),
+        "strategy_drawdown_pct": round_value(row.strategy_drawdown_pct),
+        "qqq_drawdown_pct": round_value(row.qqq_drawdown_pct),
     }
 
 
@@ -344,11 +413,21 @@ def write_outputs(rows: list[Row]) -> None:
     recent = complete_rows[-45:]
     last_actions = [row for row in complete_rows if row.action not in {"No action", "Waiting"}]
     last_trade = last_actions[-1] if last_actions else None
+    strategy_drawdowns = [
+        row.strategy_drawdown_pct
+        for row in complete_rows
+        if row.strategy_drawdown_pct is not None
+    ]
+    benchmark_drawdowns = [
+        row.qqq_drawdown_pct
+        for row in complete_rows
+        if row.qqq_drawdown_pct is not None
+    ]
 
     csv_path = DATA_DIR / "signals.csv"
     fieldnames = list(csv_row(latest).keys())
     with csv_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for row in complete_rows:
             writer.writerow(csv_row(row))
@@ -404,6 +483,16 @@ def write_outputs(rows: list[Row]) -> None:
             else "Exit risk"
             if latest.qqq_vol20_annualized_pct is not None and latest.qqq_vol20_annualized_pct > 35
             else "Normal",
+        },
+        "performance": {
+            "tracking_start_date": complete_rows[0].date,
+            "initial_investment": INITIAL_INVESTMENT,
+            "strategy_value": round_value(latest.strategy_value),
+            "qqq_buy_hold_value": round_value(latest.qqq_benchmark_value),
+            "strategy_max_drawdown_pct": round_value(min(strategy_drawdowns)),
+            "qqq_max_drawdown_pct": round_value(min(benchmark_drawdowns)),
+            "current_strategy_drawdown_pct": round_value(latest.strategy_drawdown_pct),
+            "current_qqq_drawdown_pct": round_value(latest.qqq_drawdown_pct),
         },
         "recent_history": [csv_row(row) for row in recent],
     }

@@ -1,7 +1,7 @@
 {
   "project": "QQQ/QLD Signal Desk",
-  "last_updated": "2026-06-23",
-  "generated_at_utc": "2026-06-24T01:58:36+00:00",
+  "last_updated": "2026-06-24",
+  "generated_at_utc": "2026-06-25T00:44:34+00:00",
   "data_source": "Yahoo Finance chart API adjusted close",
   "current": {
     "model_state": "Cash",
@@ -11,22 +11,22 @@
     "last_trade_action": "Move to Cash"
   },
   "market": {
-    "qqq_close": 713.65,
-    "qld_close": 91.22,
-    "sma200": 628.63,
-    "ema50": 696.58,
-    "ema200": 631.11,
-    "distance_to_sma200_pct": 13.52,
-    "distance_to_ema200_pct": 13.08,
+    "qqq_close": 710.62,
+    "qld_close": 90.37,
+    "sma200": 629.31,
+    "ema50": 697.13,
+    "ema200": 631.9,
+    "distance_to_sma200_pct": 12.92,
+    "distance_to_ema200_pct": 12.46,
     "qqq_prior_20d_high": 745.34,
     "qld_prior_20d_high": 100.53,
     "qld_prior_20d_low": 86.51,
-    "qqq_vol20_annualized_pct": 32.55
+    "qqq_vol20_annualized_pct": 31.88
   },
   "macd_context": {
-    "macd": 8.01,
-    "signal": 10.28,
-    "histogram": -2.27,
+    "macd": 6.26,
+    "signal": 9.48,
+    "histogram": -3.22,
     "status": "Bearish",
     "rule_role": "Display-only context; not part of the trading rule."
   },
@@ -35,28 +35,17 @@
     "ema_status": "EMA50 above EMA200",
     "risk_status": "Normal"
   },
+  "performance": {
+    "tracking_start_date": "2006-06-21",
+    "initial_investment": 1000.0,
+    "strategy_value": 12147.31,
+    "qqq_buy_hold_value": 21486.1,
+    "strategy_max_drawdown_pct": -23.61,
+    "qqq_max_drawdown_pct": -53.4,
+    "current_strategy_drawdown_pct": -7.03,
+    "current_qqq_drawdown_pct": -4.66
+  },
   "recent_history": [
-    {
-      "date": "2026-04-20",
-      "qqq_close": 646.08,
-      "qld_close": 76.27,
-      "sma200": 597.4,
-      "ema50": 605.97,
-      "ema200": 588.47,
-      "distance_to_sma200_pct": 8.15,
-      "distance_to_ema200_pct": 9.79,
-      "qqq_vol20_annualized_pct": 22.18,
-      "qqq_prior_20d_high": 648.14,
-      "qld_prior_20d_high": 76.73,
-      "qld_prior_20d_low": 57.16,
-      "macd": 12.6,
-      "macd_signal": 5.49,
-      "macd_histogram": 7.11,
-      "model_state": "QLD",
-      "headline_status": "Hold QLD",
-      "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
-    },
     {
       "date": "2026-04-21",
       "qqq_close": 643.62,
@@ -76,7 +65,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -0.7867,
+      "strategy_value": 9878.37,
+      "qqq_benchmark_value": 19460.39,
+      "strategy_drawdown_pct": -9.13,
+      "qqq_drawdown_pct": -0.7
     },
     {
       "date": "2026-04-22",
@@ -97,7 +93,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 3.317,
+      "strategy_value": 10206.04,
+      "qqq_benchmark_value": 19785.97,
+      "strategy_drawdown_pct": -6.11,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-04-23",
@@ -118,7 +121,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -1.1256,
+      "strategy_value": 10091.16,
+      "qqq_benchmark_value": 19674.53,
+      "strategy_drawdown_pct": -7.17,
+      "qqq_drawdown_pct": -0.56
     },
     {
       "date": "2026-04-24",
@@ -139,7 +149,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 3.8034,
+      "strategy_value": 10474.96,
+      "qqq_benchmark_value": 20050.85,
+      "strategy_drawdown_pct": -3.64,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-04-27",
@@ -160,7 +177,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 0.0623,
+      "strategy_value": 10481.49,
+      "qqq_benchmark_value": 20061.42,
+      "strategy_drawdown_pct": -3.58,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-04-28",
@@ -181,7 +205,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -2.0177,
+      "strategy_value": 10270.0,
+      "qqq_benchmark_value": 19859.67,
+      "strategy_drawdown_pct": -5.52,
+      "qqq_drawdown_pct": -1.01
     },
     {
       "date": "2026-04-29",
@@ -202,7 +233,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 1.233,
+      "strategy_value": 10396.63,
+      "qqq_benchmark_value": 19981.08,
+      "strategy_drawdown_pct": -4.36,
+      "qqq_drawdown_pct": -0.4
     },
     {
       "date": "2026-04-30",
@@ -223,7 +261,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 1.7705,
+      "strategy_value": 10580.7,
+      "qqq_benchmark_value": 20167.43,
+      "strategy_drawdown_pct": -2.67,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-01",
@@ -244,7 +289,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 1.9124,
+      "strategy_value": 10783.05,
+      "qqq_benchmark_value": 20361.03,
+      "strategy_drawdown_pct": -0.8,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-04",
@@ -265,7 +317,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -0.3874,
+      "strategy_value": 10741.27,
+      "qqq_benchmark_value": 20322.67,
+      "strategy_drawdown_pct": -1.19,
+      "qqq_drawdown_pct": -0.19
     },
     {
       "date": "2026-05-05",
@@ -286,7 +345,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 2.5644,
+      "strategy_value": 11016.72,
+      "qqq_benchmark_value": 20586.34,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-06",
@@ -307,7 +373,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 4.1,
+      "strategy_value": 11468.41,
+      "qqq_benchmark_value": 21014.01,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-07",
@@ -328,7 +401,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -0.2163,
+      "strategy_value": 11443.61,
+      "qqq_benchmark_value": 20988.94,
+      "strategy_drawdown_pct": -0.22,
+      "qqq_drawdown_pct": -0.12
     },
     {
       "date": "2026-05-08",
@@ -349,7 +429,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 4.6315,
+      "strategy_value": 11973.62,
+      "qqq_benchmark_value": 21480.94,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-11",
@@ -370,7 +457,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 0.5887,
+      "strategy_value": 12044.12,
+      "qqq_benchmark_value": 21543.16,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-12",
@@ -391,7 +485,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -1.7017,
+      "strategy_value": 11839.16,
+      "qqq_benchmark_value": 21360.43,
+      "strategy_drawdown_pct": -1.7,
+      "qqq_drawdown_pct": -0.85
     },
     {
       "date": "2026-05-13",
@@ -412,7 +513,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 2.0509,
+      "strategy_value": 12081.98,
+      "qqq_benchmark_value": 21586.05,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-14",
@@ -433,7 +541,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 1.4587,
+      "strategy_value": 12258.21,
+      "qqq_benchmark_value": 21739.47,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-15",
@@ -454,7 +569,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -3.0564,
+      "strategy_value": 11883.55,
+      "qqq_benchmark_value": 21411.47,
+      "strategy_drawdown_pct": -3.06,
+      "qqq_drawdown_pct": -1.51
     },
     {
       "date": "2026-05-18",
@@ -475,7 +597,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -0.9118,
+      "strategy_value": 11775.19,
+      "qqq_benchmark_value": 21319.36,
+      "strategy_drawdown_pct": -3.94,
+      "qqq_drawdown_pct": -1.93
     },
     {
       "date": "2026-05-19",
@@ -496,7 +625,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -1.1863,
+      "strategy_value": 11635.51,
+      "qqq_benchmark_value": 21187.98,
+      "strategy_drawdown_pct": -5.08,
+      "qqq_drawdown_pct": -2.54
     },
     {
       "date": "2026-05-20",
@@ -517,7 +653,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 3.2761,
+      "strategy_value": 12016.7,
+      "qqq_benchmark_value": 21538.93,
+      "strategy_drawdown_pct": -1.97,
+      "qqq_drawdown_pct": -0.92
     },
     {
       "date": "2026-05-21",
@@ -538,7 +681,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 0.3585,
+      "strategy_value": 12059.78,
+      "qqq_benchmark_value": 21580.0,
+      "strategy_drawdown_pct": -1.62,
+      "qqq_drawdown_pct": -0.73
     },
     {
       "date": "2026-05-22",
@@ -559,7 +709,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 0.7794,
+      "strategy_value": 12153.77,
+      "qqq_benchmark_value": 21671.52,
+      "strategy_drawdown_pct": -0.85,
+      "qqq_drawdown_pct": -0.31
     },
     {
       "date": "2026-05-26",
@@ -580,7 +737,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 3.5446,
+      "strategy_value": 12584.57,
+      "qqq_benchmark_value": 22056.3,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-27",
@@ -601,7 +765,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": -0.2178,
+      "strategy_value": 12557.16,
+      "qqq_benchmark_value": 22031.23,
+      "strategy_drawdown_pct": -0.22,
+      "qqq_drawdown_pct": -0.11
     },
     {
       "date": "2026-05-28",
@@ -622,7 +793,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 1.6634,
+      "strategy_value": 12766.03,
+      "qqq_benchmark_value": 22216.98,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-05-29",
@@ -643,7 +821,14 @@
       "model_state": "QLD",
       "headline_status": "Hold QLD",
       "action": "No action",
-      "rule_explanation": "No action; current model state remains valid."
+      "rule_explanation": "No action; current model state remains valid.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 100.0,
+      "strategy_daily_return_pct": 0.6851,
+      "strategy_value": 12853.5,
+      "qqq_benchmark_value": 22298.82,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-06-01",
@@ -664,7 +849,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "Reduce to QQQ",
-      "rule_explanation": "QQQ is more than 20% above EMA200; reduce leverage but stay invested."
+      "rule_explanation": "QQQ is more than 20% above EMA200; reduce leverage but stay invested.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 1.1883,
+      "strategy_value": 13006.24,
+      "qqq_benchmark_value": 22432.62,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-06-02",
@@ -685,7 +877,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "No action",
-      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm."
+      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.4605,
+      "strategy_value": 13066.12,
+      "qqq_benchmark_value": 22535.91,
+      "strategy_drawdown_pct": 0.0,
+      "qqq_drawdown_pct": 0.0
     },
     {
       "date": "2026-06-03",
@@ -706,7 +905,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "No action",
-      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm."
+      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": -0.2613,
+      "strategy_value": 13031.98,
+      "qqq_benchmark_value": 22477.02,
+      "strategy_drawdown_pct": -0.26,
+      "qqq_drawdown_pct": -0.26
     },
     {
       "date": "2026-06-04",
@@ -727,7 +933,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "No action",
-      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm."
+      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": -0.4837,
+      "strategy_value": 12968.94,
+      "qqq_benchmark_value": 22368.29,
+      "strategy_drawdown_pct": -0.74,
+      "qqq_drawdown_pct": -0.74
     },
     {
       "date": "2026-06-05",
@@ -748,7 +961,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "No action",
-      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm."
+      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": -4.8001,
+      "strategy_value": 12346.41,
+      "qqq_benchmark_value": 21294.59,
+      "strategy_drawdown_pct": -5.51,
+      "qqq_drawdown_pct": -5.51
     },
     {
       "date": "2026-06-08",
@@ -769,7 +989,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "No action",
-      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm."
+      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 1.5616,
+      "strategy_value": 12539.21,
+      "qqq_benchmark_value": 21627.12,
+      "strategy_drawdown_pct": -4.03,
+      "qqq_drawdown_pct": -4.03
     },
     {
       "date": "2026-06-09",
@@ -790,7 +1017,14 @@
       "model_state": "QQQ",
       "headline_status": "Hold QQQ",
       "action": "No action",
-      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm."
+      "rule_explanation": "Hold QQQ until QLD leverage-entry conditions confirm.",
+      "qqq_weight_pct": 100.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": -1.1507,
+      "strategy_value": 12394.92,
+      "qqq_benchmark_value": 21378.25,
+      "strategy_drawdown_pct": -5.14,
+      "qqq_drawdown_pct": -5.14
     },
     {
       "date": "2026-06-10",
@@ -811,7 +1045,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "Move to Cash",
-      "rule_explanation": "Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
+      "rule_explanation": "Risk exit triggered by EMA200, QLD 20-day low, or volatility rule.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": -1.9977,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 20951.19,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -7.03
     },
     {
       "date": "2026-06-11",
@@ -832,7 +1073,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 21658.83,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -3.89
     },
     {
       "date": "2026-06-12",
@@ -853,7 +1101,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 21786.29,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -3.33
     },
     {
       "date": "2026-06-15",
@@ -874,7 +1129,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 22470.68,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -0.29
     },
     {
       "date": "2026-06-16",
@@ -895,7 +1157,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 22043.61,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -2.18
     },
     {
       "date": "2026-06-17",
@@ -916,7 +1185,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 21821.62,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -3.17
     },
     {
       "date": "2026-06-18",
@@ -937,7 +1213,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 22368.59,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -0.74
     },
     {
       "date": "2026-06-22",
@@ -958,7 +1241,14 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 22312.45,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -0.99
     },
     {
       "date": "2026-06-23",
@@ -979,7 +1269,42 @@
       "model_state": "Cash",
       "headline_status": "Hold Cash",
       "action": "No action",
-      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 21577.72,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -4.25
+    },
+    {
+      "date": "2026-06-24",
+      "qqq_close": 710.62,
+      "qld_close": 90.37,
+      "sma200": 629.31,
+      "ema50": 697.13,
+      "ema200": 631.9,
+      "distance_to_sma200_pct": 12.92,
+      "distance_to_ema200_pct": 12.46,
+      "qqq_vol20_annualized_pct": 31.88,
+      "qqq_prior_20d_high": 745.34,
+      "qld_prior_20d_high": 100.53,
+      "qld_prior_20d_low": 86.51,
+      "macd": 6.26,
+      "macd_signal": 9.48,
+      "macd_histogram": -3.22,
+      "model_state": "Cash",
+      "headline_status": "Hold Cash",
+      "action": "No action",
+      "rule_explanation": "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery.",
+      "qqq_weight_pct": 0.0,
+      "qld_weight_pct": 0.0,
+      "strategy_daily_return_pct": 0.0,
+      "strategy_value": 12147.31,
+      "qqq_benchmark_value": 21486.1,
+      "strategy_drawdown_pct": -7.03,
+      "qqq_drawdown_pct": -4.66
     }
   ]
 }
