@@ -158,101 +158,161 @@ def is_ready(row: Row) -> bool:
     return all(value is not None for value in fields)
 
 
-def qld_entry_ok(row: Row, reentry_after_extension: bool) -> bool:
-    if not is_ready(row):
-        return False
-    extension_limit = 15 if reentry_after_extension else 20
-    return bool(
-        row.ema50 is not None
-        and row.ema200 is not None
-        and row.qqq_vol20_annualized_pct is not None
-        and row.distance_to_ema200_pct is not None
-        and row.qld_close is not None
-        and row.qld_prior_20d_high is not None
-        and row.ema50 > row.ema200
-        and row.qqq_vol20_annualized_pct <= 25
-        and row.distance_to_ema200_pct <= extension_limit
-        and row.qld_close > row.qld_prior_20d_high
-    )
-
-
 def simulate(rows: list[Row]) -> None:
-    state = "Cash"
+    cash = INITIAL_INVESTMENT
+    qqq_shares = 0.0
+    qld_shares = 0.0
     dca_day = 0
-    reentry_after_extension = False
     last_trade_date: str | None = None
+    previous_value = INITIAL_INVESTMENT
+    benchmark_value = INITIAL_INVESTMENT
+    strategy_peak = INITIAL_INVESTMENT
+    benchmark_peak = INITIAL_INVESTMENT
+    previous_complete: Row | None = None
 
     for row in rows:
-        action = "No action"
-        explanation = "No action; current model state remains valid."
-
-        if not is_ready(row):
-            row.model_state = "Cash"
-            row.headline_status = "Hold Cash"
-            row.action = "Waiting"
-            row.rule_explanation = "Waiting for enough QQQ and QLD history to calculate all indicators."
+        if row.qqq_close is None or row.qld_close is None:
             continue
 
-        assert row.qqq_close is not None
-        assert row.qld_close is not None
-        assert row.ema200 is not None
-        assert row.qld_prior_20d_low is not None
-        assert row.qqq_vol20_annualized_pct is not None
-        assert row.distance_to_ema200_pct is not None
+        if previous_complete is not None:
+            assert previous_complete.qqq_close is not None
+            benchmark_value *= row.qqq_close / previous_complete.qqq_close
 
-        exit_to_cash = (
-            row.qqq_close < row.ema200
-            or row.qld_close < row.qld_prior_20d_low
-            or row.qqq_vol20_annualized_pct > 35
-        )
+        value_before = cash + qqq_shares * row.qqq_close + qld_shares * row.qld_close
+        action_parts: list[str] = []
+        explanation_parts: list[str] = []
+        ready = is_ready(row)
 
-        if state != "Cash" and exit_to_cash:
-            state = "Cash"
-            dca_day = 0
-            reentry_after_extension = False
-            action = "Move to Cash"
-            explanation = "Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
-            last_trade_date = row.date
-        elif state == "Cash":
+        if ready:
+            assert row.ema50 is not None
+            assert row.ema200 is not None
             assert row.qqq_prior_20d_high is not None
-            if row.qqq_close > row.ema200 and row.qqq_close > row.qqq_prior_20d_high and row.qqq_vol20_annualized_pct < 30:
-                state = "QQQ"
-                action = "Buy QQQ"
-                explanation = "QQQ recovered above EMA200, broke its prior 20-day high, and volatility is below 30%."
-                last_trade_date = row.date
-            else:
-                explanation = "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
-        elif state == "QLD":
-            if row.distance_to_ema200_pct > 20:
-                state = "QQQ"
+            assert row.qld_prior_20d_high is not None
+            assert row.qld_prior_20d_low is not None
+            assert row.qqq_vol20_annualized_pct is not None
+            assert row.distance_to_ema200_pct is not None
+
+            has_qqq = qqq_shares * row.qqq_close > 0.01
+            has_qld = qld_shares * row.qld_close > 0.01
+            cash_to_qqq = (
+                row.qqq_close > row.ema200
+                and row.qqq_close > row.qqq_prior_20d_high
+                and row.qqq_vol20_annualized_pct < 30
+            )
+            qld_entry = (
+                row.ema50 > row.ema200
+                and row.qqq_vol20_annualized_pct <= 25
+                and row.distance_to_ema200_pct <= 20
+                and row.qld_close > row.qld_prior_20d_high
+            )
+            qld_reentry = (
+                row.distance_to_ema200_pct < 15
+                and row.qld_close > row.qld_prior_20d_high
+            )
+            qld_to_qqq = row.distance_to_ema200_pct > 20
+            any_to_cash = (
+                row.qqq_close < row.ema200
+                or row.qld_close < row.qld_prior_20d_low
+                or row.qqq_vol20_annualized_pct > 35
+            )
+
+            if (has_qqq or has_qld) and any_to_cash:
+                cash = value_before
+                qqq_shares = 0.0
+                qld_shares = 0.0
                 dca_day = 0
-                reentry_after_extension = True
-                action = "Reduce to QQQ"
-                explanation = "QQQ is more than 20% above EMA200; reduce leverage but stay invested."
-                last_trade_date = row.date
-        elif state in {"QQQ", "QQQ + QLD"}:
-            if qld_entry_ok(row, reentry_after_extension):
+                action_parts.append("Move to Cash")
+                explanation_parts.append(
+                    "Risk exit triggered by EMA200, QLD 20-day low, or volatility rule."
+                )
+
+            has_qqq = qqq_shares * row.qqq_close > 0.01
+            has_qld = qld_shares * row.qld_close > 0.01
+            if has_qld and qld_to_qqq:
+                qqq_shares += qld_shares * row.qld_close / row.qqq_close
+                qld_shares = 0.0
+                dca_day = 0
+                action_parts.append("Reduce to QQQ")
+                explanation_parts.append(
+                    "QQQ is more than 20% above EMA200; reduce leverage but stay invested."
+                )
+
+            has_qqq = qqq_shares * row.qqq_close > 0.01
+            has_qld = qld_shares * row.qld_close > 0.01
+            if cash > 0.01 and not has_qqq and not has_qld and cash_to_qqq:
+                qqq_shares = cash / row.qqq_close
+                cash = 0.0
+                dca_day = 0
+                action_parts.append("Buy QQQ")
+                explanation_parts.append(
+                    "QQQ recovered above EMA200, broke its prior 20-day high, and volatility is below 30%."
+                )
+
+            has_qqq = qqq_shares * row.qqq_close > 0.01
+            qld_condition = qld_entry or qld_reentry
+            if has_qqq and qld_condition:
                 dca_day += 1
+                qqq_value = qqq_shares * row.qqq_close
+                convert_value = qqq_value / max(1, 6 - dca_day)
+                qqq_shares -= convert_value / row.qqq_close
+                qld_shares += convert_value / row.qld_close
                 if dca_day >= 5:
-                    state = "QLD"
-                    reentry_after_extension = False
-                    action = "Complete DCA to QLD"
-                    explanation = "QLD entry conditions stayed valid through the 5-day DCA process."
+                    action_parts.append("Complete DCA to QLD")
+                    explanation_parts.append(
+                        "Completed the fifth gradual conversion from QQQ to QLD."
+                    )
+                    dca_day = 0
                 else:
-                    state = "QQQ + QLD"
-                    action = f"DCA day {dca_day}"
-                    explanation = "QLD entry conditions are valid; continue gradual conversion from QQQ to QLD."
-                last_trade_date = row.date
-            else:
-                if state == "QQQ + QLD":
-                    action = "Reset DCA"
-                    explanation = "QLD entry conditions failed during DCA; reset to QQQ."
-                    last_trade_date = row.date
-                else:
-                    explanation = "Hold QQQ until QLD leverage-entry conditions confirm."
-                state = "QQQ"
+                    action_parts.append(f"DCA day {dca_day}")
+                    explanation_parts.append(
+                        "QLD entry conditions are valid; converted the next portion of QQQ to QLD."
+                    )
+            elif not qld_condition:
                 dca_day = 0
 
+        qqq_value = qqq_shares * row.qqq_close
+        qld_value = qld_shares * row.qld_close
+        strategy_value = cash + qqq_value + qld_value
+        invested_value = qqq_value + qld_value
+        if cash > 0.01 and invested_value <= 0.01:
+            state = "Cash"
+        elif qqq_value > 0.01 and qld_value > 0.01:
+            state = "QQQ + QLD"
+        elif qqq_value > 0.01:
+            state = "QQQ"
+        else:
+            state = "QLD"
+
+        if action_parts:
+            action = "; ".join(action_parts)
+            explanation = " ".join(explanation_parts)
+            last_trade_date = row.date
+        elif not ready:
+            action = "Waiting"
+            explanation = "Waiting for enough QQQ and QLD history to calculate all indicators."
+        elif state == "Cash":
+            action = "No action"
+            explanation = "Hold cash until QQQ trend, breakout, and volatility conditions confirm recovery."
+        elif state == "QQQ":
+            action = "No action"
+            explanation = "Hold QQQ until QLD leverage-entry conditions confirm."
+        elif state == "QQQ + QLD":
+            action = "No action"
+            explanation = "Hold the current QQQ/QLD mix until the next rule-triggered conversion or exit."
+        else:
+            action = "No action"
+            explanation = "Hold QLD while leverage and risk-exit rules remain valid."
+
+        strategy_peak = max(strategy_peak, strategy_value)
+        benchmark_peak = max(benchmark_peak, benchmark_value)
+        row.strategy_daily_return_pct = (
+            0.0 if previous_complete is None else (strategy_value / previous_value - 1) * 100
+        )
+        row.strategy_value = strategy_value
+        row.qqq_benchmark_value = benchmark_value
+        row.strategy_drawdown_pct = (strategy_value / strategy_peak - 1) * 100
+        row.qqq_drawdown_pct = (benchmark_value / benchmark_peak - 1) * 100
+        assert row.qqq_close is not None
         row.model_state = state
         row.headline_status = {
             "Cash": "Hold Cash",
@@ -263,56 +323,10 @@ def simulate(rows: list[Row]) -> None:
         row.action = action
         row.rule_explanation = explanation
         row.last_trade_date = last_trade_date  # type: ignore[attr-defined]
-        if state == "QQQ":
-            row.qqq_weight = 1.0
-            row.qld_weight = 0.0
-        elif state == "QQQ + QLD":
-            row.qld_weight = dca_day / 5
-            row.qqq_weight = 1 - row.qld_weight
-        elif state == "QLD":
-            row.qqq_weight = 0.0
-            row.qld_weight = 1.0
-        else:
-            row.qqq_weight = 0.0
-            row.qld_weight = 0.0
-
-
-def calculate_performance(rows: list[Row]) -> None:
-    complete_rows = [row for row in rows if row.qqq_close is not None and row.qld_close is not None]
-    if not complete_rows:
-        raise RuntimeError("No complete rows are available for performance calculations.")
-
-    strategy_value = INITIAL_INVESTMENT
-    benchmark_value = INITIAL_INVESTMENT
-    strategy_peak = INITIAL_INVESTMENT
-    benchmark_peak = INITIAL_INVESTMENT
-
-    for index, row in enumerate(complete_rows):
-        if index == 0:
-            strategy_return = 0.0
-        else:
-            previous = complete_rows[index - 1]
-            assert previous.qqq_close is not None
-            assert previous.qld_close is not None
-            assert row.qqq_close is not None
-            assert row.qld_close is not None
-
-            qqq_return = row.qqq_close / previous.qqq_close - 1
-            qld_return = row.qld_close / previous.qld_close - 1
-            strategy_return = (
-                previous.qqq_weight * qqq_return
-                + previous.qld_weight * qld_return
-            )
-            strategy_value *= 1 + strategy_return
-            benchmark_value *= 1 + qqq_return
-
-        strategy_peak = max(strategy_peak, strategy_value)
-        benchmark_peak = max(benchmark_peak, benchmark_value)
-        row.strategy_daily_return_pct = strategy_return * 100
-        row.strategy_value = strategy_value
-        row.qqq_benchmark_value = benchmark_value
-        row.strategy_drawdown_pct = (strategy_value / strategy_peak - 1) * 100
-        row.qqq_drawdown_pct = (benchmark_value / benchmark_peak - 1) * 100
+        row.qqq_weight = qqq_value / strategy_value if strategy_value else 0.0
+        row.qld_weight = qld_value / strategy_value if strategy_value else 0.0
+        previous_value = strategy_value
+        previous_complete = row
 
 
 def round_value(value: float | None, digits: int = 2) -> float | None:
@@ -364,7 +378,6 @@ def build_rows() -> list[Row]:
         )
 
     simulate(rows)
-    calculate_performance(rows)
     return rows
 
 
