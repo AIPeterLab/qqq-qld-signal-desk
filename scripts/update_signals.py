@@ -8,9 +8,10 @@ import json
 import sys
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
@@ -29,6 +30,7 @@ class Row:
     date: str
     qqq_close: float | None = None
     qld_close: float | None = None
+    vxn_close: float | None = None
     ema200: float | None = None
     distance_to_ema200_pct: float | None = None
     qld_prior_20d_high: float | None = None
@@ -53,7 +55,7 @@ class Row:
 def fetch_yahoo(symbol: str) -> dict[str, float]:
     period2 = int(time.time()) + 86400
     request = Request(
-        YAHOO_URL.format(symbol=symbol, period2=period2),
+        YAHOO_URL.format(symbol=quote(symbol, safe=""), period2=period2),
         headers={"User-Agent": "Mozilla/5.0"},
     )
     try:
@@ -267,11 +269,44 @@ def explain_hold(position: str, signal: int, row: Row) -> str:
 def build_rows() -> list[Row]:
     qqq = fetch_yahoo("QQQ")
     qld = fetch_yahoo("QLD")
-    dates = sorted(set(qqq) | set(qld))
-    rows = [Row(date=day, qqq_close=qqq.get(day), qld_close=qld.get(day)) for day in dates]
+    vxn = fetch_yahoo("^VXN")
+    latest_allowed_date = completed_close_cutoff()
+    dates = [day for day in sorted(set(qqq) | set(qld) | set(vxn)) if day <= latest_allowed_date]
+    rows = [
+        Row(
+            date=day,
+            qqq_close=qqq.get(day),
+            qld_close=qld.get(day),
+            vxn_close=vxn.get(day),
+        )
+        for day in dates
+    ]
     calculate_indicators(rows)
     simulate(rows)
     return rows
+
+
+def completed_close_cutoff() -> str:
+    now = eastern_now()
+    day = now.date()
+    if now.hour < 18:
+        day -= timedelta(days=1)
+    return day.isoformat()
+
+
+def eastern_now() -> datetime:
+    utc_now = datetime.now(timezone.utc).replace(tzinfo=None)
+    year = utc_now.year
+    dst_start = datetime(year, 3, nth_weekday(year, 3, 6, 2), 2) + timedelta(hours=5)
+    dst_end = datetime(year, 11, nth_weekday(year, 11, 6, 1), 2) + timedelta(hours=4)
+    offset_hours = -4 if dst_start <= utc_now < dst_end else -5
+    return utc_now + timedelta(hours=offset_hours)
+
+
+def nth_weekday(year: int, month: int, weekday: int, occurrence: int) -> int:
+    first = datetime(year, month, 1)
+    offset = (weekday - first.weekday()) % 7
+    return 1 + offset + 7 * (occurrence - 1)
 
 
 def csv_row(row: Row) -> dict[str, object]:
@@ -279,6 +314,7 @@ def csv_row(row: Row) -> dict[str, object]:
         "date": row.date,
         "qqq_close": round_value(row.qqq_close),
         "qld_close": round_value(row.qld_close),
+        "vxn_close": round_value(row.vxn_close),
         "qqq_ema200": round_value(row.ema200),
         "qqq_distance_to_ema200_pct": round_value(row.distance_to_ema200_pct),
         "qld_prior_20d_high": round_value(row.qld_prior_20d_high),
@@ -371,6 +407,7 @@ def write_outputs(rows: list[Row]) -> None:
         "market": {
             "qqq_close": round_value(latest.qqq_close),
             "qld_close": round_value(latest.qld_close),
+            "vxn_close": round_value(latest.vxn_close),
             "qqq_ema200": round_value(latest.ema200),
             "qqq_distance_to_ema200_pct": round_value(latest.distance_to_ema200_pct),
             "qld_prior_20d_high": round_value(latest.qld_prior_20d_high),
