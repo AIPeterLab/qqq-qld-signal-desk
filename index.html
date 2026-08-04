@@ -374,6 +374,15 @@
     const money = (value) => Number.isFinite(value) ? `$${value.toFixed(2)}` : "--";
     const pct = (value) => Number.isFinite(value) ? `${value >= 0 ? "+" : ""}${value.toFixed(2)}%` : "--";
     const cls = (value) => value > 0 ? "positive" : value < 0 ? "negative" : "neutral";
+    const nyTime = (value) => value ? new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short"
+    }).format(new Date(value)) : "--";
 
     function panelClass(state) {
       if (state === "Cash") return "cash";
@@ -387,7 +396,7 @@
       const performance = data.performance || {};
       const transitions = data.recent_transitions || [];
 
-      document.getElementById("updated").textContent = `Latest close: ${data.last_updated || "--"} | Generated: ${data.generated_at_utc || "--"} | ${data.data_source || "--"}`;
+      document.getElementById("updated").textContent = `Latest close: ${data.last_updated || "--"} | Refreshed: ${nyTime(data.generated_at_utc)} | ${data.data_source || "--"}`;
       document.getElementById("headlineStatus").textContent = current.headline_status || "--";
       document.getElementById("requiredAction").textContent = `Required action: ${current.required_action || "--"}`;
       document.getElementById("lastTrade").textContent = `Last transition: ${current.last_trade_date || "--"}${current.last_trade_action ? `, ${current.last_trade_action}` : ""}`;

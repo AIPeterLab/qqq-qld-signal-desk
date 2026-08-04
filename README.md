@@ -46,7 +46,7 @@ Pushover uses these repository secrets:
 
 ## Cloudflare Pages
 
-This repo is ready to deploy as a no-framework Cloudflare Pages static site while keeping the dashboard method and GitHub Actions refresh workflow unchanged.
+This repo is ready to deploy as a no-framework Cloudflare Pages static site while keeping the dashboard method unchanged. The daily schedule is centralized in the AIPeterLab Cloudflare Worker, which dispatches this repo's GitHub Actions refresh workflow.
 
 Use these Pages settings:
 
@@ -58,4 +58,4 @@ Use these Pages settings:
 - Root directory: leave blank / repository root
 - Environment variables: none required
 
-After the first Pages deployment, attach the custom domain `qld.aipeterlab.com` in the Cloudflare Pages project. The existing GitHub Actions workflow should continue to own the daily data refresh and push updated `data/signals.json` and `data/signals.csv` to `main`; Cloudflare Pages will redeploy from GitHub after those pushes.
+After the first Pages deployment, attach the custom domain `qld.aipeterlab.com` in the Cloudflare Pages project. The Cloudflare Worker owns the daily timing, dispatches the GitHub Actions workflow, and that workflow pushes updated `data/signals.json` and `data/signals.csv` to `main`; Cloudflare Pages will redeploy from GitHub after those pushes.
