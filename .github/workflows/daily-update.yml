@@ -2,6 +2,12 @@ name: Daily signal update
 
 on:
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Run outside the production refresh window"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -13,19 +19,29 @@ jobs:
       PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
     steps:
-      - name: Check New York update window
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check New York refresh window
         id: schedule_gate
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" != "schedule" || "$(TZ=America/New_York date +%H)" == "18" ]]; then
-            echo "run_update=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "run_update=false" >> "$GITHUB_OUTPUT"
+          ny_date="$(TZ=America/New_York date +%F)"
+          ny_weekday="$(TZ=America/New_York date +%u)"
+          ny_time="$(TZ=America/New_York date +%H:%M)"
+          published_date="$(python -c 'import json; print(json.load(open("data/signals.json", encoding="utf-8"))["last_updated"])')"
+          force="${{ github.event.inputs.force || 'false' }}"
+
+          run_update=false
+          if [[ "$force" == "true" ]]; then
+            run_update=true
+          elif [[ "$ny_weekday" -le 5 && "$published_date" != "$ny_date" && "$ny_time" > "18:14" && "$ny_time" < "19:15" ]]; then
+            run_update=true
           fi
 
-      - name: Check out repository
-        if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
-        uses: actions/checkout@v4
+          echo "run_update=$run_update" >> "$GITHUB_OUTPUT"
+          echo "ny_date=$ny_date" >> "$GITHUB_OUTPUT"
+          echo "New York date/time: $ny_date $ny_time; published market date: $published_date; run: $run_update"
 
       - name: Set up Python
         if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
@@ -34,16 +50,24 @@ jobs:
           python-version: "3.12"
 
       - name: Update signal files
+        id: refresh
         if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
-        run: python scripts/update_signals.py
+        shell: bash
+        run: |
+          python scripts/update_signals.py --expected-market-date "${{ steps.schedule_gate.outputs.ny_date }}"
+          if git diff --quiet -- data/signals.json data/signals.csv; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Commit updated data
-        if: ${{ steps.schedule_gate.outputs.run_update == 'true' }}
+        if: ${{ steps.refresh.outputs.changed == 'true' }}
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update daily Donchian20 signals"
           file_pattern: data/signals.json data/signals.csv
 
       - name: Send phone notification
-        if: ${{ steps.schedule_gate.outputs.run_update == 'true' && env.PUSHOVER_APP_TOKEN != '' && env.PUSHOVER_USER_KEY != '' }}
+        if: ${{ steps.refresh.outputs.changed == 'true' && env.PUSHOVER_APP_TOKEN != '' && env.PUSHOVER_USER_KEY != '' }}
         run: python scripts/send_pushover_notification.py

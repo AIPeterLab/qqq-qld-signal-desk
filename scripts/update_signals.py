@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import sys
@@ -266,11 +267,46 @@ def explain_hold(position: str, signal: int, row: Row) -> str:
     return "Hold Cash until QLD creates a new Donchian20 breakout."
 
 
-def build_rows() -> list[Row]:
+def validate_current_market_date(
+    qqq: dict[str, float], qld: dict[str, float], expected_date: str
+) -> None:
+    missing = [
+        symbol
+        for symbol, series in (("QQQ", qqq), ("QLD", qld))
+        if expected_date not in series
+    ]
+    if missing:
+        raise RuntimeError(
+            "Yahoo Finance has not published the current New York trading date "
+            f"{expected_date} for {', '.join(missing)}."
+        )
+
+
+def ensure_not_older_market_date(candidate_date: str, published_date: str | None) -> None:
+    if published_date and candidate_date < published_date:
+        raise RuntimeError(
+            f"Refusing to replace published market date {published_date} "
+            f"with older date {candidate_date}."
+        )
+
+
+def published_market_date() -> str | None:
+    path = DATA_DIR / "signals.json"
+    if not path.exists():
+        return None
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    value = payload.get("last_updated")
+    return str(value) if value else None
+
+
+def build_rows(expected_market_date: str | None = None) -> list[Row]:
     qqq = fetch_yahoo("QQQ")
     qld = fetch_yahoo("QLD")
     vxn = fetch_yahoo("^VXN")
-    latest_allowed_date = completed_close_cutoff()
+    if expected_market_date:
+        validate_current_market_date(qqq, qld, expected_market_date)
+        ensure_not_older_market_date(expected_market_date, published_market_date())
+    latest_allowed_date = expected_market_date or completed_close_cutoff()
     dates = [day for day in sorted(set(qqq) | set(qld) | set(vxn)) if day <= latest_allowed_date]
     rows = [
         Row(
@@ -439,9 +475,19 @@ def write_outputs(rows: list[Row]) -> None:
     )
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--expected-market-date",
+        help="Refuse to write unless QQQ and QLD contain this New York market date.",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
     try:
-        write_outputs(build_rows())
+        write_outputs(build_rows(args.expected_market_date))
     except Exception as exc:
         print(f"update_signals failed: {exc}", file=sys.stderr)
         return 1

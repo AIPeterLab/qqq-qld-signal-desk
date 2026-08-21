@@ -37,7 +37,7 @@ python scripts/update_signals.py
 
 ## Automation
 
-GitHub Actions checks at 22:15 and 23:15 UTC and updates only when the New York hour is 6 PM, maintaining an effective 6:15 PM New York schedule through daylight-saving changes.
+The shared AIPeterLab scheduler starts all dashboards at 6:15 PM `America/New_York` on trading weekdays. If Yahoo Finance has not yet published both QQQ and QLD for the current New York date, only QLD and its dependent dashboards retry every 15 minutes through 7:00 PM. The workflow refuses early dispatches and never writes an older market date.
 
 Pushover uses these repository secrets:
 
@@ -46,7 +46,7 @@ Pushover uses these repository secrets:
 
 ## Cloudflare Pages
 
-This repo is ready to deploy as a no-framework Cloudflare Pages static site while keeping the dashboard method unchanged. The daily schedule is centralized in the AIPeterLab Cloudflare Worker, which dispatches this repo's GitHub Actions refresh workflow.
+This repo is ready to deploy as a no-framework Cloudflare Pages static site while keeping the dashboard method unchanged. The daily schedule is centralized in the AIPeterLab Cloudflare Worker, which dispatches this repo's GitHub Actions refresh workflow at the New York times described above.
 
 Use these Pages settings:
 
@@ -58,4 +58,4 @@ Use these Pages settings:
 - Root directory: leave blank / repository root
 - Environment variables: none required
 
-After the first Pages deployment, attach the custom domain `qld.aipeterlab.com` in the Cloudflare Pages project. The Cloudflare Worker owns the daily timing, dispatches the GitHub Actions workflow, and that workflow pushes updated `data/signals.json` and `data/signals.csv` to `main`; Cloudflare Pages will redeploy from GitHub after those pushes.
+After the first Pages deployment, attach the custom domain `qld.aipeterlab.com` in the Cloudflare Pages project. The Cloudflare Worker owns the daily timing, dispatches the GitHub Actions workflow, and that workflow pushes verified `data/signals.json` and `data/signals.csv` updates to `main`; Cloudflare Pages will redeploy from GitHub after those pushes.
