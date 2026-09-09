@@ -56,7 +56,7 @@ No secret values belong in the repository. A replacement GitHub/Business account
 - There is no known unfinished code change at the time of this handoff.
 - The shared Cloudflare scheduler and Cloudflare Pages project are external account-side resources; cloning the repository does not recreate them.
 - GitHub Actions secret values cannot be recovered from Git. If the repository is transferred or recreated, re-enter the two Pushover secrets.
-- A local untracked directory named `Project holder1` was inaccessible during the migration audit. Its contents and relevance could not be established. It is deliberately neither ignored nor committed; inspect it under the same Windows login and back it up separately if it contains project material.
+- A local untracked directory named `Project holder1` is an unrelated IRA/Roth planning workspace, not part of the QQQ/QLD Signal Desk. It is deliberately neither ignored nor committed here. Five of its seven top-level files exactly match files in `C:\Users\Ella\Documents\401k Allocation`; its newer `build_roth_guide.py` and `Roth guide.docx` differ from that separate folder and need a separate backup before the Personal ChatGPT account is retired.
 
 ## Next Steps for a Fresh Codex Session
 
