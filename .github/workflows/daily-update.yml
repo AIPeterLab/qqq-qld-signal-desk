@@ -15,9 +15,6 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    env:
-      PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
-      PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -69,5 +66,5 @@ jobs:
           file_pattern: data/signals.json data/signals.csv
 
       - name: Send phone notification
-        if: ${{ steps.refresh.outputs.changed == 'true' && env.PUSHOVER_APP_TOKEN != '' && env.PUSHOVER_USER_KEY != '' }}
-        run: python scripts/send_pushover_notification.py
+        if: ${{ steps.refresh.outputs.changed == 'true' }}
+        run: python scripts/send_ntfy_notification.py

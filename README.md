@@ -10,7 +10,7 @@ The stateful Donchian20 signal comes from QLD adjusted closes. The model holds Q
 - `data/signals.json` is the dashboard snapshot.
 - `data/signals.csv` is the full daily model history.
 - `scripts/update_signals.py` downloads adjusted closes and rebuilds the model.
-- `scripts/send_pushover_notification.py` sends the post-refresh phone alert.
+- `scripts/send_ntfy_notification.py` sends the post-refresh phone alert through ntfy.
 - `Real_Account_Tracking_System.doc` is the governing operating manual.
 
 ## Exact Rules
@@ -39,10 +39,7 @@ python scripts/update_signals.py
 
 The shared AIPeterLab scheduler starts all dashboards at 6:15 PM `America/New_York` on trading weekdays. If Yahoo Finance has not yet published both QQQ and QLD for the current New York date, only QLD and its dependent dashboards retry every 15 minutes through 7:00 PM. The workflow refuses early dispatches and never writes an older market date.
 
-Pushover uses these repository secrets:
-
-- `PUSHOVER_APP_TOKEN`
-- `PUSHOVER_USER_KEY`
+Phone alerts are published to the shared `aipeterlab-market-alert-1` ntfy topic. No repository secret is required for notification delivery.
 
 ## Cloudflare Pages
 

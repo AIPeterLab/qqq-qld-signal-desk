@@ -14,7 +14,7 @@ The strategy, live-data assumptions, project files, automation, and Cloudflare P
 - `data/signals.csv`: complete generated daily model history.
 - `data/signals.json`: generated dashboard snapshot.
 - `scripts/update_signals.py`: Yahoo Finance download, indicator/state simulation, validation, and output generation.
-- `scripts/send_pushover_notification.py`: optional production notification.
+- `scripts/send_ntfy_notification.py`: production notification through the shared AIPeterLab ntfy topic.
 - `.github/workflows/daily-update.yml`: guarded, manually dispatched production refresh workflow.
 - `tests/test_strategy.py`: standard-library unit tests.
 - `README.md`, `CODEX_COMMAND.md`, `AGENTS.md`: durable project and Codex instructions.
@@ -47,15 +47,15 @@ External dependencies and services:
 - Yahoo Finance chart API: public market-data source used by the updater.
 - GitHub repository and GitHub Actions: source backup and production refresh execution.
 - Cloudflare Worker and Cloudflare Pages: scheduler and static hosting; their account-side configuration is not stored in this repository.
-- Pushover: optional notification service using GitHub secret names `PUSHOVER_APP_TOKEN` and `PUSHOVER_USER_KEY`.
+- ntfy: notification service using the shared `aipeterlab-market-alert-1` topic; no repository secret is required.
 
-No secret values belong in the repository. A replacement GitHub/Business account must be granted repository access and, if it will administer operations, appropriate GitHub, Cloudflare, and Pushover access. Repository secrets and Cloudflare configuration should be verified separately after any account or organization change.
+No secret values belong in the repository. A replacement GitHub/Business account must be granted repository access and, if it will administer operations, appropriate GitHub and Cloudflare access. Cloudflare configuration should be verified separately after any account or organization change.
 
 ## Unfinished Work and Known Risks
 
 - There is no known unfinished code change at the time of this handoff.
 - The shared Cloudflare scheduler and Cloudflare Pages project are external account-side resources; cloning the repository does not recreate them.
-- GitHub Actions secret values cannot be recovered from Git. If the repository is transferred or recreated, re-enter the two Pushover secrets.
+- The ntfy topic URL is stored in the notification script and should be reviewed if the repository is transferred or recreated.
 - A local untracked directory named `Project holder1` is an unrelated IRA/Roth planning workspace, not part of the QQQ/QLD Signal Desk. It is deliberately neither ignored nor committed here. Five of its seven top-level files exactly match files in `C:\Users\Ella\Documents\401k Allocation`; its newer `build_roth_guide.py` and `Roth guide.docx` differ from that separate folder and need a separate backup before the Personal ChatGPT account is retired.
 
 ## Next Steps for a Fresh Codex Session
@@ -63,5 +63,5 @@ No secret values belong in the repository. A replacement GitHub/Business account
 1. Read `AGENTS.md`, then the linked documentation.
 2. Confirm `git status --short --branch` and `git remote -v` before editing.
 3. Run the unit tests.
-4. Verify GitHub Actions, Cloudflare scheduling/deployment, the custom domain, and Pushover delivery if operational continuity is required.
+4. Verify GitHub Actions, Cloudflare scheduling/deployment, the custom domain, and ntfy delivery if operational continuity is required.
 5. Preserve the state-machine rules and freshness safeguards when making changes.

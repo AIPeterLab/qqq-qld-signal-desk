@@ -16,7 +16,7 @@ This repository is the durable source of truth for the QQQ/QLD Signal Desk. Do n
 - Cash cannot re-enter QQQ merely because QQQ rises above EMA200; only a new QLD breakout returns the model to QLD.
 - Do not weaken the current-date and no-older-data safety checks in `scripts/update_signals.py`.
 - Treat `data/signals.csv` and `data/signals.json` as generated, tracked production outputs. Do not hand-edit them.
-- Never commit `.wrangler/`, Python caches, environment files, credentials, tokens, or secret values. GitHub repository secrets supply Pushover credentials.
+- Never commit `.wrangler/`, Python caches, environment files, credentials, tokens, or secret values. The ntfy notification uses the shared public topic documented in `README.md` and requires no repository secret.
 - Preserve unrelated local changes. Never force-push this repository.
 
 ## Verification

@@ -51,4 +51,4 @@ Do not add DCA, volatility, EMA50, SMA200, or EMA200-deviation rules.
 
 - Run at 6:15 PM New York time through GitHub Actions.
 - Commit refreshed JSON and CSV.
-- Send a Pushover notification after a successful refresh.
+- Send an ntfy notification after a successful refresh.
