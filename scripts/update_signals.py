@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh the Donchian20 QLD -> QQQ -> Cash Signal Desk."""
+"""Refresh the volatility-gated Donchian20 QLD -> QQQ -> Cash Signal Desk."""
 
 from __future__ import annotations
 
@@ -31,6 +31,11 @@ class Row:
     date: str
     qqq_close: float | None = None
     qld_close: float | None = None
+    qld_high: float | None = None
+    qld_low: float | None = None
+    qld_atr20: float | None = None
+    qld_atr20_pct: float | None = None
+    volatility_gate_blocked: bool = False
     vxn_close: float | None = None
     ema200: float | None = None
     distance_to_ema200_pct: float | None = None
@@ -77,6 +82,74 @@ def fetch_yahoo(symbol: str) -> dict[str, float]:
     if not series:
         raise RuntimeError(f"Yahoo Finance returned no adjusted-close data for {symbol}.")
     return series
+
+
+def fetch_yahoo_adjusted_ohlc(symbol: str) -> dict[str, tuple[float, float, float]]:
+    """Return adjusted high, low, and close using Yahoo's daily adjustment factor."""
+    period2 = int(time.time()) + 86400
+    request = Request(
+        YAHOO_URL.format(symbol=quote(symbol, safe=""), period2=period2),
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    try:
+        with urlopen(request, timeout=30) as response:
+            payload = json.load(response)
+    except (HTTPError, URLError, TimeoutError) as exc:
+        raise RuntimeError(f"Could not fetch {symbol} from Yahoo Finance: {exc}") from exc
+
+    result = payload["chart"]["result"][0]
+    timestamps = result["timestamp"]
+    quote_data = result["indicators"]["quote"][0]
+    adjusted = result["indicators"]["adjclose"][0]["adjclose"]
+    series: dict[str, tuple[float, float, float]] = {}
+    for stamp, raw_high, raw_low, raw_close, adjusted_close in zip(
+        timestamps,
+        quote_data["high"],
+        quote_data["low"],
+        quote_data["close"],
+        adjusted,
+    ):
+        if None in (raw_high, raw_low, raw_close, adjusted_close) or raw_close == 0:
+            continue
+        factor = float(adjusted_close) / float(raw_close)
+        day = datetime.fromtimestamp(stamp, tz=timezone.utc).strftime("%Y-%m-%d")
+        series[day] = (
+            float(raw_high) * factor,
+            float(raw_low) * factor,
+            float(adjusted_close),
+        )
+    if not series:
+        raise RuntimeError(f"Yahoo Finance returned no adjusted OHLC data for {symbol}.")
+    return series
+
+
+def wilder_atr(rows: list[Row], period: int = 20) -> list[float | None]:
+    """Match ewm(alpha=1/period, adjust=False, min_periods=period)."""
+    output: list[float | None] = []
+    current: float | None = None
+    observations = 0
+    previous_close: float | None = None
+    alpha = 1 / period
+    for row in rows:
+        if row.qld_high is None or row.qld_low is None or row.qld_close is None:
+            output.append(None)
+            continue
+        true_range = row.qld_high - row.qld_low
+        if previous_close is not None:
+            true_range = max(
+                true_range,
+                abs(row.qld_high - previous_close),
+                abs(row.qld_low - previous_close),
+            )
+        current = (
+            true_range
+            if current is None
+            else alpha * true_range + (1 - alpha) * current
+        )
+        observations += 1
+        output.append(current if observations >= period else None)
+        previous_close = row.qld_close
+    return output
 
 
 def ema(values: list[float | None], span: int) -> list[float | None]:
@@ -132,12 +205,16 @@ def calculate_indicators(rows: list[Row]) -> None:
     ema200_values = ema(qqq_values, 200)
     qld_highs = prior_extreme(qld_values, 20, True)
     qld_lows = prior_extreme(qld_values, 20, False)
+    qld_atr20_values = wilder_atr(rows)
 
     for index, row in enumerate(rows):
         row.ema200 = ema200_values[index]
         row.distance_to_ema200_pct = pct(row.qqq_close, row.ema200)
         row.qld_prior_20d_high = qld_highs[index]
         row.qld_prior_20d_low = qld_lows[index]
+        row.qld_atr20 = qld_atr20_values[index]
+        if row.qld_atr20 is not None and row.qld_close not in {None, 0}:
+            row.qld_atr20_pct = row.qld_atr20 / row.qld_close * 100
         if (
             row.qld_close is not None
             and row.qld_prior_20d_high is not None
@@ -176,7 +253,10 @@ def simulate(rows: list[Row]) -> None:
 
         if channel_ready:
             if signal == 0 and row.qld_close > row.qld_prior_20d_high:
-                signal = 1
+                if row.qld_atr20_pct is not None and row.qld_atr20_pct > 4.0:
+                    row.volatility_gate_blocked = True
+                else:
+                    signal = 1
             elif signal == 1 and row.qld_close < row.qld_prior_20d_low:
                 signal = 0
         row.donchian_signal = signal
@@ -240,6 +320,12 @@ def simulate(rows: list[Row]) -> None:
             row.rule_explanation = (
                 "Waiting for 20 completed QLD trading days to establish the channel."
             )
+        elif row.volatility_gate_blocked:
+            row.action = "No action"
+            row.rule_explanation = (
+                "QLD broke above its prior 20-day high, but entry was blocked because "
+                "adjusted ATR(20) exceeded 4% of adjusted QLD close."
+            )
         else:
             row.action = "No action"
             row.rule_explanation = explain_hold(position, signal, row)
@@ -301,7 +387,8 @@ def published_market_date() -> str | None:
 
 def build_rows(expected_market_date: str | None = None) -> list[Row]:
     qqq = fetch_yahoo("QQQ")
-    qld = fetch_yahoo("QLD")
+    qld_ohlc = fetch_yahoo_adjusted_ohlc("QLD")
+    qld = {day: values[2] for day, values in qld_ohlc.items()}
     vxn = fetch_yahoo("^VXN")
     if expected_market_date:
         validate_current_market_date(qqq, qld, expected_market_date)
@@ -313,6 +400,8 @@ def build_rows(expected_market_date: str | None = None) -> list[Row]:
             date=day,
             qqq_close=qqq.get(day),
             qld_close=qld.get(day),
+            qld_high=qld_ohlc.get(day, (None, None, None))[0],
+            qld_low=qld_ohlc.get(day, (None, None, None))[1],
             vxn_close=vxn.get(day),
         )
         for day in dates
@@ -356,6 +445,9 @@ def csv_row(row: Row) -> dict[str, object]:
         "qld_prior_20d_high": round_value(row.qld_prior_20d_high),
         "qld_prior_20d_low": round_value(row.qld_prior_20d_low),
         "qld_channel_position_pct": round_value(row.qld_channel_position_pct),
+        "qld_atr20": round_value(row.qld_atr20),
+        "qld_atr20_pct": round_value(row.qld_atr20_pct),
+        "volatility_gate_blocked": row.volatility_gate_blocked,
         "prior_donchian_signal": row.prior_signal,
         "donchian_signal": row.donchian_signal,
         "model_state": row.model_state,
@@ -426,10 +518,16 @@ def write_outputs(rows: list[Row]) -> None:
 
     payload = {
         "project": "QQQ/QLD Signal Desk",
-        "strategy_name": "Donchian20 QLD -> QQQ -> Cash exit strategy",
+        "strategy_name": "Donchian20 QLD -> QQQ -> Cash with volatility gate",
+        "volatility_gate": {
+            "scope": "QLD entry only",
+            "atr_period": 20,
+            "threshold_pct": 4.0,
+            "block_condition": "adjusted ATR(20) / adjusted QLD close > 0.04",
+        },
         "last_updated": latest.date,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "data_source": "Yahoo Finance chart API adjusted close",
+        "data_source": "Yahoo Finance chart API adjusted OHLC",
         "current": {
             "model_state": latest.model_state,
             "headline_status": latest.headline_status,
@@ -449,6 +547,9 @@ def write_outputs(rows: list[Row]) -> None:
             "qld_prior_20d_high": round_value(latest.qld_prior_20d_high),
             "qld_prior_20d_low": round_value(latest.qld_prior_20d_low),
             "qld_channel_position_pct": round_value(latest.qld_channel_position_pct),
+            "qld_atr20": round_value(latest.qld_atr20),
+            "qld_atr20_pct": round_value(latest.qld_atr20_pct),
+            "volatility_gate_blocked": latest.volatility_gate_blocked,
             "channel_status": channel_status,
         },
         "performance": {
@@ -491,7 +592,7 @@ def main() -> int:
     except Exception as exc:
         print(f"update_signals failed: {exc}", file=sys.stderr)
         return 1
-    print("Updated Donchian20 data/signals.json and data/signals.csv")
+    print("Updated volatility-gated Donchian20 data/signals.json and data/signals.csv")
     return 0
 
 

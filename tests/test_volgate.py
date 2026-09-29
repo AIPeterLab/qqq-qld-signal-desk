@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from update_signals_volgate import Row, simulate, wilder_atr
+from update_signals import Row, simulate, wilder_atr
 
 
 def row(date, qqq, qld, ema200, high, low, atr_pct=None):

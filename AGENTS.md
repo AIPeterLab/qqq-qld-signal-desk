@@ -11,7 +11,8 @@ This repository is the durable source of truth for the QQQ/QLD Signal Desk. Do n
 
 ## Guardrails
 
-- Preserve the Donchian20 QLD -> QQQ -> Cash rules exactly. Do not introduce DCA, volatility, EMA50, SMA200, or EMA200-deviation rules.
+- Preserve the Donchian20 QLD -> QQQ -> Cash rules and the production entry-only QLD volatility gate exactly. Do not introduce DCA, EMA50, SMA200, EMA200-deviation, or any additional volatility rules.
+- A new QLD entry is blocked only when adjusted ATR(20) / adjusted QLD close is strictly greater than 4%. The gate is inactive until 20 ATR observations exist and never forces an exit.
 - Use adjusted closes for QQQ and QLD. A breakout or exit is strict (`>` or `<`) and compares with the prior completed 20-day window.
 - Cash cannot re-enter QQQ merely because QQQ rises above EMA200; only a new QLD breakout returns the model to QLD.
 - Do not weaken the current-date and no-older-data safety checks in `scripts/update_signals.py`.

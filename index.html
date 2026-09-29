@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Track the daily Donchian 20 QQQ market signal and the QLD, QQQ, or cash operating position in the AIPeterLab QLD Signal Desk.">
+  <meta name="description" content="Track the volatility-gated Donchian 20 QQQ market signal and the QLD, QQQ, or cash operating position in the AIPeterLab QLD Signal Desk.">
   <title>QLD Signal Desk | QQQ Strategy Dashboard</title>
   <link rel="canonical" href="https://qld.aipeterlab.com/">
   <meta property="og:title" content="QLD Signal Desk | AIPeterLab">
-  <meta property="og:description" content="Daily Donchian 20 QQQ signal and QLD, QQQ, or cash strategy dashboard.">
+  <meta property="og:description" content="Daily volatility-gated Donchian 20 QQQ signal and QLD, QQQ, or cash strategy dashboard.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://qld.aipeterlab.com/">
   <meta name="twitter:card" content="summary">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QLD Signal Desk","url":"https://qld.aipeterlab.com/","description":"Daily Donchian 20 QQQ signal and QLD, QQQ, or cash strategy dashboard.","isPartOf":{"@type":"WebSite","name":"AIPeterLab","url":"https://aipeterlab.com/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QLD Signal Desk","url":"https://qld.aipeterlab.com/","description":"Daily volatility-gated Donchian 20 QQQ signal and QLD, QQQ, or cash strategy dashboard.","isPartOf":{"@type":"WebSite","name":"AIPeterLab","url":"https://aipeterlab.com/"}}</script>
   <style>
     :root {
       --bg: #f4f6f8;
@@ -274,7 +274,7 @@
         <div class="mark">D20</div>
         <div>
           <h1>QQQ/QLD Signal Desk</h1>
-          <p class="subtitle">Donchian20 QLD → QQQ → Cash exit strategy</p>
+          <p class="subtitle">Volatility-gated Donchian20 QLD → QQQ → Cash strategy</p>
         </div>
       </div>
       <div class="updated">
@@ -330,6 +330,11 @@
           <p class="value" id="qldLow">--</p>
           <p class="note">Strictly below triggers signal 0</p>
         </div>
+        <div class="metric">
+          <p class="label">QLD ATR(20) / Close</p>
+          <p class="value" id="qldAtrPct">--</p>
+          <p class="note" id="volatilityGateStatus">Entry gate: --</p>
+        </div>
       </article>
     </section>
 
@@ -340,7 +345,7 @@
       </div>
       <div class="performance-grid">
         <div class="metric"><p class="label">Starting Date</p><p class="value" id="startDate">--</p><p class="note">First actual QLD date</p></div>
-        <div class="metric"><p class="label">Strategy Value</p><p class="value" id="strategyValue">--</p><p class="note">Donchian exit strategy</p></div>
+        <div class="metric"><p class="label">Strategy Value</p><p class="value" id="strategyValue">--</p><p class="note">Volatility-gated Donchian strategy</p></div>
         <div class="metric"><p class="label">QQQ Hold Value</p><p class="value" id="benchmarkValue">--</p><p class="note">Same start date and dollars</p></div>
         <div class="metric"><p class="label">Strategy vs QQQ</p><p class="value" id="leadLag">--</p><p class="note" id="leadLagPct">--</p></div>
         <div class="metric"><p class="label">Current Drawdown</p><p class="value" id="currentDrawdown">--</p><p class="note">Strategy below prior peak</p></div>
@@ -366,7 +371,7 @@
       <aside class="panel">
         <div class="section-head"><h2>Decision Path</h2></div>
         <div class="path">
-          <div class="path-step"><span class="step-number">1</span><div><p class="path-title">Breakout → QLD</p><p class="path-copy">Signal 0 changes to 1 only when QLD closes strictly above its prior 20-day high.</p></div></div>
+          <div class="path-step"><span class="step-number">1</span><div><p class="path-title">Eligible breakout → QLD</p><p class="path-copy">QLD must close strictly above its prior 20-day high and adjusted ATR(20) / close must not exceed 4%.</p></div></div>
           <div class="path-step"><span class="step-number">2</span><div><p class="path-title">Channel exit → QQQ</p><p class="path-copy">Signal 1 changes to 0 only when QLD closes strictly below its prior 20-day low.</p></div></div>
           <div class="path-step"><span class="step-number">3</span><div><p class="path-title">QQQ below EMA200 → Cash</p><p class="path-copy">After the QLD exit, hold QQQ only while it remains at or above EMA200.</p></div></div>
           <div class="path-step"><span class="step-number">4</span><div><p class="path-title">Cash waits for QLD</p><p class="path-copy">QQQ crossing above EMA200 alone does not re-enter. A new QLD breakout is required.</p></div></div>
@@ -424,6 +429,8 @@
       document.getElementById("qldHigh").textContent = money(market.qld_prior_20d_high);
       document.getElementById("qldLow").textContent = money(market.qld_prior_20d_low);
       document.getElementById("channelStatus").textContent = market.channel_status || "--";
+      document.getElementById("qldAtrPct").textContent = pct(market.qld_atr20_pct);
+      document.getElementById("volatilityGateStatus").textContent = market.volatility_gate_blocked ? "Entry blocked today" : "Entry gate open";
 
       document.getElementById("startDate").textContent = performance.tracking_start_date || "--";
       document.getElementById("strategyValue").textContent = money(performance.strategy_value);

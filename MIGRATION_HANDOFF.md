@@ -4,7 +4,7 @@ This file makes the QQQ/QLD Signal Desk recoverable without Personal ChatGPT his
 
 ## Purpose and Current Status
 
-The project publishes a static operational dashboard for the Donchian20 QLD -> QQQ -> Cash strategy. The production branch is `main`; GitHub Actions refreshes the tracked signal data, and Cloudflare Pages can redeploy the static site from GitHub.
+The project publishes a static operational dashboard for the Donchian20 QLD -> QQQ -> Cash strategy with an entry-only QLD volatility gate. The production branch is `main`; GitHub Actions refreshes the tracked signal data, and Cloudflare Pages can redeploy the static site from GitHub.
 
 The strategy, live-data assumptions, project files, automation, and Cloudflare Pages settings are documented in `README.md`. The exact state machine and output contract are in `CODEX_COMMAND.md`. `Real_Account_Tracking_System.doc` remains the governing operating manual. Tests in `tests/test_strategy.py` cover the transition order, Cash re-entry rule, and refresh-date safety checks.
 
@@ -21,7 +21,8 @@ The strategy, live-data assumptions, project files, automation, and Cloudflare P
 
 ## Design and Operational Decisions
 
-- The live model begins with actual QLD history, signal `0`, and no inherited synthetic pre-launch state. The operating manual's legacy research snapshot is retained for reference but is not imported into the live dashboard.
+- The live model begins with actual QLD history, signal `0`, and no inherited synthetic pre-launch state. A new QLD breakout is blocked when adjusted ATR(20) / adjusted QLD close is strictly greater than 4%; the gate is inactive before 20 ATR observations and never forces an exit. The operating manual's legacy research snapshot is retained for reference but is not imported into the live dashboard.
+- The 4% gate threshold was originally validated on raw closes. The live implementation follows the adjusted-data convention and should be revalidated on adjusted data.
 - Generated data is committed because the static dashboard consumes it directly.
 - Production scheduling is centralized in a shared AIPeterLab Cloudflare Worker. The repository workflow is `workflow_dispatch`-based and independently rejects early, duplicate, stale, or older-market-date refreshes.
 - Cloudflare Pages is a no-framework static deployment with repository root as output. The expected project name is `qld-signal-desk`, production branch `main`, and custom domain `qld.aipeterlab.com`.
