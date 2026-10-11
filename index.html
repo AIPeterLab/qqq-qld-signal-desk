@@ -242,6 +242,27 @@
 
     .footer { margin-top: 18px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
+    .experimental-paper { margin-top: 18px; border-color: rgba(217, 119, 6, 0.38); }
+    .experimental-note { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border: 1px solid rgba(217, 119, 6, 0.45);
+      border-radius: 20px;
+      background: #fffbeb;
+      color: #b45309;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+    .experimental-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 14px; }
+    .experimental-grid .metric:nth-child(4n) { border-right: 0; }
+    .experimental-grid .metric:nth-child(n + 5) { border-bottom: 0; }
+    .experimental-grid .metric:last-child { border-right: 0; }
+
     @media (max-width: 880px) {
       header { align-items: flex-start; flex-direction: column; }
       .updated { text-align: left; }
@@ -250,6 +271,9 @@
       .signal-grid .metric:nth-child(n) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
       .signal-grid .metric:nth-child(2n) { border-right: 0; }
       .signal-grid .metric:nth-child(n + 7) { border-bottom: 0; }
+      .experimental-grid .metric:nth-child(n) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .experimental-grid .metric:nth-child(2n) { border-right: 0; }
+      .experimental-grid .metric:nth-child(n + 3) { border-bottom: 0; }
       .performance-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .performance-grid .metric:nth-child(n) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
       .performance-grid .metric:nth-child(2n) { border-right: 0; }
@@ -379,6 +403,38 @@
       </aside>
     </section>
 
+    <section class="panel experimental-paper" id="experimentalPanel" aria-label="Experimental drawdown regime paper signal" hidden>
+      <div class="section-head">
+        <div>
+          <h2>Experimental: Drawdown Regime Gate <span class="tag">paper only</span></h2>
+          <p class="experimental-note">Separate research sleeve. It does not change the live Donchian20 signal or allocation above.</p>
+        </div>
+        <span class="chip" id="expSignal">--</span>
+      </div>
+      <div class="experimental-grid">
+        <div class="metric">
+          <p class="label">Regime</p>
+          <p class="value" id="expRegime">--</p>
+          <p class="note">Bull market: QLD · Bear market: QQQ</p>
+        </div>
+        <div class="metric">
+          <p class="label">QQQ Drawdown</p>
+          <p class="value" id="expDrawdown">--</p>
+          <p class="note" id="expHigh">252-day high: --</p>
+        </div>
+        <div class="metric">
+          <p class="label">Paper Value</p>
+          <p class="value" id="expPaperValue">--</p>
+          <p class="note" id="expPaperNote">$1,000 paper since --</p>
+        </div>
+        <div class="metric">
+          <p class="label">Paper vs QQQ Hold</p>
+          <p class="value" id="expVsQqq">--</p>
+          <p class="note" id="expSwitches">--</p>
+        </div>
+      </div>
+    </section>
+
     <p class="footer">Scheduled daily at 6:15 PM New York time. Signals use adjusted closes and apply at the model close. This is an operating display, not financial advice.</p>
   </main>
 
@@ -457,6 +513,33 @@
           <td class="reason">${row.rule_explanation}</td>
         </tr>
       `).join("") || `<tr><td colspan="6">No transitions available.</td></tr>`;
+
+      const exp = data.experimental_drawdown_regime || {};
+      const expPanel = document.getElementById("experimentalPanel");
+      if (exp.available) {
+        expPanel.hidden = false;
+        const expPaper = exp.paper || {};
+        document.getElementById("expSignal").textContent = exp.headline_status || "--";
+        const regimeNode = document.getElementById("expRegime");
+        regimeNode.textContent = exp.regime === "bull" ? "Bull market" : exp.regime === "bear" ? "Bear market" : "--";
+        regimeNode.className = `value ${exp.regime === "bull" ? "positive" : exp.regime === "bear" ? "negative" : "neutral"}`;
+        const ddNode = document.getElementById("expDrawdown");
+        ddNode.textContent = pct(exp.qqq_drawdown_pct);
+        ddNode.className = `value ${cls(exp.qqq_drawdown_pct)}`;
+        document.getElementById("expHigh").textContent =
+          `252-day high: ${money(exp.qqq_252d_high)} on ${exp.qqq_252d_high_date || "--"} · bear trigger -15%`;
+        document.getElementById("expPaperValue").textContent = money(expPaper.paper_value_from_1000);
+        document.getElementById("expPaperNote").textContent =
+          `$1,000 paper since ${expPaper.start_date || "--"} · max DD ${pct(expPaper.max_drawdown_pct)}`;
+        const vsQqq = (expPaper.paper_value_from_1000 || 0) - (expPaper.qqq_buy_hold_from_1000 || 0);
+        const vsQqqNode = document.getElementById("expVsQqq");
+        vsQqqNode.textContent = money(vsQqq);
+        vsQqqNode.className = `value ${cls(vsQqq)}`;
+        document.getElementById("expSwitches").textContent =
+          `${exp.bear_episodes || 0} bear episodes · last switch ${exp.last_switch ? `${exp.last_switch.date} (${exp.last_switch.from} to ${exp.last_switch.to})` : "--"}`;
+      } else {
+        expPanel.hidden = true;
+      }
     }
 
     fetch("data/signals.json", { cache: "no-store" })
