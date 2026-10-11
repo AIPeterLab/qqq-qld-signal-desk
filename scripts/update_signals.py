@@ -465,6 +465,154 @@ def csv_row(row: Row) -> dict[str, object]:
     }
 
 
+DD_LOOKBACK_DAYS = 252
+DD_BEAR_ENTER_PCT = -15.0
+DD_BULL_REENTER_PCT = -5.0
+
+
+def compute_drawdown_regime(rows: list[Row]) -> dict[str, object]:
+    """Paper-only experimental drawdown-regime gate.
+
+    Never touches the live Donchian20 strategy. Rule: QQQ drawdown from its
+    252-trading-day rolling adjusted-close high. At or above -15% = bull
+    market, hold QLD; below -15% = bear market, hold QQQ; a bear exits back
+    to bull when the drawdown recovers above -5%. The signal uses adjusted
+    closes and applies at the model close, matching the desk convention.
+    """
+    complete = [
+        row for row in rows if row.qqq_close is not None and row.qld_close is not None
+    ]
+    base = {
+        "available": False,
+        "experimental": True,
+        "paper_only": True,
+        "affects_live_strategy": False,
+    }
+    if not complete:
+        return base
+
+    # Causal 252-trading-day rolling high of QQQ adjusted close.
+    rolling_high: dict[str, float] = {}
+    window: list[float] = []
+    for row in rows:
+        if row.qqq_close is not None:
+            window.append(row.qqq_close)
+            if len(window) > DD_LOOKBACK_DAYS:
+                window.pop(0)
+            rolling_high[row.date] = max(window)
+
+    state = 1  # 1 = bull (hold QLD), 0 = bear (hold QQQ)
+    position = 1
+    shares_qld = 0.0
+    shares_qqq = 0.0
+    paper_value = INITIAL_INVESTMENT
+    peak = INITIAL_INVESTMENT
+    max_drawdown = 0.0
+    switches: list[dict[str, str]] = []
+    initialized = False
+
+    for row in complete:
+        assert row.qqq_close is not None and row.qld_close is not None
+        high = rolling_high.get(row.date)
+        drawdown_pct = (row.qqq_close / high - 1) * 100 if high else 0.0
+        previous = state
+        if state == 1 and drawdown_pct <= DD_BEAR_ENTER_PCT:
+            state = 0
+        elif state == 0 and drawdown_pct > DD_BULL_REENTER_PCT:
+            state = 1
+        if state != previous:
+            switches.append(
+                {
+                    "date": row.date,
+                    "from": "bull" if previous == 1 else "bear",
+                    "to": "bull" if state == 1 else "bear",
+                }
+            )
+        if not initialized:
+            if state == 1:
+                shares_qld = INITIAL_INVESTMENT / row.qld_close
+            else:
+                shares_qqq = INITIAL_INVESTMENT / row.qqq_close
+            position = state
+            initialized = True
+        else:
+            if state != position:
+                paper_value = shares_qld * row.qld_close + shares_qqq * row.qqq_close
+                shares_qld = 0.0
+                shares_qqq = 0.0
+                if state == 1:
+                    shares_qld = paper_value / row.qld_close
+                else:
+                    shares_qqq = paper_value / row.qqq_close
+                position = state
+            paper_value = shares_qld * row.qld_close + shares_qqq * row.qqq_close
+        peak = max(peak, paper_value)
+        drawdown = paper_value / peak - 1
+        max_drawdown = min(max_drawdown, drawdown)
+
+    latest = complete[-1]
+    first = complete[0]
+    assert latest.qqq_close is not None and latest.qld_close is not None
+    latest_high = rolling_high.get(latest.date)
+    latest_drawdown_pct = (
+        (latest.qqq_close / latest_high - 1) * 100 if latest_high else 0.0
+    )
+    high_date = next(
+        (
+            row.date
+            for row in reversed(complete)
+            if rolling_high.get(row.date) == latest_high
+        ),
+        None,
+    )
+    qqq_buy_hold = INITIAL_INVESTMENT / first.qqq_close * latest.qqq_close
+    bear_episodes = sum(1 for switch in switches if switch["to"] == "bear")
+
+    return {
+        **base,
+        "available": True,
+        "strategy_name": "Drawdown Regime Gate",
+        "rule": (
+            "QQQ drawdown from its 252-trading-day adjusted-close high: "
+            "at or above -15% = bull market, hold QLD; "
+            "below -15% = bear market, hold QQQ; "
+            "a bear exits back to bull when the drawdown recovers above -5%. "
+            "Signal uses adjusted closes and applies at the model close."
+        ),
+        "parameters": {
+            "lookback_trading_days": DD_LOOKBACK_DAYS,
+            "bear_enter_drawdown_pct": DD_BEAR_ENTER_PCT,
+            "bull_reenter_drawdown_pct": DD_BULL_REENTER_PCT,
+            "regime_asset": "QQQ",
+            "bull_position": "QLD",
+            "bear_position": "QQQ",
+        },
+        "signal": "QLD" if state == 1 else "QQQ",
+        "headline_status": f"Hold {'QLD' if state == 1 else 'QQQ'} (experimental)",
+        "regime": "bull" if state == 1 else "bear",
+        "qqq_drawdown_pct": round_value(latest_drawdown_pct),
+        "qqq_252d_high": round_value(latest_high),
+        "qqq_252d_high_date": high_date,
+        "distance_to_bear_trigger_pp": round_value(
+            latest_drawdown_pct - DD_BEAR_ENTER_PCT
+        ),
+        "switch_count": len(switches),
+        "bear_episodes": bear_episodes,
+        "last_switch": switches[-1] if switches else None,
+        "recent_switches": switches[-8:],
+        "paper": {
+            "start_date": first.date,
+            "price_date": latest.date,
+            "initial_investment": INITIAL_INVESTMENT,
+            "paper_value_from_1000": round_value(paper_value),
+            "paper_return_pct": round_value(paper_value / INITIAL_INVESTMENT * 100 - 100),
+            "qqq_buy_hold_from_1000": round_value(qqq_buy_hold),
+            "max_drawdown_pct": round_value(max_drawdown * 100),
+            "current_drawdown_pct": round_value(paper_value / peak * 100 - 100),
+        },
+    }
+
+
 def drawdown_summary(rows: list[Row], field: str) -> dict[str, object]:
     peak = float("-inf")
     peak_date = ""
@@ -568,6 +716,7 @@ def write_outputs(rows: list[Row]) -> None:
             "current_strategy_drawdown_pct": round_value(latest.strategy_drawdown_pct),
             "current_qqq_drawdown_pct": round_value(latest.qqq_drawdown_pct),
         },
+        "experimental_drawdown_regime": compute_drawdown_regime(rows),
         "recent_transitions": [csv_row(row) for row in trades[-12:]],
         "recent_history": [csv_row(row) for row in recent],
     }
