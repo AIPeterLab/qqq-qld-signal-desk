@@ -51,6 +51,88 @@
     "current_strategy_drawdown_pct": -13.06,
     "current_qqq_drawdown_pct": -1.46
   },
+  "experimental_drawdown_regime": {
+    "available": true,
+    "experimental": true,
+    "paper_only": true,
+    "affects_live_strategy": false,
+    "strategy_name": "Drawdown Regime Gate",
+    "rule": "QQQ drawdown from its 252-trading-day adjusted-close high: at or above -15% = bull market, hold QLD; below -15% = bear market, hold QQQ; a bear exits back to bull when the drawdown recovers above -5%. Signal uses adjusted closes and applies at the model close.",
+    "parameters": {
+      "lookback_trading_days": 252,
+      "bear_enter_drawdown_pct": -15.0,
+      "bull_reenter_drawdown_pct": -5.0,
+      "regime_asset": "QQQ",
+      "bull_position": "QLD",
+      "bear_position": "QQQ"
+    },
+    "signal": "QLD",
+    "headline_status": "Hold QLD (experimental)",
+    "regime": "bull",
+    "qqq_drawdown_pct": -1.1,
+    "qqq_252d_high": 759.66,
+    "qqq_252d_high_date": "2026-10-09",
+    "distance_to_bear_trigger_pp": 13.9,
+    "switch_count": 18,
+    "bear_episodes": 9,
+    "last_switch": {
+      "date": "2025-05-13",
+      "from": "bear",
+      "to": "bull"
+    },
+    "recent_switches": [
+      {
+        "date": "2018-12-17",
+        "from": "bull",
+        "to": "bear"
+      },
+      {
+        "date": "2019-03-13",
+        "from": "bear",
+        "to": "bull"
+      },
+      {
+        "date": "2020-03-09",
+        "from": "bull",
+        "to": "bear"
+      },
+      {
+        "date": "2020-05-08",
+        "from": "bear",
+        "to": "bull"
+      },
+      {
+        "date": "2022-01-27",
+        "from": "bull",
+        "to": "bear"
+      },
+      {
+        "date": "2023-04-21",
+        "from": "bear",
+        "to": "bull"
+      },
+      {
+        "date": "2025-04-03",
+        "from": "bull",
+        "to": "bear"
+      },
+      {
+        "date": "2025-05-13",
+        "from": "bear",
+        "to": "bull"
+      }
+    ],
+    "paper": {
+      "start_date": "2006-06-21",
+      "price_date": "2026-10-09",
+      "initial_investment": 1000.0,
+      "paper_value_from_1000": 95827.74,
+      "paper_return_pct": 9482.77,
+      "qqq_buy_hold_from_1000": 22738.86,
+      "max_drawdown_pct": -61.32,
+      "current_drawdown_pct": -2.33
+    }
+  },
   "recent_transitions": [
     {
       "date": "2025-06-02",
