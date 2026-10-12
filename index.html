@@ -262,7 +262,7 @@
     .experimental-grid .metric:nth-child(4n) { border-right: 0; }
     .experimental-grid .metric:nth-child(n + 5) { border-bottom: 0; }
     .experimental-grid .metric:last-child { border-right: 0; }
-    .exp-value { margin: 0; font-size: 20px; line-height: 1.15; font-weight: 750; }
+    .exp-value { margin: 0; font-size: 16px; line-height: 1.2; font-weight: 750; overflow-wrap: break-word; }
     .exp-rules { margin: 14px 18px 18px; color: var(--text); font-size: 13px; line-height: 1.6; }
     .exp-rules strong { font-weight: 700; }
 
@@ -271,6 +271,7 @@
       .updated { text-align: left; }
       .lead-grid, .lower-grid { grid-template-columns: 1fr; }
       .signal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .experimental-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .signal-grid .metric:nth-child(n) { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
       .signal-grid .metric:nth-child(2n) { border-right: 0; }
       .signal-grid .metric:nth-child(n + 7) { border-bottom: 0; }
@@ -286,9 +287,9 @@
 
     @media (max-width: 560px) {
       .shell { width: calc(100% - 20px); padding-top: 17px; }
-      .signal-grid, .performance-grid { grid-template-columns: 1fr; }
+      .signal-grid, .performance-grid, .experimental-grid { grid-template-columns: 1fr; }
       .metric, .metric:nth-child(n) { border-right: 0; border-bottom: 1px solid var(--border); }
-      .signal-grid .metric:last-child, .performance-grid .metric:last-child { border-bottom: 0; }
+      .signal-grid .metric:last-child, .performance-grid .metric:last-child, .experimental-grid .metric:last-child { border-bottom: 0; }
       th, td { padding: 10px 12px; }
       .section-head { align-items: flex-start; }
     }
