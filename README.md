@@ -27,7 +27,7 @@ The volatility gate is entry-only and never forces a QLD exit. There is no DCA, 
 
 The updater uses Yahoo Finance chart API adjusted closes for QQQ and QLD. For QLD True Range, raw daily highs and lows are multiplied by the daily `adjusted_close / raw_close` factor. ATR(20) uses Wilder's `ewm(alpha=1/20, adjust=False, min_periods=20)` recurrence. Model tracking starts with `$1,000` on QLD's first available date. The benchmark is QQQ Hold from the same date and initial value.
 
-The 4% threshold originated from validation on raw closes. Production follows the repository's adjusted-data convention, so the threshold still requires dedicated revalidation on adjusted data.
+The 4% threshold originated from validation on raw closes and was re-validated on adjusted closes on 2026-10-07 (verdict: ADOPT, user-approved 2026-10-14). IS grid (2006-06-21→2015-12-31) froze X=4% again (Calmar 0.714 vs baseline 0.346); OOS (2016-01-01→2026-09-25) gated +861.8% with maxDD −27.84% vs baseline +1160.3% / −43.08%; beats QQQ buy-and-hold (+633.5%); DSR P(SR>0)=0.9856 ≥ 0.95; walk-forward 17/17 positive, 9/17 beat buy-and-hold. Gated maxDD −27.84% sits inside the 30–35% portfolio drawdown line. Full write-up is Muse-held at `~/workspace/goals/qld-donchian-volatility-gate-experiment/files/volgate-adjusted-revalidation-2026-10-07.md`.
 
 The operating manual contains a saved historical research snapshot built from legacy research files that include synthetic pre-QLD history. The live dashboard does not import that inherited pre-launch signal state. It rebuilds the investable model from actual QLD history, initializes the Donchian signal at `0`, and waits for 20 completed QLD trading days before allowing the first breakout.
 
